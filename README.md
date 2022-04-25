@@ -1,6 +1,7 @@
 # `Intro🇵🇭`
-`Hope you'll like some of my projects`
-`and useful as you wish. 🤦‍♂️🙃`
+> Hope you'll like some of my projects and scripts 
+> that I created and/or develop to boost my productivity
+> and useful as you wish. 🤦‍♂️🙃
 
 - [Repo_Clone](https://github.com/jxmked/Repo_Clone) 
   - [Repo Clone Page](https://jxmked.github.io/Repo_Clone)
