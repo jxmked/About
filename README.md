@@ -10,7 +10,7 @@
 - [Script-Thing](https://github.com/jxmked/Script-Thing)
   - [Console Menu Repo](https://github.com/jxmked/Script-Thing/tree/xio/Console%20Menu)
   - [Binary & Decimal Repo](https://github.com/jxmked/Script-Thing/tree/xio/Binary%20%26%20Decimal)
-  - [All Stars Pattern Repo](https://github.com/jxmked/Script-Thing/tree/xio/All%20Stars%20Pattern)
+  - [Stars Pattern Repo](https://github.com/jxmked/Script-Thing/tree/xio/All%20Stars%20Pattern)
 
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/tic-tac-toe-incomplete/)
