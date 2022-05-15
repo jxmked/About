@@ -11,6 +11,7 @@
   - [Console Menu Repo](https://github.com/jxmked/Script-Thing/tree/xio/Console%20Menu)
   - [Binary & Decimal Repo](https://github.com/jxmked/Script-Thing/tree/xio/Binary%20%26%20Decimal)
   - [Stars Pattern Repo](https://github.com/jxmked/Script-Thing/tree/xio/Stars%20Pattern)
+  - [Create Multiplication Table](https://github.com/jxmked/Script-Thing/tree/xio/Create%20Multiplication%20Table)
 
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
