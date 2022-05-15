@@ -13,7 +13,7 @@
   - [Stars Pattern Repo](https://github.com/jxmked/Script-Thing/tree/xio/Stars%20Pattern)
 
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
-  - [Tic Tac Toe Page](https://jxmked.github.io/tic-tac-toe-incomplete/)
+  - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
 
 - [Buttons-Toggles-Design](https://github.com/jxmked/Buttons-Toggles-Design)
   - [Toggle v1 Repo](https://github.com/jxmked/Buttons-Toggles-Design/tree/xio/Toggle%20-%20Lever%20-%20v1)
