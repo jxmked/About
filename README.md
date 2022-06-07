@@ -13,6 +13,7 @@
   - [Stars Pattern Repo](https://github.com/jxmked/Script-Thing/tree/xio/Stars%20Pattern)
   - [Create Multiplication Table](https://github.com/jxmked/Script-Thing/tree/xio/Create%20Multiplication%20Table)
   - [Compile & Run C/C++ using in Termux](https://github.com/jxmked/Script-Thing/tree/xio/Compile%20%26%20Run%20C%20Language%20using%20Termux)
+  - [Sorting Algorithms](https://github.com/jxmked/Script-Thing/tree/xio/Sorting%20Algorithms)
 
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
