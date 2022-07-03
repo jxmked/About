@@ -27,6 +27,10 @@
 
 ----
 
+
+[![Jovan's github activity graph](https://activity-graph.herokuapp.com/graph?username=jxmked&theme=github)](https://github.com/jxmked/jxmked)
+
+----
 # Hook me
 
 > My static website under develoment but functional.
