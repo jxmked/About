@@ -14,7 +14,7 @@
   - [Compile & Run C/C++ using in Termux](https://github.com/jxmked/Script-Thing/tree/xio/Compile%20%26%20Run%20C%20Language%20using%20Termux)
   - [Sorting Algorithms](https://github.com/jxmked/Script-Thing/tree/xio/Sorting%20Algorithms)
   - [Price per Weight](https://github.com/jxmked/Script-Thing/tree/xio/Price%20per%20Weights)
-
+  - [Random Activities found from Internet](https://github.com/jxmked/Script-Thing/tree/xio/Random%20Activities)
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
 
