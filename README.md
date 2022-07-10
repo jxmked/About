@@ -27,14 +27,15 @@
 
 ----
 
-
 [![Jovan's github activity graph](https://activity-graph.herokuapp.com/graph?username=jxmked&theme=github)](https://github.com/jxmked/jxmked)
 
 ----
-# Hook me
 
 > My static website under develoment but functional.
 __[xCreatIOn](https://xio.netlify.app/)__
+
+> Fun Fact: 95% of codes here is written using android phone.
+> Using Termux & Code Editor for the most of the time
 
 
 ## Socials
