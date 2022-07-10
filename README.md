@@ -35,7 +35,7 @@
 __[xCreatIOn](https://xio.netlify.app/)__
 
 > Fun Fact: 95% of codes here is written using android phone.
-> Using Termux & Code Editor... 🥲
+> Using Termux & Code Editor... 😅
 
 
 ## Socials
