@@ -3,8 +3,8 @@
 > that I created and/or develop to boost my productivity
 > and useful as you wish. 🤦‍♂️🙃
 
-- [Repo_Clone](https://github.com/jxmked/Repo_Clone) 
-  - [Repo Clone](https://jxmked.github.io/Repo_Clone)
+- [Repo_Clone Repo](https://github.com/jxmked/Repo_Clone) 
+  - [Repo Clone Page](https://jxmked.github.io/Repo_Clone)
   
 - [Script-Thing](https://github.com/jxmked/Script-Thing)
   - [Console Menu](https://github.com/jxmked/Script-Thing/tree/xio/Console%20Menu)
@@ -15,6 +15,7 @@
   - [Sorting Algorithms](https://github.com/jxmked/Script-Thing/tree/xio/Sorting%20Algorithms)
   - [Price per Weight](https://github.com/jxmked/Script-Thing/tree/xio/Price%20per%20Weights)
   - [Random Activities found from Internet](https://github.com/jxmked/Script-Thing/tree/xio/Random%20Activities)
+
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
 
@@ -23,7 +24,6 @@
   - [Toggle v1 Page](https://jxmked.github.io/Buttons-Toggles-Design/Toggle%20-%20Lever%20-%20v1/index.html)
 
 - [Time-lapse-Video-Creator](https://github.com/jxmked/Time-lapse-Video-Creator)
-  - [ReadMe file](https://github.com/jxmked/Time-lapse-Video-Creator/blob/xio/README.md)
 
 ----
 
