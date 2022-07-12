@@ -24,6 +24,7 @@
   - [Toggle v1 Page](https://jxmked.github.io/Buttons-Toggles-Design/Toggle%20-%20Lever%20-%20v1/index.html)
 
 - [Time-lapse-Video-Creator](https://github.com/jxmked/Time-lapse-Video-Creator)
+- [Audio-Normalizer](https://github.com/jxmked/Audio-Normalizer)
 
 ----
 
