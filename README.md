@@ -28,8 +28,6 @@
 
 ----
 [![Jovan's github activity graph](https://activity-graph.herokuapp.com/graph?username=jxmked&theme=github)](https://github.com/jxmked/jxmked)
-
-[![Jovan's GitHub stats](https://github-readme-stats.vercel.app/api?username=jxmked&show_icons=true&theme=tokyonight)](https://github.com/jxmked/jxmked)
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&layout=compact)](https://github.com/jxmked/jxmked)
 
 ----
