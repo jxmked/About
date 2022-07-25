@@ -25,6 +25,9 @@
 
 - [Time-lapse-Video-Creator](https://github.com/jxmked/Time-lapse-Video-Creator)
 - [Audio-Normalizer](https://github.com/jxmked/Audio-Normalizer)
+- [Javascript-Press-and-Hold-Feature](https://github.com/jxmked/Javascript-Press-and-Hold-Feature)
+  - [Live Demo](https://jxmked.github.io/Javascript-Press-and-Hold-Feature/)
+
 
 ----
 [![Jovan's github activity graph](https://activity-graph.herokuapp.com/graph?username=jxmked&theme=github)](https://github.com/jxmked/jxmked)
