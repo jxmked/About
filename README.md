@@ -27,18 +27,11 @@
 - [Javascript-Press-and-Hold-Feature](https://github.com/jxmked/Javascript-Press-and-Hold-Feature)
 
 ----
-[![Jovan's github activity graph](https://morning-caverns-29272.herokuapp.com/graph?username=jxmked&theme=github)](https://github.com/jxmked/jxmked)
-
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&layout=compact)](https://github.com/jxmked/jxmked)
-
 ----
 
 > My static website under develoment but functional.
 __[xCreatIOn](https://xio.netlify.app/)__
-
-> Fun Fact: 95% of codes here is written using android phone.
-> Using Termux & Code Editor... 😅
-
 
 ## Socials
 
