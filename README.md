@@ -19,9 +19,6 @@
 - [Tic-Tac-Toe Incomplete](https://github.com/jxmked/Tic-Tac-Toe-incomplete)
   - [Tic Tac Toe Page](https://jxmked.github.io/Tic-Tac-Toe-incomplete/)
 
-- [Buttons-Toggles-Design](https://github.com/jxmked/Buttons-Toggles-Design)
-  - [Toggle v1 Repo](https://github.com/jxmked/Buttons-Toggles-Design/tree/xio/Toggle%20-%20Lever%20-%20v1)
-
 - [Time-lapse-Video-Creator](https://github.com/jxmked/Time-lapse-Video-Creator)
 - [Audio-Normalizer](https://github.com/jxmked/Audio-Normalizer)
 - [Javascript-Press-and-Hold-Feature](https://github.com/jxmked/Javascript-Press-and-Hold-Feature)
