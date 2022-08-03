@@ -30,6 +30,9 @@
 > My static website under develoment but functional.
 __[xCreatIOn](https://xio.netlify.app/)__
 
+> My portfolio - v1. Written in TypeScript and SCSS.
+__[Jovan De Guia](https://jxmked.github.io/jxmked/)__
+
 ## Socials
 
 - [Github](https://github.com/jxmked)

@@ -1,0 +1,202 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="#585860">
+    <meta name="color-scheme" content="light dark">
+    
+    <title>Page Not Found</title>
+    <meta name="description" content="Error 404 - Page Not Found">
+    <meta name="author" content="jxmked">
+    
+    <meta property="og:title" content="Page Not Found">
+    <meta property="og:type" content="Error webpage">
+    <meta property="og:url" content="#">
+    <meta property="og:description" content="Error 404 - Page Not Found">
+    <meta property="og:image" content="#">
+    <style>
+        ::selection {
+            background: #D0F541;
+            color: #0f0f0f;
+            font-weight: 700;
+        }
+    /** Default Light Mode **/
+        :root {
+            --bg-color: #e1e1e1;
+            --a-color: #1e1e1e;
+            --b-color: #cacaca;
+            --c-color: #f0f0f0;
+            --d-color: #acacac;
+            --e-color: #ffffff;
+            --f-color: #747489;
+            --g-color: #878789;
+            --cd-border: none;
+        }
+        
+    /** Dark mode **/
+        @media (prefers-color-scheme: dark){  
+            :root {
+                --bg-color: #282834;
+                --a-color: #a8a8a8;
+                --b-color: #212121;
+                --c-color: #1e1e1e;
+                --d-color: #5f5e59;
+                --e-color: #3f3f3f;
+                --f-color: #e8e8e8;
+                --g-color: #a8a8a8;
+                --cd-border: 2px solid #a989ee;
+            }
+        } 
+        
+        html[data-theme='dark'] {
+            --bg-color: #3e3e3e;
+            --a-color: #a8a8a8;
+            --b-color: #212121;
+            --c-color: #1e1e1e;
+            --d-color: #5f5e59;
+            --e-color: #3f3f3f;
+            --f-color: #e8e8e8;
+            --g-color: #a8a8a8;
+            --cd-border: 2px solid #a989ee;
+        }
+    
+    /** Layout and more **/
+        body {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+            color: var(--a-color);
+            
+            /** Smoothing transition between light and dark mode **/
+            transition: all 0.3s;
+        }
+        
+        *::-webkit-scrollbar{
+            display: none; /*I dont like this one mostly on mobile and tablet devices*/
+        }
+        /** Main Container **/
+        body > div {
+            padding: 10px;
+            box-sizing: border-box;
+            width: 90%;
+            height: 90%;
+            max-width: 450px;
+            max-height: 450px;
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            border-radius: 24px;
+            background: linear-gradient(145deg, var(--b-color), var(--c-color));
+            box-shadow:  28px 28px 97px var(--d-color),
+                         -28px -28px 97px var(--e-color);
+            border: var(--cd-border);
+
+            overflow: hidden;
+        }
+        
+        /** Header container **/
+        body > div > h3 {
+            width: 95%;
+            height: auto;
+            border-bottom: 1px solid var(--f-color);
+            margin: 3px auto 10px auto;
+            padding: 0 0 4px 0;
+        }
+        
+        /** Header style **/
+        body > div > h3 > span {
+            width: 100%;
+            height: 100%;
+            margin: 0 0 0 3%;
+            font-size:  1.8rem;
+            font-weight: 800;
+        }
+        
+        /** Message Container **/
+        body > div > div:nth-child(2) {
+            width: 95%;
+            height: auto;
+            margin: 18px auto 0 auto;
+            overflow: auto;
+        }
+        body > div > div:nth-child(2) > p {
+            width: 100%;
+            height: auto;
+            margin: 0 0 10px 0;
+            border-bottom: 1px dashed var(--g-color);
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-align: left;
+        }
+        
+        /** First <p> tag must be highlighted **/
+        body > div > div:nth-child(2) > p:first-child {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        /** Copyright and Company **/
+        body > div > div:last-child {
+            height: auto;
+            position: absolute;
+            bottom: 3%;
+            right: 5%;
+            text-align: right;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+        
+        /** Before line char **/
+        body > div > div > p:before {
+            content: '\2022\20';
+        }
+        /** End Line char **/
+        body > div > div > p:after {
+            content: '\B6';
+        }
+        a {
+            color: inherit;
+            font-size: inherit;
+            font-family: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+            letter-spacing: inherit;
+            background: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h3>
+            <span>Page Not Found</span>
+        </h3>
+        <div>
+            <p>The page you want to work on does not exists</p>
+            <p>Please check your url.</p>
+            <p>If you are redirected, please <a href="#issue">report</a>.</p>
+        </div>
+        <div>
+            <span>&copy;2022&nbsp;&#124;&nbsp;xCreatIOn</span>
+        </div>
+    </div>
+</body>
+<!-- 
+    This page is part of a project.
+    More modification will happen soon.
+    
+    ~Lablots-
+    
+    Author: jxmked
+
+    Open-source License under MIT
+-->
+</html>
