@@ -1,0 +1,29 @@
+{
+    "github" : {
+        "username" : "jxmked",
+        "auth_token" : "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",
+        "mostly_used_languages" : {
+            "max_display_language" : 999,
+            "exception" : []
+        },
+        "personal_projects" : {
+            "target_topics" : ["portfolio-include"],
+            "max_display_projects" : 200,
+            "hide_projects" : []
+        }
+    },
+    
+    "email": {
+        "icon": "mail.svg",
+        "address": "jovandeguia@gmail.com"
+    },
+    "socials" : [{
+        "icon" : "github.svg",
+        "href" : "https://github.com/jxmked",
+        "title" : "jxmked"
+    }, {
+        "icon" : "facebook.svg",
+        "href" : "https://facebook/deguia25",
+        "title" : "jxmked"
+    }]
+}

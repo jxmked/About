@@ -1,0 +1,182 @@
+#main-languages {
+    div {
+        width: 100%;
+        
+        > div:nth-child(2):not(.loading-state){
+            width: 98%;
+            height: 1rem;
+            box-sizing: border-box;
+            padding: 1rem 5px 1.4rem 5px;
+            margin-left: auto;
+            margin-right: auto;
+            
+            div {
+                width: 100%;
+                height: inherit;
+                border-radius: 15px;
+                overflow: hidden;
+                font-size: 0;
+                box-sizing: border-box;
+                white-space: nowrap;
+                margin: 0;
+                background-color: inherit;
+                @media (prefers-color-scheme: dark) {
+                    background-color: rgb(52, 52, 54);
+                }
+                
+                span {
+                    position: relative;
+                    display: inline-block;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    border-style: solid;
+                    border-color: $primary-bg-color;
+                    @media (prefers-color-scheme: dark) {
+                        border-color: rgb(52, 52, 54);
+                    }
+                    border: 0 0.5px 0 0.5px;
+                    border-top: 0;
+                    border-collapse: collapse;
+                    border-bottom: 0;
+                    
+                    @media only screen and (min-width: 650px) {
+                        border: 0 0.2px 0 0.2px;
+                    }
+                    &:last-child {
+                        border-right: none;
+                    }
+                    &:first-child {
+                        border-left: none;
+                    }
+                }
+            }
+        }
+        
+        > div:last-child {
+            width: 95%;
+            margin: 0 auto;
+            padding: 0;
+            height: auto;
+            
+            > ul {
+                white-space: initial;
+                list-style-type: none;
+                margin: 0 auto;
+               // margin-left: 1rem;
+                text-align: left;
+                padding: 0;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                
+                li {
+                    width: 100%;
+                    display: block;
+                    
+                    span, p {
+                        display: inline-block;
+                    }
+                    
+                    > span:first-child { // Bullet
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        border: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    
+                    p, span:last-child {
+                        color: $primary-text-color;
+                        font-size: .9rem;
+                        font-weight: 400;
+                        font-style: italic;
+                        @media (prefers-color-scheme: dark) {
+                            color: $primary-text-color-dark;
+                        }
+                    }
+                    
+                    p {
+                        padding-left: 2px;
+                        padding-right: 2px;
+                    }
+                    span:last-child {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#main-languages.loading {
+    > div {
+        height: 10.4rem;
+        width: 100%;
+        
+        > div.loading-state {
+            height: 50%;
+            width: 75%;
+            margin: auto;
+            margin-top: 5%;
+            
+            > div {
+                height: 35px;
+                width: 35px;
+                margin: auto;
+                
+                div {
+                    width: 100% !important;
+                    height: 100%!important;
+                    clear: both;
+                    margin: 20px auto;
+                    border-radius: 50%;
+                    position: relative;
+                    opacity: 1;
+                    &:before, &:after {
+                        content:'';
+                        border: 1px $primary-border-dark solid;
+                        border-radius: 50%;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        left:0px;
+                    }
+                    
+                    &:before {
+                        transform: scale(1);
+                        opacity: 1;
+                        animation: animB 0.6s infinite linear;
+                    }
+                    
+                    &:after {
+                        transform: scale(0);
+                        opacity: 0;
+                        animation: animA 0.6s infinite linear;
+                    }
+                }
+            }
+            > span {
+                display: block;
+                width: 100%;
+                margin: 0;
+                margin-top: 10px;
+                border: none;
+                padding: none;
+                text-align: center;
+                white-space: initial;
+            }
+         }
+    }
+}
+
+@keyframes animA {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes animB {
+    from { -webkit-transform: scale(1,1); opacity: 1; }
+    to { -webkit-transform: scale(1.5,1.5); opacity: 0; }
+}

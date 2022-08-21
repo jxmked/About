@@ -1,0 +1,10 @@
+@mixin reset {
+    display: block;
+    max-width: $max-width;
+    min-width: $min-width;
+    white-space: nowrap;
+    font-family: "Helvetica", "Arial", "Sans-Serif";
+    font-family: 12px;
+    background-color: $primary-bg-color;
+    margin: 0 auto;
+}
