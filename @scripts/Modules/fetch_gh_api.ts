@@ -24,13 +24,12 @@ class GH_API {
             method: "GET",
             mode: "cors",
             cache: "force-cache",
-            redirect: "follow",
             referrerPolicy: "no-referrer"
         };
         
         
         //return 
-        if(GH_API.__auth_token__) {
+        if(GH_API.__auth_token__ != "") {
             /**
              * If you are running in development mode.
              * 

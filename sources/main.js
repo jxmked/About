@@ -614,10 +614,9 @@ var GH_API = (function () {
             method: "GET",
             mode: "cors",
             cache: "force-cache",
-            redirect: "follow",
             referrerPolicy: "no-referrer"
         };
-        if (GH_API.__auth_token__) {
+        if (GH_API.__auth_token__ != "") {
             this.__config__['headers'] = this.__config__['headers'] || {};
             this.__config__['headers']['Authorization'] = "token ".concat(GH_API.__auth_token__);
         }
