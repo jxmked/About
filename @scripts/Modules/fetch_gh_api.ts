@@ -183,7 +183,6 @@ class GH_API {
         const db:any = await GH_API.__getDB__();
         
         try {
-            let isEmpty:any = false;
             await db.getItem(key).then((str:any) => {
                 const data:{[id:string]:any} = JSON.parse(str);
                 if(justGet){

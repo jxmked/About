@@ -8,7 +8,8 @@ class getColors {
     private static colors:{[id:string]:string};
     
     constructor(){
-        this.__url = safeConcat(window.location.origin, "/assets/data/colors.json");
+        let pre_path:string = window.GLOBAL_ENV['pre_path'];
+        this.__url = safeConcat(window.location.origin, pre_path, "/assets/data/colors.json");
     }
     
     async then(callback:Function = (x:any) => {}) {

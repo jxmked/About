@@ -35,6 +35,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+(function () {
+    var ENV = {};
+    ENV['pre_path'] = "jxmked";
+    window.GLOBAL_ENV = ENV;
+})();
 window.addEventListener("DOMContentLoaded", function () { return __awaiter(void 0, void 0, void 0, function () {
     var data, username, e_1;
     return __generator(this, function (_a) {
@@ -553,14 +558,17 @@ function safeConcat() {
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
-    return args.map(function (t) {
+    return args.filter(function (x) {
+        return String(x.trim()).length > 0;
+    }).map(function (t) {
         var str = String(t).trim().replace(/^\//, "");
         return str.replace(/\/$/, "");
     }).join("/");
 }
 var Config = (function () {
     function Config() {
-        this.__url = safeConcat(window.location.origin, "config.json");
+        var pre_path = window.GLOBAL_ENV['pre_path'];
+        this.__url = safeConcat(window.location.origin, pre_path, "config.json");
     }
     Config.prototype.load = function (callback) {
         if (callback === void 0) { callback = function (x) { return x; }; }
@@ -749,7 +757,7 @@ var GH_API = (function () {
     };
     GH_API.prototype.getFromDB = function (key, justGet, callback) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, isEmpty, e_4, obj;
+            var db, e_4, obj;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, GH_API.__getDB__()];
@@ -758,7 +766,6 @@ var GH_API = (function () {
                         _a.label = 2;
                     case 2:
                         _a.trys.push([2, 4, , 5]);
-                        isEmpty = false;
                         return [4, db.getItem(key).then(function (str) {
                                 var data = JSON.parse(str);
                                 if (justGet) {
@@ -836,7 +843,8 @@ function gh_fetch(url, expiry) {
 }
 var getColors = (function () {
     function getColors() {
-        this.__url = safeConcat(window.location.origin, "/assets/data/colors.json");
+        var pre_path = window.GLOBAL_ENV['pre_path'];
+        this.__url = safeConcat(window.location.origin, pre_path, "/assets/data/colors.json");
     }
     getColors.prototype.then = function (callback) {
         if (callback === void 0) { callback = function (x) { }; }

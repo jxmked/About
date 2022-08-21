@@ -88,3 +88,4 @@ declare class getColors {
     then(callback?: Function): Promise<void>;
     static color(lang: string): string;
 }
+//# sourceMappingURL=main.d.ts.map

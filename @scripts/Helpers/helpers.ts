@@ -20,7 +20,9 @@ function ObjectSort(value:{[id:string]:number}):{[id:string]:number} {
 
 
 function safeConcat(...args:any):string {
-    return args.map((t:string) => {
+    return args.filter((x:string) => {
+        return String(x.trim()).length > 0
+    }).map((t:string) => {
         let str:string = String(t).trim().replace(/^\//, "");
         return str.replace(/\/$/, "");
     }).join("/");

@@ -1,6 +1,15 @@
 
-
-
+(function(){
+    const ENV:any = {};
+    /**
+     * fetcher uses 'window.location.origin' as base path
+     * 
+     * Insert your username here if the page is about to deploy on github oages
+     * */
+   ENV['pre_path'] = "jxmked";
+   
+   window.GLOBAL_ENV = ENV;
+})();
 
 window.addEventListener("DOMContentLoaded", async () => {
     new NavigationPanel();

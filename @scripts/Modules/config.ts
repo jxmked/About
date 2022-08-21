@@ -8,7 +8,8 @@ class Config {
     private static __config:any = {};
     
     constructor(){
-        this.__url = safeConcat(window.location.origin, "config.json");
+        let pre_path:string = window.GLOBAL_ENV['pre_path'];
+        this.__url = safeConcat(window.location.origin, pre_path, "config.json");
     }
     
     async load(callback:Function = (x:any)=>x) {
