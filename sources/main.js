@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 (function () {
     var ENV = {};
-    ENV['pre_path'] = "";
+    ENV['pre_path'] = "jxmked";
     window.GLOBAL_ENV = ENV;
 })();
 window.addEventListener("DOMContentLoaded", function () { return __awaiter(void 0, void 0, void 0, function () {
