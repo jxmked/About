@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 (function () {
     var ENV = {};
-    ENV['pre_path'] = "jxmked";
+    ENV['pre_path'] = "";
     window.GLOBAL_ENV = ENV;
 })();
 window.addEventListener("DOMContentLoaded", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -203,18 +203,6 @@ var PP_Item_Create = (function () {
     };
     PP_Item_Create.topicExceptions = [];
     return PP_Item_Create;
-}());
-var Main_Lang_loading = (function () {
-    function Main_Lang_loading(parent) {
-        Main_Lang_loading._parent = parent;
-    }
-    Main_Lang_loading.prototype.loadUp = function () {
-        Main_Lang_loading._parent.classList.add("loading");
-        this.wave_animation();
-    };
-    Main_Lang_loading.prototype.wave_animation = function () {
-    };
-    return Main_Lang_loading;
 }());
 var MostLanguages = (function () {
     function MostLanguages() {
@@ -576,11 +564,11 @@ var Config = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, fetch(this.__url, {
-                            method: "GET",
-                            mode: "cors",
-                            cache: "force-cache",
-                            redirect: "follow",
-                            referrerPolicy: "no-referrer"
+                            'method': "GET",
+                            'mode': "cors",
+                            'cache': "force-cache",
+                            'redirect': "follow",
+                            'referrerPolicy': "no-referrer"
                         }).then(function (res) { return res.json(); }).then(function (res) {
                             Config.__config = res;
                             callback(res);
@@ -611,10 +599,10 @@ var GH_API = (function () {
         this.__expiry__ = expiry;
         this.__url__ = url;
         this.__config__ = {
-            method: "GET",
-            mode: "cors",
-            cache: "force-cache",
-            referrerPolicy: "no-referrer"
+            'method': "GET",
+            'mode': "cors",
+            'cache': "force-cache",
+            'referrerPolicy': "no-referrer"
         };
         if (GH_API.__auth_token__ != "") {
             this.__config__['headers'] = this.__config__['headers'] || {};
@@ -826,9 +814,9 @@ var GH_API = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, localforage.createInstance({
-                            name: "gh_fetched",
-                            storeName: 'urls',
-                            description: 'Stored Data'
+                            'name': "gh_fetched",
+                            'storeName': 'urls',
+                            'description': 'Stored Data'
                         })];
                     case 1: return [2, _a.sent()];
                 }
@@ -851,11 +839,11 @@ var getColors = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, fetch(this.__url, {
-                            method: "GET",
-                            mode: "cors",
-                            cache: "force-cache",
-                            redirect: "follow",
-                            referrerPolicy: "no-referrer"
+                            'method': "GET",
+                            'mode': "cors",
+                            'cache': "force-cache",
+                            'redirect': "follow",
+                            'referrerPolicy': "no-referrer"
                         }).then(function (res) { return res.json(); }).then(function (res) {
                             getColors.colors = res;
                             callback(res);

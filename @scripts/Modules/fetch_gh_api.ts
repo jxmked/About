@@ -21,10 +21,10 @@ class GH_API {
         this.__url__ = url;
         
         this.__config__ = {
-            method: "GET",
-            mode: "cors",
-            cache: "force-cache",
-            referrerPolicy: "no-referrer"
+            'method': "GET",
+            'mode': "cors",
+            'cache': "force-cache",
+            'referrerPolicy': "no-referrer"
         };
         
         
@@ -227,9 +227,9 @@ class GH_API {
     private static async __getDB__() {
         // @ts-expect-error
         return await localforage.createInstance({
-            name        : "gh_fetched",
-            storeName   : 'urls',
-            description : 'Stored Data'
+            'name'        : "gh_fetched",
+            'storeName'   : 'urls',
+            'description' : 'Stored Data'
         });
     }
 }
