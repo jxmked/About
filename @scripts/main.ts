@@ -6,7 +6,7 @@
      * 
      * Insert your username here if the page is about to deploy on github oages
      * */
-   ENV['pre_path'] = "";
+   ENV['pre_path'] = "jxmked";
    
    window.GLOBAL_ENV = ENV;
 })();
