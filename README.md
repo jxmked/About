@@ -22,6 +22,9 @@
 - [Time-lapse-Video-Creator](https://github.com/jxmked/Time-lapse-Video-Creator)
 - [Audio-Normalizer](https://github.com/jxmked/Audio-Normalizer)
 
+- [password-generator](https://github.com/jxmked/password-generator)
+  - [password-generator Live Page](https://jxmked.github.io/password-generator/)
+
 ----
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&langs_count=4&layout=compact&theme=dark)](https://github.com/jxmked/jxmked)
 ----
