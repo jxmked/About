@@ -39,6 +39,31 @@
     <meta property="og:site_name" content="Jovan's Portfolio" />
     <meta name="description" content="My Porfolio" />
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PE0FVL7SZ8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-PE0FVL7SZ8');
+    </script>
+    <script type="text/javascript">
+    
+        function onClickEvent(element) {
+            element.addEventListener("click", function(){
+                gtag("event", "url_clicked", {
+                    "social_name": social 
+                });
+            });
+        }
+        
+        document.querySelectorAll(".listen-on-click").forEach(function(element) {
+            onClickEvent(element);
+        })
+    </script>
+        
+        
     <title>Jovan De Guia</title>
 </head>
 <body>
@@ -102,7 +127,7 @@
                         </svg>
                     </span>
                     <span>
-                        <a href="https://github.com/jxmked" rel="noopener noreferrer" target="_blank" alt="Github">github.com/jxmked</a>
+                        <a class="listen-on-click" href="https://github.com/jxmked" rel="noopener noreferrer" target="_blank" alt="Github">github.com/jxmked</a>
                     </span>
                 </li>
                 <li>
@@ -112,7 +137,7 @@
                         </svg>
                     </span>
                     <span>
-                        <a href="https://www.facebook.com/deguia25" rel="noopener noreferrer" target="_blank" alt="Facebook">facebook.com/deguia25</a>
+                        <a class="listen-on-click" href="https://www.facebook.com/deguia25" rel="noopener noreferrer" target="_blank" alt="Facebook">facebook.com/deguia25</a>
                     </span>
                 </li>
                 <li>
@@ -122,7 +147,7 @@
                         </svg>
                     </span>
                     <span>
-                        <a href="https://twitter.com/jxmked" rel="noopener noreferrer" target="_blank" alt="Twitter">twitter.com/jxmked</a>
+                        <a class="listen-on-click" href="https://twitter.com/jxmked" rel="noopener noreferrer" target="_blank" alt="Twitter">twitter.com/jxmked</a>
                     </span>
                 </li>
                 <li>
@@ -132,7 +157,7 @@
                         </svg>
                     </span>
                     <span>
-                        <a href="https://www.instagram.com/jxmked/" rel="noopener noreferrer" target="_blank" alt="Instagram">instagram.com/jxmked</a>
+                        <a class="listen-on-click" href="https://www.instagram.com/jxmked/" rel="noopener noreferrer" target="_blank" alt="Instagram">instagram.com/jxmked</a>
                     </span>
                 </li>
             </ul>
