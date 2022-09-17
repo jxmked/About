@@ -101,6 +101,7 @@ var PP_Item_Create = (function () {
         a.setAttribute('href', this.obj['html_url']);
         a.setAttribute('rel', 'noopener noreferrer');
         a.setAttribute('target', '_blank');
+        a.classList.add('listen-on-click');
         a.appendChild(document.createTextNode(this.obj['full_name']));
         label.appendChild(a);
         this.parent.appendChild(label);
