@@ -51,9 +51,11 @@
     <script type="text/javascript">
     
         function onClickEvent(element) {
+            var url = element.getAttribute("url");
+            
             element.addEventListener("click", function(){
                 gtag("event", "url_clicked", {
-                    "social_name": social 
+                    "social_name": url 
                 });
             });
         }
