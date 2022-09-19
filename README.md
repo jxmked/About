@@ -28,9 +28,9 @@
 ----
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&langs_count=4&layout=compact&theme=dark)](https://github.com/jxmked/jxmked)
 ----
-
+<!--
 > My static website under develoment but functional.
-__[xCreatIOn](https://xio.netlify.app/)__
+__[xCreatIOn](https://xio.netlify.app/)__ -->
 
 > My portfolio - v1. Written in TypeScript and SCSS.
 __[Jovan De Guia](https://jxmked.github.io/jxmked/)__
