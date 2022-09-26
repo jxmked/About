@@ -28,7 +28,7 @@
 - [StaticWeb2AndroidApp](https://github.com/jxmked/StaticWeb2AndroidApp)
 
 - [Browser-Tester](https://github.com/jxmked/Browser-Tester)
-  - [Browser-Tester Live Page](https://github.com/jxmked/Browser-Tester)
+  - [Browser-Tester Live Page](https://jxmked.github.io/Browser-Tester/)
 
 
 ----
