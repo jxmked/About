@@ -25,6 +25,9 @@
 - [password-generator](https://github.com/jxmked/password-generator)
   - [password-generator Live Page](https://pldtwifi.netlify.app/)
 
+- [StaticWeb2AndroidApp](https://github.com/jxmked/StaticWeb2AndroidApp)
+
+- [nnnn]
 ----
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&langs_count=4&layout=compact&theme=dark)](https://github.com/jxmked/jxmked)
 ----
