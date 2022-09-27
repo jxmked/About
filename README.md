@@ -30,11 +30,13 @@
 - [Browser-Tester](https://github.com/jxmked/Browser-Tester)
   - [Browser-Tester Live Page](https://jxmked.github.io/Browser-Tester/)
 
+----
 
+<!--
 ----
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jxmked&langs_count=4&layout=compact&theme=dark)](https://github.com/jxmked/jxmked)
 ----
-<!--
+
 > My static website under develoment but functional.
 __[xCreatIOn](https://xio.netlify.app/)__ -->
 
