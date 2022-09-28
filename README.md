@@ -11,7 +11,7 @@
   - [Binary & Decimal](https://github.com/jxmked/Script-Thing/tree/xio/Binary%20%26%20Decimal)
   - [Stars Pattern](https://github.com/jxmked/Script-Thing/tree/xio/Stars%20Pattern)
   - [Create Multiplication Table](https://github.com/jxmked/Script-Thing/tree/xio/Create%20Multiplication%20Table)
-  - [Compile & Run C/C++ using in Termux](https://github.com/jxmked/Script-Thing/tree/xio/Compile%20%26%20Run%20C%20%26%20C%2B%2B%20Language%20using%20Termux)
+  - [Compile & Run C/C++ in Termux](https://github.com/jxmked/Script-Thing/tree/xio/Compile%20%26%20Run%20C%20%26%20C%2B%2B%20Language%20using%20Termux)
   - [Sorting Algorithms](https://github.com/jxmked/Script-Thing/tree/xio/Sorting%20Algorithms)
   - [Price per Weight](https://github.com/jxmked/Script-Thing/tree/xio/Price%20per%20Weights)
   - [Random Activities found from Internet](https://github.com/jxmked/Script-Thing/tree/xio/Random%20Activities)
