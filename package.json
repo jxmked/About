@@ -1,7 +1,7 @@
 {
-  "name": "browser-tester",
-  "version": "1.0.0",
-  "description": "Test Basic Browser Capabilities",
+  "name": "Jovan's Portfolio",
+  "version": "1.0.4",
+  "description": "Personal Portfolio",
   "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,19 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jxmked/Browser-Tester.git"
+    "url": "git+https://github.com/jxmked/jxmked.git"
   },
   "keywords": [
-    "browser-tester"
+    "portfolio",
+    "personal-porfolio"
   ],
   "author": "jxmked <jamc015lol@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jxmked/Browser-Tester/issues"
+    "url": "https://github.com/jxmked/jxmked/issues"
   },
-  "homepage": "https://jxmked.github.io/Browser-Tester/",
+  "homepage": "https://github.com/jxmked/jxmked/",
   "devDependencies": {
-    "@types/modernizr": "^3.5.3",
     "concurrently": "^7.4.0",
     "sass": "^1.54.9",
     "typescript": "^4.8.2"
