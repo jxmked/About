@@ -42,19 +42,17 @@
 import {envRes} from "globals";
 import Label from "../models/label";
 
-type catcherProperties = (err:any) => Promise<boolean>;
-
-
 class Known_Lang {
-    private BASE:HTMLElement; // #main-languages
-    private CONTAINER:HTMLElement; // Base container
     
+    private static BASE:HTMLElement = document.createElement("div"); // #main-languages
+    private static CONTAINER:HTMLElement = document.createElement("div"); // Base container
     private __promise:Promise<boolean>;
     
     constructor() {
-        this.BASE = document.createElement("div");
-        this.BASE.setAttribute("id", "main-languages");
-
+        
+        Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
+        Known_Lang.BASE.setAttribute("id", "main-languages");
+        
         this.display_loading_screen();
         
         this.__promise = new Promise<boolean>((resolve, reject) => {
@@ -63,6 +61,8 @@ class Known_Lang {
     }
     
     async display_loading_screen() {
+        Known_Lang.BASE.classList.add("loading");
+        
         
     }
     
@@ -75,16 +75,16 @@ class Known_Lang {
         return true;
     }
     
-    html():HTMLElement {
-        container.appendChild(new Label({
+    /*html():HTMLElement {
+       container.appendChild(new Label({
             title:"Known Languages",
             tooltip:"from Github"
         }).html);
         
         base.appendChild(container);
-        
-        return base;
-    }
+         
+        return base; 
+    } */
     
     
     

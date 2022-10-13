@@ -38,6 +38,9 @@
     <meta name="description" content="My Porfolio" />
 
     <script type="application/javascript">
+        window.XIO = window.XIO || {};
+        window.XIO.ENVIRONMENT_MODE = window.XIO.ENVIRONMENT_MODE || "dev";
+        
         function onClickEvent(element) {
             var url = element.getAttribute("href");
 
@@ -52,7 +55,9 @@
         (function(id) {
             if (window.location.protocol.toString() != "https:")
                 return;
-
+            
+            window.XIO.ENVIRONMENT_MODE = "prod";
+            
             var scr = document.createElement("script");
             scr.setAttribute("src", "https://www.googletagmanager.com/gtag/js?id=" + id);
             scr.async = true;

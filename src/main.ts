@@ -1,2 +1,1 @@
-import { envRes, localforage } from "./globals";
-
+import { envRes, localforage, env_mode} from "./globals";

@@ -4,8 +4,6 @@
  * 
  * */
 
-
-
 // env-res - DOM version
 window.__ENVIRONMENT__ = window.__ENVIRONMENT__ || new Map<any, any>();
 const envRes = window.__ENVIRONMENT__;
@@ -17,6 +15,33 @@ export { envRes };
  * */
 export const localforage:LocalForage = window.localforage || {};
 
+
+/**
+ * Environment mode
+ * prod|dev
+ * */
+window.XIO.ENVIRONMENT_MODE = window.XIO.ENVIRONMENT_MODE || "dev";
+export const env_mode:"prod"|"dev" = window.XIO.ENVIRONMENT_MODE;
+
+/**
+ * Disable any console logging function when its production mode
+ * 
+ * Only receiving native errors
+ * */
+ 
+(():void => {
+    if(env_mode == "dev")
+        console.log("Development Mode");
+        return;
+    
+    /**
+     * Any last words? 
+     * */
+    console.log("Console has been disabled");
+    
+    for (let i in console)
+        console[i as keyof Console] = () => {};
+})();
 
 
 /**

@@ -2,6 +2,7 @@ declare module "globals" {
     const envRes: Map<any, any>;
     export { envRes };
     export const localforage: LocalForage;
+    export const env_mode: "prod" | "dev";
 }
 declare module "main" { }
 declare module "models/label" {
@@ -26,3 +27,18 @@ declare module "known-languages/bullet" {
     }
 }
 declare module "known-languages/language" { }
+declare module "models/createElement" {
+    type CreateElementName = string;
+    interface CreateElementAttributes {
+        [key: string]: any;
+    }
+    class CreateElement {
+        private element;
+        private name;
+        private attr?;
+        constructor(name: CreateElementName, attr?: CreateElementAttributes);
+        private checkout_attributes;
+    }
+    const _default: (name: CreateElementName, attr: CreateElementAttributes) => CreateElement;
+    export default _default;
+}

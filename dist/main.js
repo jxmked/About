@@ -34,17 +34,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 define("globals", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.localforage = exports.envRes = void 0;
+    exports.env_mode = exports.localforage = exports.envRes = void 0;
     window.__ENVIRONMENT__ = window.__ENVIRONMENT__ || new Map();
     var envRes = window.__ENVIRONMENT__;
     exports.envRes = envRes;
     exports.localforage = window.localforage || {};
+    window.XIO.ENVIRONMENT_MODE = window.XIO.ENVIRONMENT_MODE || "dev";
+    exports.env_mode = window.XIO.ENVIRONMENT_MODE;
+    (function () {
+        if (exports.env_mode == "dev")
+            console.log("Development Mode");
+        return;
+        console.log("Console has been disabled");
+        for (var i in console)
+            console[i] = function () { };
+    })();
     envRes.set("configs", {
         "personal": {
             "name": {
@@ -110,14 +117,13 @@ define("models/label", ["require", "exports"], function (require, exports) {
     }());
     exports.default = Label;
 });
-define("known-languages/Known_Lang", ["require", "exports", "models/label"], function (require, exports, label_1) {
+define("known-languages/Known_Lang", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    label_1 = __importDefault(label_1);
     var Known_Lang = (function () {
         function Known_Lang() {
-            this.BASE = document.createElement("div");
-            this.BASE.setAttribute("id", "main-languages");
+            Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
+            Known_Lang.BASE.setAttribute("id", "main-languages");
             this.display_loading_screen();
             this.__promise = new Promise(function (resolve, reject) {
             }).catch(this.catch.bind(this));
@@ -125,6 +131,7 @@ define("known-languages/Known_Lang", ["require", "exports", "models/label"], fun
         Known_Lang.prototype.display_loading_screen = function () {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
+                    Known_Lang.BASE.classList.add("loading");
                     return [2];
                 });
             });
@@ -146,14 +153,8 @@ define("known-languages/Known_Lang", ["require", "exports", "models/label"], fun
                 });
             });
         };
-        Known_Lang.prototype.html = function () {
-            container.appendChild(new label_1.default({
-                title: "Known Languages",
-                tooltip: "from Github"
-            }).html);
-            base.appendChild(container);
-            return base;
-        };
+        Known_Lang.BASE = document.createElement("div");
+        Known_Lang.CONTAINER = document.createElement("div");
         return Known_Lang;
     }());
 });
@@ -170,5 +171,27 @@ define("known-languages/bullet", ["require", "exports"], function (require, expo
 define("known-languages/language", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+});
+define("models/createElement", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var CreateElement = (function () {
+        function CreateElement(name, attr) {
+            this.name = name;
+            this.attr = attr;
+            this.element = document.createElement(name.trim());
+        }
+        CreateElement.prototype.checkout_attributes = function () {
+            if (this.attr == void 0)
+                return;
+        };
+        return CreateElement;
+    }());
+    exports.default = (function (name, attr) {
+        attr = Object.assign({
+            "xio-is-virtual": true
+        }, attr);
+        return new CreateElement(name, attr);
+    });
 });
 //# sourceMappingURL=main.js.map
