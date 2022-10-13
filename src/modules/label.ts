@@ -10,6 +10,7 @@
  *     - (string)
  * 
  * */
+import createElement from "modules/createElement";
 
 interface LabelProperties {
     title:string,
@@ -41,14 +42,10 @@ class Label {
     }
     
     private __get_tooltip():HTMLElement {
-        const span:HTMLElement = document.createElement("span");
-        const text:Text = document.createTextNode(this.__normalize(this.tooltip!)!)
-        
-        span.classList.add("tooltip");
-        
-        span.appendChild(text);
-        
-        return span;
+        return createElement("span", {
+            "class":"tooltip",
+            "text":this.__normalize(this.tooltip!)!
+        });
     }
     
     /**
@@ -56,12 +53,11 @@ class Label {
      * 
      * */
     get html():HTMLElement {
-        const label:HTMLElement = document.createElement("label");
-        const text:Text = document.createTextNode(this.__normalize(this.title)!);
+        const label:HTMLElement = createElement("label", {
+            "text":this.__normalize(this.title)!
+        });
+        
         const tooltip:string = this.__normalize(this.tooltip!)!;
-        
-        label.appendChild(text);
-        
         
         if(tooltip != void 0 || tooltip != "") {
             label.appendChild(this.__get_tooltip());

@@ -4,6 +4,6 @@ interface XIO {
 
 interface Window {
     localforage:LocalForage;
-    __ENVIRONMENT__:Map<any, any>;
+    __ENVIRONMENT__:Map<string, any>;
     XIO:XIO;
 };

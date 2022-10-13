@@ -5,7 +5,7 @@
  * */
 
 // env-res - DOM version
-window.__ENVIRONMENT__ = window.__ENVIRONMENT__ || new Map<any, any>();
+window.__ENVIRONMENT__ = window.__ENVIRONMENT__ || new Map<string, any>();
 const envRes = window.__ENVIRONMENT__;
 
 export { envRes };
@@ -37,6 +37,7 @@ export const env_mode:"prod"|"dev" = window.XIO.ENVIRONMENT_MODE;
     /**
      * Any last words? 
      * */
+    // @ts-ignore
     console.log("Console has been disabled");
     
     for (let i in console)

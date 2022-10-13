@@ -40,7 +40,7 @@
  * */
 
 import {envRes} from "globals";
-import Label from "../models/label";
+import Label from "../modules/label";
 
 class Known_Lang {
     
