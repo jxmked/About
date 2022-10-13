@@ -64,4 +64,9 @@ envRes.set("configs", {
         "instagram":"https://www.instagram.com/jxmked/",
         "twitter":"https://twitter.com/jxmked"
     } 
-})
+});
+
+
+
+
+export default () => {};

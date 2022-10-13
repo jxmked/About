@@ -1,7 +1,7 @@
 /**
  * Create element
  * 
- * 
+ * For initial 
  * */
 
 import {env_mode} from "globals";
@@ -42,7 +42,7 @@ class CreateElement {
 
 export { CreateElement };
 
-export default (name:CreateElementName, attr:CreateElementAttributes):HTMLElement=> {
+export default (name:CreateElementName, attr?:CreateElementAttributes):HTMLElement=> {
     
     if(env_mode == "dev") 
         attr = Object.assign({"xio-is-virtual":true}, attr);

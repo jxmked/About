@@ -3,8 +3,9 @@ declare module "globals" {
     export { envRes };
     export const localforage: LocalForage;
     export const env_mode: "prod" | "dev";
+    const _default: () => void;
+    export default _default;
 }
-declare module "main" { }
 declare module "modules/createElement" {
     type CreateElementName = string;
     type CreateElementAttributes = {
@@ -18,8 +19,8 @@ declare module "modules/createElement" {
         get html(): HTMLElement;
     }
     export { CreateElement };
-    const _default: (name: CreateElementName, attr: CreateElementAttributes) => HTMLElement;
-    export default _default;
+    const _default_1: (name: CreateElementName, attr?: CreateElementAttributes) => HTMLElement;
+    export default _default_1;
 }
 declare module "modules/label" {
     interface LabelProperties {
@@ -36,7 +37,20 @@ declare module "modules/label" {
     }
     export default Label;
 }
-declare module "known-languages/Known_Lang" { }
+declare module "known-languages/Known_Lang" {
+    export default class Known_Lang {
+        private static PLACEMENT;
+        private static BASE;
+        private static CONTAINER;
+        private static TEXT_CONTAINER;
+        private __promise;
+        constructor();
+        display_loading_screen(): Promise<void>;
+        then(): Promise<boolean>;
+        catch(err: any): Promise<boolean>;
+    }
+}
+declare module "main" { }
 declare module "known-languages/bullet" {
     export default class Bullet {
         constructor(lang: string);

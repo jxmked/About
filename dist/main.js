@@ -35,10 +35,7 @@ define("globals", ["require", "exports"], function (require, exports) {
             "twitter": "https://twitter.com/jxmked"
         }
     });
-});
-define("main", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = () => { };
 });
 define("modules/createElement", ["require", "exports", "globals"], function (require, exports, globals_1) {
     "use strict";
@@ -111,19 +108,36 @@ define("modules/label", ["require", "exports", "modules/createElement"], functio
     }
     exports.default = Label;
 });
-define("known-languages/Known_Lang", ["require", "exports"], function (require, exports) {
+define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement"], function (require, exports, label_1, createElement_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    label_1 = __importDefault(label_1);
+    createElement_2 = __importDefault(createElement_2);
     class Known_Lang {
         constructor() {
-            Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
-            Known_Lang.BASE.setAttribute("id", "main-languages");
+            Known_Lang.CONTAINER.appendChild(new label_1.default({
+                title: "Known Languages: ",
+                tooltip: "from Github"
+            }).html);
             this.display_loading_screen();
+            Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
+            Known_Lang.PLACEMENT.parentNode.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
             this.__promise = new Promise((resolve, reject) => {
+                resolve(true);
             }).catch(this.catch.bind(this));
         }
         async display_loading_screen() {
             Known_Lang.BASE.classList.add("loading");
+            const container = (0, createElement_2.default)("div", {
+                "class": "loading-state"
+            });
+            const waveContainer = (0, createElement_2.default)("div");
+            const waveMotion = (0, createElement_2.default)("div");
+            Known_Lang.TEXT_CONTAINER.innerText = "Loading...";
+            waveContainer.appendChild(waveMotion);
+            container.appendChild(waveContainer);
+            container.appendChild(Known_Lang.TEXT_CONTAINER);
+            Known_Lang.CONTAINER.appendChild(container);
         }
         async then() {
             return await this.__promise.then((arg) => arg);
@@ -132,8 +146,17 @@ define("known-languages/Known_Lang", ["require", "exports"], function (require, 
             return true;
         }
     }
-    Known_Lang.BASE = document.createElement("div");
-    Known_Lang.CONTAINER = document.createElement("div");
+    exports.default = Known_Lang;
+    Known_Lang.PLACEMENT = document.getElementById("main-about");
+    Known_Lang.BASE = (0, createElement_2.default)("div", { id: "main-languages" });
+    Known_Lang.CONTAINER = (0, createElement_2.default)("div");
+    Known_Lang.TEXT_CONTAINER = (0, createElement_2.default)("span");
+});
+define("main", ["require", "exports", "globals"], function (require, exports, globals_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    globals_2 = __importDefault(globals_2);
+    (0, globals_2.default)();
 });
 define("known-languages/bullet", ["require", "exports"], function (require, exports) {
     "use strict";
