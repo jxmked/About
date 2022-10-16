@@ -42,6 +42,7 @@
 import {envRes} from "globals";
 import Label from "modules/label";
 import createElement from "modules/createElement";
+import getRepos from "modules/get_repos";
 
 
 export default class Known_Lang {
@@ -64,8 +65,11 @@ export default class Known_Lang {
         Known_Lang.PLACEMENT.parentNode!.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
         
         this.__promise = new Promise<boolean>((resolve, reject) => {
-            resolve(true)
+            new getRepos().then((repos:RepoProperties[]) => {
+                console.log(repos)
+            })
         }).catch(this.catch.bind(this));
+        
     }
     
     async display_loading_screen() {

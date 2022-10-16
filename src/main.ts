@@ -1,5 +1,5 @@
 import __init__, { envRes, env_mode} from "./globals";
-import known_lang from "known-languages/Known_Lang";
+import Known_Lang from "known-languages/Known_Lang";
 
 /**
  * Just to initialize 
@@ -8,3 +8,4 @@ import known_lang from "known-languages/Known_Lang";
  * */
 __init__();
 
+new Known_Lang()

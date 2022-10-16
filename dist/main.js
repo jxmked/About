@@ -108,11 +108,38 @@ define("modules/label", ["require", "exports", "modules/createElement"], functio
     }
     exports.default = Label;
 });
-define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement"], function (require, exports, label_1, createElement_2) {
+define("modules/get_repos", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class getRepo {
+        constructor() {
+            this.thenCallback = (args) => { };
+            this.catchCallback = (args) => { };
+            fetch(getRepo.url, {
+                "method": "GET"
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                this.thenCallback.bind(this.thenCallback)(res["data"]);
+            })
+                .catch(this.catchCallback.bind(this));
+        }
+        then(callback) {
+            this.thenCallback = callback;
+        }
+        catch(callback) {
+            this.catchCallback = callback;
+        }
+    }
+    exports.default = getRepo;
+    getRepo.url = "https://cdn.jsdelivr.net/gh/jxmked/resources@master/repositories.json";
+});
+define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement", "modules/get_repos"], function (require, exports, label_1, createElement_2, get_repos_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     label_1 = __importDefault(label_1);
     createElement_2 = __importDefault(createElement_2);
+    get_repos_1 = __importDefault(get_repos_1);
     class Known_Lang {
         constructor() {
             Known_Lang.CONTAINER.appendChild(new label_1.default({
@@ -123,7 +150,9 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
             Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
             Known_Lang.PLACEMENT.parentNode.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
             this.__promise = new Promise((resolve, reject) => {
-                resolve(true);
+                new get_repos_1.default().then((repos) => {
+                    console.log(repos);
+                });
             }).catch(this.catch.bind(this));
         }
         async display_loading_screen() {
@@ -152,11 +181,13 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
     Known_Lang.CONTAINER = (0, createElement_2.default)("div");
     Known_Lang.TEXT_CONTAINER = (0, createElement_2.default)("span");
 });
-define("main", ["require", "exports", "globals"], function (require, exports, globals_2) {
+define("main", ["require", "exports", "globals", "known-languages/Known_Lang"], function (require, exports, globals_2, Known_Lang_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     globals_2 = __importDefault(globals_2);
+    Known_Lang_1 = __importDefault(Known_Lang_1);
     (0, globals_2.default)();
+    new Known_Lang_1.default();
 });
 define("known-languages/bullet", ["require", "exports"], function (require, exports) {
     "use strict";

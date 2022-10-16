@@ -37,6 +37,17 @@ declare module "modules/label" {
     }
     export default Label;
 }
+declare module "modules/get_repos" {
+    type getRepoProperties = (arg: RepoProperties[]) => void;
+    export default class getRepo {
+        private static url;
+        private thenCallback;
+        private catchCallback;
+        constructor();
+        then(callback: getRepoProperties): void;
+        catch(callback: any): void;
+    }
+}
 declare module "known-languages/Known_Lang" {
     export default class Known_Lang {
         private static PLACEMENT;
