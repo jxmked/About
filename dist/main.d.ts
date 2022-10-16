@@ -44,8 +44,8 @@ declare module "modules/get_repos" {
         private thenCallback;
         private catchCallback;
         constructor();
-        then(callback: getRepoProperties): void;
-        catch(callback: any): void;
+        then(callback: getRepoProperties): this;
+        catch(callback: any): this;
     }
 }
 declare module "known-languages/Known_Lang" {
@@ -54,11 +54,11 @@ declare module "known-languages/Known_Lang" {
         private static BASE;
         private static CONTAINER;
         private static TEXT_CONTAINER;
-        private __promise;
+        private COUNTED_LANGS;
         constructor();
+        __calculate(repos: RepoProperties[]): void;
         display_loading_screen(): Promise<void>;
-        then(): Promise<boolean>;
-        catch(err: any): Promise<boolean>;
+        catch(err: any): void;
     }
 }
 declare module "main" { }

@@ -51,9 +51,14 @@ export default class Known_Lang {
     private static BASE:HTMLElement = createElement("div", {id:"main-languages"}); // #main-languages
     private static CONTAINER:HTMLElement = createElement("div"); // Base container
     private static TEXT_CONTAINER:HTMLElement = createElement("span"); // Text interact
-    private __promise:Promise<boolean>;
+    private COUNTED_LANGS:{[key:string]:number};
     
     constructor() {
+        
+        console.log("Known_Lang has been initiated");
+        
+        this.COUNTED_LANGS = {};
+        
         // Add label
         Known_Lang.CONTAINER.appendChild(new Label({
             title: "Known Languages: ", 
@@ -64,15 +69,44 @@ export default class Known_Lang {
         Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
         Known_Lang.PLACEMENT.parentNode!.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
         
-        this.__promise = new Promise<boolean>((resolve, reject) => {
-            new getRepos().then((repos:RepoProperties[]) => {
-                console.log(repos)
-            })
-        }).catch(this.catch.bind(this));
+        console.log("Starting to fetch github repositories...");
+        
+        new getRepos().then((repos:RepoProperties[]) => {
+            
+            console.log("Repositories has been fetched");
+            console.log("Parsing Repositories...");
+            this.__calculate(repos);
+            
+        })
         
     }
     
-    async display_loading_screen() {
+    
+    __calculate(repos:RepoProperties[]):void {
+        /**
+         * Sum each unique languages has been used each repository
+         * */
+         
+        console.log("Calculating languages from each repository...");
+        const calculated:{[key:string]:number} = {};
+        
+        // Get language dictionary 
+        for(const {languages, name} of Object.values(repos)) {
+            
+            console.log("Counting... " + name);
+            
+            for(const [lang, count] of Object.entries(languages)) {
+                calculated[lang] = (calculated.hasOwnProperty(lang))?calculated[lang] += count :count;
+            }
+        }
+        
+        this.COUNTED_LANGS = calculated;
+        
+        console.log("Calculated");
+    }
+    
+    
+    async display_loading_screen():Promise<void> {
         Known_Lang.BASE.classList.add("loading");
         
         const container:HTMLElement = createElement("div", {
@@ -87,28 +121,11 @@ export default class Known_Lang {
         container.appendChild(waveContainer);
         container.appendChild(Known_Lang.TEXT_CONTAINER);
         Known_Lang.CONTAINER.appendChild(container);
-    }
-    
-    async then():Promise<boolean> {
-        return await this.__promise.then((arg) => arg);
-    }
-    
-    async catch(err:any):Promise<boolean> {
         
-        return true;
+        console.log("Loading screen has been added");
     }
     
-    /*html():HTMLElement {
-       container.appendChild(new Label({
-            title:"Known Languages",
-            tooltip:"from Github"
-        }).html);
-        
-        base.appendChild(container);
-         
-        return base; 
-    } */
-    
-    
-    
+    catch(err:any):void {
+        console.error(err)
+    }
 }

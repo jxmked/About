@@ -8,7 +8,6 @@ interface Window {
     XIO:XIO;
 };
 
-
 interface RepoProperties {
     id:number;
     node_id: string;
