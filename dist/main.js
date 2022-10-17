@@ -274,6 +274,44 @@ define("main", ["require", "exports", "globals", "known-languages/Known_Lang"], 
     (0, globals_2.default)();
     new Known_Lang_1.default();
 });
+define("known-languages/bar-graph", ["require", "exports", "modules/createElement"], function (require, exports, createElement_3) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    createElement_3 = __importDefault(createElement_3);
+    var BarGraph = (function () {
+        function BarGraph(name, value) {
+            this.name = name;
+            this.value = value;
+        }
+        Object.defineProperty(BarGraph.prototype, "Name", {
+            set: function (name) {
+                this.name = name;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BarGraph.prototype, "Value", {
+            set: function (value) {
+                this.value = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BarGraph.prototype, "html", {
+            get: function () {
+                var elem = (0, createElement_3.default)("span", {
+                    "data-value": this.value,
+                    "style": "background-color: #00ff00"
+                });
+                return elem;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return BarGraph;
+    }());
+    exports.default = BarGraph;
+});
 define("known-languages/bullet", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -287,5 +325,66 @@ define("known-languages/bullet", ["require", "exports"], function (require, expo
 define("known-languages/language", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+});
+define("modules/get-lang-colors", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Get_Colors = (function () {
+        function Get_Colors() {
+            console.log("Getting Languages Colors...");
+            this.thenCallback = function (args) { };
+            this.catchCallback = function (args) { };
+            var _catch = this.catchCallback.bind(this);
+            var _then = this.thenCallback.bind(this);
+            fetch(Get_Colors.url, {
+                method: "get"
+            }).then(function (res) {
+                var status = res.status;
+                if (status != 200) {
+                    console.error("Failed to fetch colors with status code: ".concat(status));
+                    throw new Error("Failed to colors");
+                }
+                Get_Colors.__is_success = true;
+                return res.json();
+            }).then(function (res) {
+                var colors = {};
+                var keys = Object.keys(res);
+                var index = keys.length;
+                while (index--) {
+                    var key = keys[index];
+                    colors[key.toLowerCase()] = res[key];
+                }
+                Get_Colors.__loaded_colors = colors;
+                _then();
+            }).catch(_catch);
+        }
+        Object.defineProperty(Get_Colors.prototype, "success", {
+            get: function () {
+                return Get_Colors.__is_success;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Get_Colors.prototype.getColor = function (lang) {
+            if (!this.success) {
+                throw new Error("No colors available");
+            }
+            lang = lang.toLowerCase();
+            if (Get_Colors.__loaded_colors.hasOwnProperty(lang)) {
+                return Get_Colors.__loaded_colors[lang];
+            }
+            throw new TypeError("Cannot find color for ".concat(lang));
+        };
+        Get_Colors.prototype.then = function (callback) {
+            this.thenCallback = callback;
+        };
+        Get_Colors.prototype.catch = function (callback) {
+            this.catchCallback = callback;
+        };
+        Get_Colors.url = "assets/data/color.json";
+        Get_Colors.__is_success = false;
+        return Get_Colors;
+    }());
+    exports.default = Get_Colors;
 });
 //# sourceMappingURL=main.js.map

@@ -62,9 +62,33 @@ declare module "known-languages/Known_Lang" {
     }
 }
 declare module "main" { }
+declare module "known-languages/bar-graph" {
+    export default class BarGraph {
+        private name;
+        private value;
+        constructor(name: string, value: number);
+        set Name(name: string);
+        set Value(value: number);
+        get html(): HTMLElement;
+    }
+}
 declare module "known-languages/bullet" {
     export default class Bullet {
         constructor(lang: string);
     }
 }
 declare module "known-languages/language" { }
+declare module "modules/get-lang-colors" {
+    export default class Get_Colors {
+        private static url;
+        private static __loaded_colors;
+        private thenCallback;
+        private catchCallback;
+        private static __is_success;
+        constructor();
+        get success(): boolean;
+        getColor(lang: string): string;
+        then(callback: Function): void;
+        catch(callback: Function): void;
+    }
+}

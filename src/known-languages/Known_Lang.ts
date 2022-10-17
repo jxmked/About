@@ -13,7 +13,7 @@
  *     
  *     - div
  *       - div
- *         - span[] (This must be a bars)
+ *         - span[] (This must be a bars) (Define background color and width in style attr)
  * 
  *     - div
  *       - ul
