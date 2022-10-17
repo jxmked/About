@@ -51,6 +51,10 @@ export default class Known_Lang {
     private static BASE:HTMLElement = createElement("div", {id:"main-languages"}); // #main-languages
     private static CONTAINER:HTMLElement = createElement("div"); // Base container
     private static TEXT_CONTAINER:HTMLElement = createElement("span"); // Text interact
+    
+    /**
+     * Calculated Languages in Percentage
+     * */
     private COUNTED_LANGS:{[key:string]:number};
     
     constructor() {
@@ -81,7 +85,6 @@ export default class Known_Lang {
         
     }
     
-    
     __calculate(repos:RepoProperties[]):void {
         /**
          * Sum each unique languages has been used each repository
@@ -96,11 +99,27 @@ export default class Known_Lang {
             console.log("Counting... " + name);
             
             for(const [lang, count] of Object.entries(languages)) {
-                calculated[lang] = (calculated.hasOwnProperty(lang))?calculated[lang] += count :count;
+                if(calculated.hasOwnProperty(lang)){
+                    calculated[lang] += count
+                    continue;
+                }
+                
+                calculated[lang] = count;
             }
         }
         
-        this.COUNTED_LANGS = calculated;
+        /**
+         * Convert to percentages
+         * */
+        const sum:number = Object.values(calculated).reduce((x, y) => x + y);
+        
+        const pert:{[key:string]:number} = {};
+        
+        Object.entries(calculated).forEach(([lang, count]) => {
+            pert[lang] = (count / sum) * 100;
+        });
+        
+        this.COUNTED_LANGS = pert;
         
         console.log("Calculated");
     }

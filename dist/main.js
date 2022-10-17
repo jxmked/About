@@ -48,9 +48,10 @@ define("globals", ["require", "exports"], function (require, exports) {
     window.XIO.ENVIRONMENT_MODE = window.XIO.ENVIRONMENT_MODE || "dev";
     exports.env_mode = window.XIO.ENVIRONMENT_MODE;
     (function () {
-        if (exports.env_mode == "dev")
+        if (window.XIO.ENVIRONMENT_MODE == "dev") {
             console.log("Development Mode");
-        return;
+            return;
+        }
         console.log("Console has been disabled");
         for (var i in console)
             console[i] = function () { };
@@ -218,10 +219,20 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
                 console.log("Counting... " + name_1);
                 for (var _c = 0, _d = Object.entries(languages); _c < _d.length; _c++) {
                     var _e = _d[_c], lang = _e[0], count = _e[1];
-                    calculated[lang] = (calculated.hasOwnProperty(lang)) ? calculated[lang] += count : count;
+                    if (calculated.hasOwnProperty(lang)) {
+                        calculated[lang] += count;
+                        continue;
+                    }
+                    calculated[lang] = count;
                 }
             }
-            this.COUNTED_LANGS = calculated;
+            var sum = Object.values(calculated).reduce(function (x, y) { return x + y; });
+            var pert = {};
+            Object.entries(calculated).forEach(function (_a) {
+                var lang = _a[0], count = _a[1];
+                pert[lang] = (count / sum) * 100;
+            });
+            this.COUNTED_LANGS = pert;
             console.log("Calculated");
         };
         Known_Lang.prototype.display_loading_screen = function () {

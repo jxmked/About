@@ -29,15 +29,15 @@ export const env_mode:"prod"|"dev" = window.XIO.ENVIRONMENT_MODE;
  * Only receiving native errors
  * */
  
-(():void => {
-    if(env_mode == "dev")
+(() => {
+    if(window.XIO.ENVIRONMENT_MODE == "dev") {
         console.log("Development Mode");
         return;
+    }
     
     /**
      * Any last words? 
      * */
-    // @ts-ignore
     console.log("Console has been disabled");
     
     for (let i in console)

@@ -56,6 +56,7 @@
             if (window.location.protocol.toString() != "https:")
                 return;
             
+            window.XIO = window.XIO || {};
             window.XIO.ENVIRONMENT_MODE = "prod";
             
             var scr = document.createElement("script");
