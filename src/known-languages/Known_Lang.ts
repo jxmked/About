@@ -44,6 +44,7 @@ import Label from "modules/label";
 import createElement from "modules/createElement";
 import getRepos from "modules/get_repos";
 import createBarGraph from "create-bar-graph";
+import createListItem from "create-list-item";
 
 export default class Known_Lang {
     
@@ -80,9 +81,7 @@ export default class Known_Lang {
             console.log("Repositories has been fetched");
             console.log("Parsing Repositories...");
             this.__calculate(repos);
-            
-            console.log("Creating DOM Elements...");
-            
+
             // Remove all child element from container
             // except the label tag
             let last:ChildNode|null = null;
@@ -95,8 +94,11 @@ export default class Known_Lang {
                 last = Known_Lang.CONTAINER.lastChild;
                 first = Known_Lang.CONTAINER.firstChild;
             } while(last != first);
+            Known_Lang.BASE.classList.remove("loading");
             
             console.log("Loading element has been removed");
+            
+            console.log("Sorting languages");
             
             // Sort COUNTED_LANGS by value
             // Max -> Min
@@ -116,26 +118,30 @@ export default class Known_Lang {
             this.COUNTED_LANGS = rebuild;
             this.createDOMElements();
         })
-        
     }
     
     createDOMElements():void {
+        console.log("Creating DOM Elements...");
+        
         const barGraph:createBarGraph = new createBarGraph();
+        const listItem:createListItem = new createListItem();
         const pert:{[key:string]:number} = this.COUNTED_LANGS;
         const keys:string[] = Object.keys(pert);
-        
-        Known_Lang.CONTAINER.appendChild(barGraph.html);
         
         let index:number = keys.length;
         let ival = window.setInterval(() => {
             try {
-                index--
-                const lang:string = keys[index];
+                
+                const lang:string = keys[--index];
                 
                 barGraph.item({
                     name:lang,
                     value:pert[lang]
-                })
+                });
+                listItem.item({
+                    name:lang,
+                    value:pert[lang]
+                });
                 
                 console.log(`${lang} has been added to bar graph.`);
                 
@@ -143,6 +149,9 @@ export default class Known_Lang {
                 clearInterval(ival);
             }
         }, 100);
+        
+        Known_Lang.CONTAINER.appendChild(barGraph.html);
+        Known_Lang.CONTAINER.appendChild(listItem.html);
     }
     
     __calculate(repos:RepoProperties[]):void {

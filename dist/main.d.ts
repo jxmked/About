@@ -76,6 +76,22 @@ declare module "known-languages/create-bar-graph" {
         get html(): HTMLElement;
     }
 }
+declare module "known-languages/create-list-item" {
+    interface CreateItemProperties {
+        name: string;
+        value: number;
+    }
+    export default class CreateListItem {
+        private BASE;
+        private LIST;
+        constructor();
+        item({ name, value }: CreateItemProperties): void;
+        get html(): HTMLElement;
+        itemValue(name: string, value: number, color: string): HTMLElement;
+        itemName(name: string, value: number, color: hexCode): HTMLElement;
+        bullet(name: string, value: number, color: string): HTMLElement;
+    }
+}
 declare module "known-languages/Known_Lang" {
     export default class Known_Lang {
         private static PLACEMENT;
@@ -94,17 +110,6 @@ declare module "main" { }
 declare module "known-languages/bullet" {
     export default class Bullet {
         constructor(lang: string);
-    }
-}
-declare module "known-languages/create-list-item" {
-    export default class CreateListItem {
-        private BASE;
-        private LIST;
-        constructor();
-        get html(): HTMLElement;
-        itemValue(name: string, value: number, color: string): HTMLElement;
-        itemName(name: string, value: number, color: string): HTMLElement;
-        bullet(name: string, value: number, color: string): HTMLElement;
     }
 }
 declare module "known-languages/language" { }
