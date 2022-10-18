@@ -81,7 +81,7 @@ export default class Known_Lang {
             console.log("Repositories has been fetched");
             console.log("Parsing Repositories...");
             this.__calculate(repos);
-
+            
             // Remove all child element from container
             // except the label tag
             let last:ChildNode|null = null;
@@ -94,6 +94,7 @@ export default class Known_Lang {
                 last = Known_Lang.CONTAINER.lastChild;
                 first = Known_Lang.CONTAINER.firstChild;
             } while(last != first);
+            
             Known_Lang.BASE.classList.remove("loading");
             
             console.log("Loading element has been removed");
@@ -101,7 +102,7 @@ export default class Known_Lang {
             console.log("Sorting languages");
             
             // Sort COUNTED_LANGS by value
-            // Max -> Min
+            // Min -> Max
             const sortedPert:[string, number][] = [];
             const entries:[string, number][] = Object.entries(this.COUNTED_LANGS);
             const rebuild:{[key:string]:number} = {};
@@ -134,16 +135,19 @@ export default class Known_Lang {
                 
                 const lang:string = keys[--index];
                 
+                // Add Item into Bar Graph
                 barGraph.item({
                     name:lang,
                     value:pert[lang]
                 });
+                
+                // Add Item to Item List
                 listItem.item({
                     name:lang,
                     value:pert[lang]
                 });
                 
-                console.log(`${lang} has been added to bar graph.`);
+                console.log(`'${lang}' language has been added to bar graph.`);
                 
             } catch(TypeError) {
                 clearInterval(ival);
@@ -160,6 +164,7 @@ export default class Known_Lang {
          * */
          
         console.log("Calculating languages from each repository...");
+        
         const calculated:{[key:string]:number} = {};
         
         // Get language dictionary 
