@@ -44,7 +44,6 @@ import Label from "modules/label";
 import createElement from "modules/createElement";
 import getRepos from "modules/get_repos";
 
-
 export default class Known_Lang {
     
     private static PLACEMENT:HTMLElement = document.getElementById("main-about")!;
@@ -84,6 +83,8 @@ export default class Known_Lang {
         })
         
     }
+    
+  //  createBarGraph
     
     __calculate(repos:RepoProperties[]):void {
         /**

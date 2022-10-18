@@ -61,23 +61,6 @@ declare module "known-languages/Known_Lang" {
         catch(err: any): void;
     }
 }
-declare module "main" { }
-declare module "known-languages/bar-graph" {
-    export default class BarGraph {
-        private name;
-        private value;
-        constructor(name: string, value: number);
-        set Name(name: string);
-        set Value(value: number);
-        get html(): HTMLElement;
-    }
-}
-declare module "known-languages/bullet" {
-    export default class Bullet {
-        constructor(lang: string);
-    }
-}
-declare module "known-languages/language" { }
 declare module "modules/get-lang-colors" {
     export default class Get_Colors {
         private static url;
@@ -86,9 +69,30 @@ declare module "modules/get-lang-colors" {
         private catchCallback;
         private static __is_success;
         constructor();
+        load(): void;
         get success(): boolean;
-        getColor(lang: string): string;
-        then(callback: Function): void;
-        catch(callback: Function): void;
+        static lang(lang: string): hexCode;
+        then(callback: Function): Get_Colors;
+        catch(callback: Function): Get_Colors;
     }
 }
+declare module "main" { }
+declare module "known-languages/bullet" {
+    export default class Bullet {
+        constructor(lang: string);
+    }
+}
+declare module "known-languages/create-bar-graph" {
+    interface CreateBarGraphProperties {
+        name: string;
+        value: number;
+    }
+    export default class CreateBarGraph {
+        private BASE;
+        private PARENT;
+        constructor();
+        set item({ name, value }: CreateBarGraphProperties);
+        get html(): HTMLElement;
+    }
+}
+declare module "known-languages/language" { }

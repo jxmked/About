@@ -21,3 +21,5 @@ interface RepoProperties {
     forks:number;
     download_link:string
 };
+
+type hexCode = `#${string}`;

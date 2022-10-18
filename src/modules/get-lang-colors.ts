@@ -8,26 +8,35 @@
  * In main.ts
  * 
  * Call this constructor first to make initial load so, we can use 
- * get color function with sync method
+ * static get color function with sync method
  * */
 
-type colorProperties = {[key:string]:string};
+type colorProperties = {[key:string]:hexCode};
 
 export default class Get_Colors {
-    private static url:string = "assets/data/color.json";
-    private static __loaded_colors:colorProperties;
+    private static url:string = "assets/data/colors.json";
+    
+    // Save all fetched colors for later use
+    private static __loaded_colors:colorProperties = {};
+    
     private thenCallback:Function;
     private catchCallback:Function;
+    
+    // Is successfully fetch colors?
     private static __is_success:boolean = false;
     
     constructor() {
-        console.log("Getting Languages Colors...");
+        console.log("Get colors has been initiated");
         
         this.thenCallback = (args:any) => {};
         this.catchCallback = (args:any) => {};
+    }
+    
+    load() {
+        console.log("Fetching colors has been started");
         
-        const _catch = this.catchCallback.bind(this);
-        const _then = this.thenCallback.bind(this);
+        const _catch = this.catchCallback.bind(this.catchCallback);
+        const _then = this.thenCallback.bind(this.thenCallback);
         
         fetch(Get_Colors.url, {
             method:"get"
@@ -35,15 +44,19 @@ export default class Get_Colors {
             const status = res.status;
             
             if(status != 200) { // Not ok
-                console.error(`Failed to fetch colors with status code: ${status}`);
-                throw new Error("Failed to colors");
+                throw new Error(`Failed to fetch colors with status code: ${status}`);
             }
+            
             Get_Colors.__is_success = true;
+            
+            console.log("Colors has been fetched!");
+            
             return res.json() as colorProperties;
-            
         }).then((res:colorProperties) => {
-            // Translate key to lower case
             
+            console.log("Translating Color keys into lowercase...");
+            
+            // Translate key to lower case
             const colors:colorProperties = {};
             const keys:string[] = Object.keys(res);
             let index:number = keys.length;
@@ -53,7 +66,11 @@ export default class Get_Colors {
                 colors[key.toLowerCase() as keyof colorProperties] = res[key];
             }
             
+            console.log("Translated");
+            
             Get_Colors.__loaded_colors = colors;
+            
+            console.log("Languages color is good to go");
             
             _then();
         }).catch(_catch);
@@ -63,8 +80,8 @@ export default class Get_Colors {
         return Get_Colors.__is_success;
     }
     
-    getColor(lang:string):string {
-        if(! this.success) {
+    static lang(lang:string):hexCode {
+        if(! Get_Colors.__is_success) {
             throw new Error("No colors available");
         }
         
@@ -77,12 +94,16 @@ export default class Get_Colors {
         throw new TypeError(`Cannot find color for ${lang}`);
     }
     
-    then(callback:Function):void {
+    then(callback:Function):Get_Colors {
         this.thenCallback = callback;
+        return this;
     }
     
-    catch(callback:Function):void {
+    catch(callback:Function):Get_Colors {
         this.catchCallback = callback;
+        return this;
     }
     
 }
+
+

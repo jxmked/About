@@ -266,51 +266,88 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
     }());
     exports.default = Known_Lang;
 });
-define("main", ["require", "exports", "globals", "known-languages/Known_Lang"], function (require, exports, globals_2, Known_Lang_1) {
+define("modules/get-lang-colors", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Get_Colors = (function () {
+        function Get_Colors() {
+            console.log("Get colors has been initiated");
+            this.thenCallback = function (args) { };
+            this.catchCallback = function (args) { };
+        }
+        Get_Colors.prototype.load = function () {
+            console.log("Fetching colors has been started");
+            var _catch = this.catchCallback.bind(this.catchCallback);
+            var _then = this.thenCallback.bind(this.thenCallback);
+            fetch(Get_Colors.url, {
+                method: "get"
+            }).then(function (res) {
+                var status = res.status;
+                if (status != 200) {
+                    throw new Error("Failed to fetch colors with status code: ".concat(status));
+                }
+                Get_Colors.__is_success = true;
+                console.log("Colors has been fetched!");
+                return res.json();
+            }).then(function (res) {
+                console.log("Translating Color keys into lowercase...");
+                var colors = {};
+                var keys = Object.keys(res);
+                var index = keys.length;
+                while (index--) {
+                    var key = keys[index];
+                    colors[key.toLowerCase()] = res[key];
+                }
+                console.log("Translated");
+                Get_Colors.__loaded_colors = colors;
+                console.log("Languages color is good to go");
+                _then();
+            }).catch(_catch);
+        };
+        Object.defineProperty(Get_Colors.prototype, "success", {
+            get: function () {
+                return Get_Colors.__is_success;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Get_Colors.lang = function (lang) {
+            if (!Get_Colors.__is_success) {
+                throw new Error("No colors available");
+            }
+            lang = lang.toLowerCase();
+            if (Get_Colors.__loaded_colors.hasOwnProperty(lang)) {
+                return Get_Colors.__loaded_colors[lang];
+            }
+            throw new TypeError("Cannot find color for ".concat(lang));
+        };
+        Get_Colors.prototype.then = function (callback) {
+            this.thenCallback = callback;
+            return this;
+        };
+        Get_Colors.prototype.catch = function (callback) {
+            this.catchCallback = callback;
+            return this;
+        };
+        Get_Colors.url = "assets/data/colors.json";
+        Get_Colors.__loaded_colors = {};
+        Get_Colors.__is_success = false;
+        return Get_Colors;
+    }());
+    exports.default = Get_Colors;
+});
+define("main", ["require", "exports", "globals", "modules/get-lang-colors"], function (require, exports, globals_2, get_lang_colors_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     globals_2 = __importDefault(globals_2);
-    Known_Lang_1 = __importDefault(Known_Lang_1);
+    get_lang_colors_1 = __importDefault(get_lang_colors_1);
     (0, globals_2.default)();
-    new Known_Lang_1.default();
-});
-define("known-languages/bar-graph", ["require", "exports", "modules/createElement"], function (require, exports, createElement_3) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    createElement_3 = __importDefault(createElement_3);
-    var BarGraph = (function () {
-        function BarGraph(name, value) {
-            this.name = name;
-            this.value = value;
-        }
-        Object.defineProperty(BarGraph.prototype, "Name", {
-            set: function (name) {
-                this.name = name;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BarGraph.prototype, "Value", {
-            set: function (value) {
-                this.value = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BarGraph.prototype, "html", {
-            get: function () {
-                var elem = (0, createElement_3.default)("span", {
-                    "data-value": this.value,
-                    "style": "background-color: #00ff00"
-                });
-                return elem;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        return BarGraph;
-    }());
-    exports.default = BarGraph;
+    new get_lang_colors_1.default().then(function () {
+        console.log("Color loaded");
+        console.log(get_lang_colors_1.default.lang("python"));
+    }).catch(function (err) {
+        console.error("Failed to load");
+    }).load();
 });
 define("known-languages/bullet", ["require", "exports"], function (require, exports) {
     "use strict";
@@ -322,69 +359,44 @@ define("known-languages/bullet", ["require", "exports"], function (require, expo
     }());
     exports.default = Bullet;
 });
-define("known-languages/language", ["require", "exports"], function (require, exports) {
+define("known-languages/create-bar-graph", ["require", "exports", "modules/get-lang-colors", "modules/createElement"], function (require, exports, get_lang_colors_2, createElement_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-});
-define("modules/get-lang-colors", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var Get_Colors = (function () {
-        function Get_Colors() {
-            console.log("Getting Languages Colors...");
-            this.thenCallback = function (args) { };
-            this.catchCallback = function (args) { };
-            var _catch = this.catchCallback.bind(this);
-            var _then = this.thenCallback.bind(this);
-            fetch(Get_Colors.url, {
-                method: "get"
-            }).then(function (res) {
-                var status = res.status;
-                if (status != 200) {
-                    console.error("Failed to fetch colors with status code: ".concat(status));
-                    throw new Error("Failed to colors");
-                }
-                Get_Colors.__is_success = true;
-                return res.json();
-            }).then(function (res) {
-                var colors = {};
-                var keys = Object.keys(res);
-                var index = keys.length;
-                while (index--) {
-                    var key = keys[index];
-                    colors[key.toLowerCase()] = res[key];
-                }
-                Get_Colors.__loaded_colors = colors;
-                _then();
-            }).catch(_catch);
+    get_lang_colors_2 = __importDefault(get_lang_colors_2);
+    createElement_3 = __importDefault(createElement_3);
+    var CreateBarGraph = (function () {
+        function CreateBarGraph() {
+            this.BASE = (0, createElement_3.default)("div");
+            this.PARENT = (0, createElement_3.default)("div");
+            this.BASE.appendChild(this.PARENT);
         }
-        Object.defineProperty(Get_Colors.prototype, "success", {
-            get: function () {
-                return Get_Colors.__is_success;
+        Object.defineProperty(CreateBarGraph.prototype, "item", {
+            set: function (_a) {
+                var name = _a.name, value = _a.value;
+                var color = get_lang_colors_2.default.lang(name);
+                var bar = (0, createElement_3.default)("span", {
+                    "data-value": value,
+                    "data-language": name,
+                    "style": "background-color:".concat(color, ";width:").concat(value, "%;")
+                });
+                this.PARENT.appendChild(bar);
             },
             enumerable: false,
             configurable: true
         });
-        Get_Colors.prototype.getColor = function (lang) {
-            if (!this.success) {
-                throw new Error("No colors available");
-            }
-            lang = lang.toLowerCase();
-            if (Get_Colors.__loaded_colors.hasOwnProperty(lang)) {
-                return Get_Colors.__loaded_colors[lang];
-            }
-            throw new TypeError("Cannot find color for ".concat(lang));
-        };
-        Get_Colors.prototype.then = function (callback) {
-            this.thenCallback = callback;
-        };
-        Get_Colors.prototype.catch = function (callback) {
-            this.catchCallback = callback;
-        };
-        Get_Colors.url = "assets/data/color.json";
-        Get_Colors.__is_success = false;
-        return Get_Colors;
+        Object.defineProperty(CreateBarGraph.prototype, "html", {
+            get: function () {
+                return this.BASE;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return CreateBarGraph;
     }());
-    exports.default = Get_Colors;
+    exports.default = CreateBarGraph;
+});
+define("known-languages/language", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
 });
 //# sourceMappingURL=main.js.map
