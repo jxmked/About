@@ -12,13 +12,10 @@ __init__();
 new getColors().then(() => {
     console.log("Color loaded")
     
+    new Known_Lang();
     
-    
-    console.log(getColors.lang("python"))
 }).catch((err:any) => {
     console.error("Failed to load")
 }).load()
 
 
-
-//new Known_Lang()

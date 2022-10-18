@@ -10,9 +10,8 @@
 import getColors from "modules/get-lang-colors";
 import createElement from "modules/createElement";
 
-
-interface CreateBarGraphProperties {
-    name:string;
+interface BarGraphItemProperties {
+    name:any
     value:number;
 }
 
@@ -24,13 +23,11 @@ export default class CreateBarGraph {
     constructor() {
         this.BASE = createElement("div");
         this.PARENT = createElement("div");
-        
         this.BASE.appendChild(this.PARENT);
     }
     
-    
-    
-    set item({name, value}:CreateBarGraphProperties) {
+    // Throwing an error
+    /*set */ item({name, value}:BarGraphItemProperties) {
         const color:hexCode = getColors.lang(name);
         
         const bar:HTMLElement = createElement("span", {

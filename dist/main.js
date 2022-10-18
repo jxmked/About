@@ -186,86 +186,6 @@ define("modules/get_repos", ["require", "exports"], function (require, exports) 
     }());
     exports.default = getRepo;
 });
-define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement", "modules/get_repos"], function (require, exports, label_1, createElement_2, get_repos_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    label_1 = __importDefault(label_1);
-    createElement_2 = __importDefault(createElement_2);
-    get_repos_1 = __importDefault(get_repos_1);
-    var Known_Lang = (function () {
-        function Known_Lang() {
-            var _this = this;
-            console.log("Known_Lang has been initiated");
-            this.COUNTED_LANGS = {};
-            Known_Lang.CONTAINER.appendChild(new label_1.default({
-                title: "Known Languages: ",
-                tooltip: "from Github"
-            }).html);
-            this.display_loading_screen();
-            Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
-            Known_Lang.PLACEMENT.parentNode.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
-            console.log("Starting to fetch github repositories...");
-            new get_repos_1.default().then(function (repos) {
-                console.log("Repositories has been fetched");
-                console.log("Parsing Repositories...");
-                _this.__calculate(repos);
-            });
-        }
-        Known_Lang.prototype.__calculate = function (repos) {
-            console.log("Calculating languages from each repository...");
-            var calculated = {};
-            for (var _i = 0, _a = Object.values(repos); _i < _a.length; _i++) {
-                var _b = _a[_i], languages = _b.languages, name_1 = _b.name;
-                console.log("Counting... " + name_1);
-                for (var _c = 0, _d = Object.entries(languages); _c < _d.length; _c++) {
-                    var _e = _d[_c], lang = _e[0], count = _e[1];
-                    if (calculated.hasOwnProperty(lang)) {
-                        calculated[lang] += count;
-                        continue;
-                    }
-                    calculated[lang] = count;
-                }
-            }
-            var sum = Object.values(calculated).reduce(function (x, y) { return x + y; });
-            var pert = {};
-            Object.entries(calculated).forEach(function (_a) {
-                var lang = _a[0], count = _a[1];
-                pert[lang] = (count / sum) * 100;
-            });
-            this.COUNTED_LANGS = pert;
-            console.log("Calculated");
-        };
-        Known_Lang.prototype.display_loading_screen = function () {
-            return __awaiter(this, void 0, void 0, function () {
-                var container, waveContainer, waveMotion;
-                return __generator(this, function (_a) {
-                    Known_Lang.BASE.classList.add("loading");
-                    container = (0, createElement_2.default)("div", {
-                        "class": "loading-state"
-                    });
-                    waveContainer = (0, createElement_2.default)("div");
-                    waveMotion = (0, createElement_2.default)("div");
-                    Known_Lang.TEXT_CONTAINER.innerText = "Loading...";
-                    waveContainer.appendChild(waveMotion);
-                    container.appendChild(waveContainer);
-                    container.appendChild(Known_Lang.TEXT_CONTAINER);
-                    Known_Lang.CONTAINER.appendChild(container);
-                    console.log("Loading screen has been added");
-                    return [2];
-                });
-            });
-        };
-        Known_Lang.prototype.catch = function (err) {
-            console.error(err);
-        };
-        Known_Lang.PLACEMENT = document.getElementById("main-about");
-        Known_Lang.BASE = (0, createElement_2.default)("div", { id: "main-languages" });
-        Known_Lang.CONTAINER = (0, createElement_2.default)("div");
-        Known_Lang.TEXT_CONTAINER = (0, createElement_2.default)("span");
-        return Known_Lang;
-    }());
-    exports.default = Known_Lang;
-});
 define("modules/get-lang-colors", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -336,15 +256,164 @@ define("modules/get-lang-colors", ["require", "exports"], function (require, exp
     }());
     exports.default = Get_Colors;
 });
-define("main", ["require", "exports", "globals", "modules/get-lang-colors"], function (require, exports, globals_2, get_lang_colors_1) {
+define("known-languages/create-bar-graph", ["require", "exports", "modules/get-lang-colors", "modules/createElement"], function (require, exports, get_lang_colors_1, createElement_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    get_lang_colors_1 = __importDefault(get_lang_colors_1);
+    createElement_2 = __importDefault(createElement_2);
+    var CreateBarGraph = (function () {
+        function CreateBarGraph() {
+            this.BASE = (0, createElement_2.default)("div");
+            this.PARENT = (0, createElement_2.default)("div");
+            this.BASE.appendChild(this.PARENT);
+        }
+        CreateBarGraph.prototype.item = function (_a) {
+            var name = _a.name, value = _a.value;
+            var color = get_lang_colors_1.default.lang(name);
+            var bar = (0, createElement_2.default)("span", {
+                "data-value": value,
+                "data-language": name,
+                "style": "background-color:".concat(color, ";width:").concat(value, "%;")
+            });
+            this.PARENT.appendChild(bar);
+        };
+        Object.defineProperty(CreateBarGraph.prototype, "html", {
+            get: function () {
+                return this.BASE;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return CreateBarGraph;
+    }());
+    exports.default = CreateBarGraph;
+});
+define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement", "modules/get_repos", "known-languages/create-bar-graph"], function (require, exports, label_1, createElement_3, get_repos_1, create_bar_graph_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    label_1 = __importDefault(label_1);
+    createElement_3 = __importDefault(createElement_3);
+    get_repos_1 = __importDefault(get_repos_1);
+    create_bar_graph_1 = __importDefault(create_bar_graph_1);
+    var Known_Lang = (function () {
+        function Known_Lang() {
+            var _this = this;
+            console.log("Known_Lang has been initiated");
+            this.COUNTED_LANGS = {};
+            Known_Lang.CONTAINER.appendChild(new label_1.default({
+                title: "Known Languages: ",
+                tooltip: "from Github"
+            }).html);
+            this.display_loading_screen();
+            Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
+            Known_Lang.PLACEMENT.parentNode.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
+            console.log("Starting to fetch github repositories...");
+            new get_repos_1.default().then(function (repos) {
+                console.log("Repositories has been fetched");
+                console.log("Parsing Repositories...");
+                _this.__calculate(repos);
+                console.log("Creating DOM Elements...");
+                var last = null;
+                var first = null;
+                do {
+                    if (last && first)
+                        Known_Lang.CONTAINER.removeChild(last);
+                    last = Known_Lang.CONTAINER.lastChild;
+                    first = Known_Lang.CONTAINER.firstChild;
+                } while (last != first);
+                console.log("Loading element has been removed");
+                var sortedPert = [[]];
+                _this.createDOMElements(sortedPert);
+            });
+        }
+        Known_Lang.prototype.createDOMElements = function (sortedPert) {
+            var barGraph = new create_bar_graph_1.default();
+            var pert = this.COUNTED_LANGS;
+            var keys = Object.keys(pert);
+            Known_Lang.CONTAINER.appendChild(barGraph.html);
+            var index = 0;
+            var ival = window.setInterval(function () {
+                try {
+                    var lang = keys[index];
+                    var value = pert[lang];
+                    barGraph.item({
+                        name: lang,
+                        value: value
+                    });
+                    index++;
+                    console.log("".concat(lang, " has been added to bar graph."));
+                }
+                catch (err) {
+                    console.log(err);
+                    clearInterval(ival);
+                }
+            }, 100);
+        };
+        Known_Lang.prototype.__calculate = function (repos) {
+            console.log("Calculating languages from each repository...");
+            var calculated = {};
+            for (var _i = 0, _a = Object.values(repos); _i < _a.length; _i++) {
+                var _b = _a[_i], languages = _b.languages, name_1 = _b.name;
+                console.log("Counting... " + name_1);
+                for (var _c = 0, _d = Object.entries(languages); _c < _d.length; _c++) {
+                    var _e = _d[_c], lang = _e[0], count = _e[1];
+                    if (calculated.hasOwnProperty(lang)) {
+                        calculated[lang] += count;
+                        continue;
+                    }
+                    calculated[lang] = count;
+                }
+            }
+            var sum = Object.values(calculated).reduce(function (x, y) { return x + y; });
+            var pert = {};
+            Object.entries(calculated).forEach(function (_a) {
+                var lang = _a[0], count = _a[1];
+                pert[lang] = (count / sum) * 100;
+            });
+            this.COUNTED_LANGS = pert;
+            console.log("Calculated");
+        };
+        Known_Lang.prototype.display_loading_screen = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var container, waveContainer, waveMotion;
+                return __generator(this, function (_a) {
+                    Known_Lang.BASE.classList.add("loading");
+                    container = (0, createElement_3.default)("div", {
+                        "class": "loading-state"
+                    });
+                    waveContainer = (0, createElement_3.default)("div");
+                    waveMotion = (0, createElement_3.default)("div");
+                    Known_Lang.TEXT_CONTAINER.innerText = "Loading...";
+                    waveContainer.appendChild(waveMotion);
+                    container.appendChild(waveContainer);
+                    container.appendChild(Known_Lang.TEXT_CONTAINER);
+                    Known_Lang.CONTAINER.appendChild(container);
+                    console.log("Loading screen has been added");
+                    return [2];
+                });
+            });
+        };
+        Known_Lang.prototype.catch = function (err) {
+            console.error(err);
+        };
+        Known_Lang.PLACEMENT = document.getElementById("main-about");
+        Known_Lang.BASE = (0, createElement_3.default)("div", { id: "main-languages" });
+        Known_Lang.CONTAINER = (0, createElement_3.default)("div");
+        Known_Lang.TEXT_CONTAINER = (0, createElement_3.default)("span");
+        return Known_Lang;
+    }());
+    exports.default = Known_Lang;
+});
+define("main", ["require", "exports", "globals", "known-languages/Known_Lang", "modules/get-lang-colors"], function (require, exports, globals_2, Known_Lang_1, get_lang_colors_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     globals_2 = __importDefault(globals_2);
-    get_lang_colors_1 = __importDefault(get_lang_colors_1);
+    Known_Lang_1 = __importDefault(Known_Lang_1);
+    get_lang_colors_2 = __importDefault(get_lang_colors_2);
     (0, globals_2.default)();
-    new get_lang_colors_1.default().then(function () {
+    new get_lang_colors_2.default().then(function () {
         console.log("Color loaded");
-        console.log(get_lang_colors_1.default.lang("python"));
+        new Known_Lang_1.default();
     }).catch(function (err) {
         console.error("Failed to load");
     }).load();
@@ -358,42 +427,6 @@ define("known-languages/bullet", ["require", "exports"], function (require, expo
         return Bullet;
     }());
     exports.default = Bullet;
-});
-define("known-languages/create-bar-graph", ["require", "exports", "modules/get-lang-colors", "modules/createElement"], function (require, exports, get_lang_colors_2, createElement_3) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    get_lang_colors_2 = __importDefault(get_lang_colors_2);
-    createElement_3 = __importDefault(createElement_3);
-    var CreateBarGraph = (function () {
-        function CreateBarGraph() {
-            this.BASE = (0, createElement_3.default)("div");
-            this.PARENT = (0, createElement_3.default)("div");
-            this.BASE.appendChild(this.PARENT);
-        }
-        Object.defineProperty(CreateBarGraph.prototype, "item", {
-            set: function (_a) {
-                var name = _a.name, value = _a.value;
-                var color = get_lang_colors_2.default.lang(name);
-                var bar = (0, createElement_3.default)("span", {
-                    "data-value": value,
-                    "data-language": name,
-                    "style": "background-color:".concat(color, ";width:").concat(value, "%;")
-                });
-                this.PARENT.appendChild(bar);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(CreateBarGraph.prototype, "html", {
-            get: function () {
-                return this.BASE;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        return CreateBarGraph;
-    }());
-    exports.default = CreateBarGraph;
 });
 define("known-languages/language", ["require", "exports"], function (require, exports) {
     "use strict";

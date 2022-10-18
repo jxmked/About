@@ -43,6 +43,7 @@ import {envRes} from "globals";
 import Label from "modules/label";
 import createElement from "modules/createElement";
 import getRepos from "modules/get_repos";
+import createBarGraph from "create-bar-graph";
 
 export default class Known_Lang {
     
@@ -80,11 +81,58 @@ export default class Known_Lang {
             console.log("Parsing Repositories...");
             this.__calculate(repos);
             
+            console.log("Creating DOM Elements...");
+            
+            // Remove all child element from container
+            let last:ChildNode|null = null;
+            let first:ChildNode|null = null;
+            
+            do {
+                if(last && first)
+                    Known_Lang.CONTAINER.removeChild(last);
+                
+                last = Known_Lang.CONTAINER.lastChild;
+                first = Known_Lang.CONTAINER.firstChild;
+            } while(last != first);
+            
+            console.log("Loading element has been removed");
+            
+            const sortedPert:[string, number] = [[]];
+            
+            
+            this.createDOMElements(sortedPert);
         })
         
     }
     
-  //  createBarGraph
+    createDOMElements(sortedPert:[string, number]):void {
+        const barGraph = new createBarGraph();
+        const pert:{[key:string]:number} = this.COUNTED_LANGS;
+        const keys:string[] = Object.keys(pert);
+        
+        Known_Lang.CONTAINER.appendChild(barGraph.html);
+        
+        let index:number = 0;
+        let ival = window.setInterval(() => {
+            try {
+                const lang:string = keys[index];
+                const value:number = pert[lang];
+                
+                barGraph.item({
+                    name:lang,
+                    value:value
+                })
+                
+                index++;
+                
+                console.log(`${lang} has been added to bar graph.`);
+                
+            } catch(err:any) {
+                console.log(err);
+                clearInterval(ival);
+            }
+        }, 100);
+    }
     
     __calculate(repos:RepoProperties[]):void {
         /**

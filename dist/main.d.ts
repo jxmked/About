@@ -48,19 +48,6 @@ declare module "modules/get_repos" {
         catch(callback: any): this;
     }
 }
-declare module "known-languages/Known_Lang" {
-    export default class Known_Lang {
-        private static PLACEMENT;
-        private static BASE;
-        private static CONTAINER;
-        private static TEXT_CONTAINER;
-        private COUNTED_LANGS;
-        constructor();
-        __calculate(repos: RepoProperties[]): void;
-        display_loading_screen(): Promise<void>;
-        catch(err: any): void;
-    }
-}
 declare module "modules/get-lang-colors" {
     export default class Get_Colors {
         private static url;
@@ -76,23 +63,37 @@ declare module "modules/get-lang-colors" {
         catch(callback: Function): Get_Colors;
     }
 }
-declare module "main" { }
-declare module "known-languages/bullet" {
-    export default class Bullet {
-        constructor(lang: string);
-    }
-}
 declare module "known-languages/create-bar-graph" {
-    interface CreateBarGraphProperties {
-        name: string;
+    interface BarGraphItemProperties {
+        name: any;
         value: number;
     }
     export default class CreateBarGraph {
         private BASE;
         private PARENT;
         constructor();
-        set item({ name, value }: CreateBarGraphProperties);
+        item({ name, value }: BarGraphItemProperties): void;
         get html(): HTMLElement;
+    }
+}
+declare module "known-languages/Known_Lang" {
+    export default class Known_Lang {
+        private static PLACEMENT;
+        private static BASE;
+        private static CONTAINER;
+        private static TEXT_CONTAINER;
+        private COUNTED_LANGS;
+        constructor();
+        createDOMElements(sortedPert: [string, number]): void;
+        __calculate(repos: RepoProperties[]): void;
+        display_loading_screen(): Promise<void>;
+        catch(err: any): void;
+    }
+}
+declare module "main" { }
+declare module "known-languages/bullet" {
+    export default class Bullet {
+        constructor(lang: string);
     }
 }
 declare module "known-languages/language" { }
