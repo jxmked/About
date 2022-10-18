@@ -322,29 +322,36 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
                     first = Known_Lang.CONTAINER.firstChild;
                 } while (last != first);
                 console.log("Loading element has been removed");
-                var sortedPert = [[]];
-                _this.createDOMElements(sortedPert);
+                var sortedPert = [];
+                var entries = Object.entries(_this.COUNTED_LANGS);
+                var rebuild = {};
+                entries.sort(function (a, b) {
+                    return a[1] - b[1];
+                });
+                entries.forEach(function (item) {
+                    rebuild[item[0]] = item[1];
+                });
+                _this.COUNTED_LANGS = rebuild;
+                _this.createDOMElements();
             });
         }
-        Known_Lang.prototype.createDOMElements = function (sortedPert) {
+        Known_Lang.prototype.createDOMElements = function () {
             var barGraph = new create_bar_graph_1.default();
             var pert = this.COUNTED_LANGS;
             var keys = Object.keys(pert);
             Known_Lang.CONTAINER.appendChild(barGraph.html);
-            var index = 0;
+            var index = keys.length;
             var ival = window.setInterval(function () {
                 try {
+                    index--;
                     var lang = keys[index];
-                    var value = pert[lang];
                     barGraph.item({
                         name: lang,
-                        value: value
+                        value: pert[lang]
                     });
-                    index++;
                     console.log("".concat(lang, " has been added to bar graph."));
                 }
-                catch (err) {
-                    console.log(err);
+                catch (TypeError) {
                     clearInterval(ival);
                 }
             }, 100);
@@ -427,6 +434,51 @@ define("known-languages/bullet", ["require", "exports"], function (require, expo
         return Bullet;
     }());
     exports.default = Bullet;
+});
+define("known-languages/create-list-item", ["require", "exports", "modules/createElement"], function (require, exports, createElement_4) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    createElement_4 = __importDefault(createElement_4);
+    var CreateListItem = (function () {
+        function CreateListItem() {
+            this.BASE = (0, createElement_4.default)("div");
+            this.LIST = (0, createElement_4.default)("ul");
+            this.BASE.appendChild(this.LIST);
+        }
+        Object.defineProperty(CreateListItem.prototype, "html", {
+            get: function () {
+                return this.BASE;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CreateListItem.prototype.itemValue = function (name, value, color) {
+            return (0, createElement_4.default)("p", {
+                "data-value": value,
+                "data-language": name,
+                "data-color": color,
+                "text": value
+            });
+        };
+        CreateListItem.prototype.itemName = function (name, value, color) {
+            return (0, createElement_4.default)("p", {
+                "data-value": value,
+                "data-language": name,
+                "data-color": color,
+                "text": name
+            });
+        };
+        CreateListItem.prototype.bullet = function (name, value, color) {
+            return (0, createElement_4.default)("span", {
+                "data-value": value,
+                "data-language": name,
+                "data-color": color,
+                "style": "background-color: ".concat(color)
+            });
+        };
+        return CreateListItem;
+    }());
+    exports.default = CreateListItem;
 });
 define("known-languages/language", ["require", "exports"], function (require, exports) {
     "use strict";

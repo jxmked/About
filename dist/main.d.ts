@@ -84,7 +84,7 @@ declare module "known-languages/Known_Lang" {
         private static TEXT_CONTAINER;
         private COUNTED_LANGS;
         constructor();
-        createDOMElements(sortedPert: [string, number]): void;
+        createDOMElements(): void;
         __calculate(repos: RepoProperties[]): void;
         display_loading_screen(): Promise<void>;
         catch(err: any): void;
@@ -94,6 +94,17 @@ declare module "main" { }
 declare module "known-languages/bullet" {
     export default class Bullet {
         constructor(lang: string);
+    }
+}
+declare module "known-languages/create-list-item" {
+    export default class CreateListItem {
+        private BASE;
+        private LIST;
+        constructor();
+        get html(): HTMLElement;
+        itemValue(name: string, value: number, color: string): HTMLElement;
+        itemName(name: string, value: number, color: string): HTMLElement;
+        bullet(name: string, value: number, color: string): HTMLElement;
     }
 }
 declare module "known-languages/language" { }

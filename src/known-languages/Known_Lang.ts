@@ -84,6 +84,7 @@ export default class Known_Lang {
             console.log("Creating DOM Elements...");
             
             // Remove all child element from container
+            // except the label tag
             let last:ChildNode|null = null;
             let first:ChildNode|null = null;
             
@@ -97,38 +98,48 @@ export default class Known_Lang {
             
             console.log("Loading element has been removed");
             
-            const sortedPert:[string, number] = [[]];
+            // Sort COUNTED_LANGS by value
+            // Max -> Min
+            const sortedPert:[string, number][] = [];
+            const entries:[string, number][] = Object.entries(this.COUNTED_LANGS);
+            const rebuild:{[key:string]:number} = {};
             
+            entries.sort((a, b) => {
+                return a[1] - b[1];
+            });
             
-            this.createDOMElements(sortedPert);
+            // Rebuild object
+            entries.forEach((item:[string, number]) => {
+                rebuild[item[0]] = item[1];
+            });
+            
+            this.COUNTED_LANGS = rebuild;
+            this.createDOMElements();
         })
         
     }
     
-    createDOMElements(sortedPert:[string, number]):void {
-        const barGraph = new createBarGraph();
+    createDOMElements():void {
+        const barGraph:createBarGraph = new createBarGraph();
         const pert:{[key:string]:number} = this.COUNTED_LANGS;
         const keys:string[] = Object.keys(pert);
         
         Known_Lang.CONTAINER.appendChild(barGraph.html);
         
-        let index:number = 0;
+        let index:number = keys.length;
         let ival = window.setInterval(() => {
             try {
+                index--
                 const lang:string = keys[index];
-                const value:number = pert[lang];
                 
                 barGraph.item({
                     name:lang,
-                    value:value
+                    value:pert[lang]
                 })
-                
-                index++;
                 
                 console.log(`${lang} has been added to bar graph.`);
                 
-            } catch(err:any) {
-                console.log(err);
+            } catch(TypeError) {
                 clearInterval(ival);
             }
         }, 100);
