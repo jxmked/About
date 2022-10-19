@@ -1,4 +1,4 @@
-import __init__, { envRes, env_mode} from "./globals";
+import __init__ from "./globals";
 import Known_Lang from "known-languages/Known_Lang";
 import getColors from "modules/get-lang-colors";
 

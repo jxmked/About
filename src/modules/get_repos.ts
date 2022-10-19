@@ -16,16 +16,16 @@ export default class getRepo {
     
     constructor(){
         this.thenCallback = (args:any) => {};
-        this.catchCallback = (args:any) => {};
+        this.catchCallback = (args:any) => {
+            console.log(args)
+        };
         
         fetch(getRepo.url, {
             "method":"GET"
-        })
-            .then((res:any) => res.json())
-            .then((res:any) => {
-                this.thenCallback.bind(this.thenCallback)(res["data"] as RepoProperties[]);
-            })
-            .catch(this.catchCallback.bind(this))
+        }).then((response:any) => response.json())
+        .then((response:any) => {
+            this.thenCallback(response["data"] as RepoProperties[]);
+        }).catch((err:any) => { this.catchCallback(err)});
     }
     
     then(callback:getRepoProperties) {

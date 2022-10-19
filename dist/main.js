@@ -124,15 +124,15 @@ define("modules/get_repos", ["require", "exports"], function (require, exports) 
     class getRepo {
         constructor() {
             this.thenCallback = (args) => { };
-            this.catchCallback = (args) => { };
+            this.catchCallback = (args) => {
+                console.log(args);
+            };
             fetch(getRepo.url, {
                 "method": "GET"
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                this.thenCallback.bind(this.thenCallback)(res["data"]);
-            })
-                .catch(this.catchCallback.bind(this));
+            }).then((response) => response.json())
+                .then((response) => {
+                this.thenCallback(response["data"]);
+            }).catch((err) => { this.catchCallback(err); });
         }
         then(callback) {
             this.thenCallback = callback;
@@ -290,7 +290,7 @@ define("known-languages/create-list-item", ["require", "exports", "modules/creat
     }
     exports.default = CreateListItem;
 });
-define("known-languages/Known_Lang", ["require", "exports", "modules/label", "modules/createElement", "modules/get_repos", "known-languages/create-bar-graph", "known-languages/create-list-item"], function (require, exports, label_1, createElement_4, get_repos_1, create_bar_graph_1, create_list_item_1) {
+define("known-languages/Known_Lang", ["require", "exports", "globals", "modules/label", "modules/createElement", "modules/get_repos", "known-languages/create-bar-graph", "known-languages/create-list-item"], function (require, exports, globals_2, label_1, createElement_4, get_repos_1, create_bar_graph_1, create_list_item_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     label_1 = __importDefault(label_1);
@@ -314,6 +314,22 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
                 console.log("Repositories has been fetched");
                 console.log("Parsing Repositories...");
                 this.__calculate(repos);
+                console.log("Sorting languages");
+                const entries = Object.entries(this.COUNTED_LANGS);
+                const rebuild = {};
+                const skips = (globals_2.envRes.get("known-lang-skip") || []).map((x) => x.toLowerCase());
+                entries.sort((a, b) => a[1] - b[1]);
+                console.log(skips);
+                entries.forEach((item) => {
+                    if (skips.indexOf(item[0].toLowerCase()) == -1)
+                        rebuild[item[0]] = item[1];
+                });
+                const sum = Object.values(rebuild).reduce((x, y) => x + y);
+                const pert = {};
+                Object.entries(rebuild).forEach(([lang, count]) => {
+                    pert[lang] = (count / sum) * 100;
+                });
+                this.COUNTED_LANGS = pert;
                 let last = null;
                 let first = null;
                 do {
@@ -324,18 +340,10 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
                 } while (last != first);
                 Known_Lang.BASE.classList.remove("loading");
                 console.log("Loading element has been removed");
-                console.log("Sorting languages");
-                const sortedPert = [];
-                const entries = Object.entries(this.COUNTED_LANGS);
-                const rebuild = {};
-                entries.sort((a, b) => {
-                    return a[1] - b[1];
-                });
-                entries.forEach((item) => {
-                    rebuild[item[0]] = item[1];
-                });
-                this.COUNTED_LANGS = rebuild;
                 this.createDOMElements();
+            }).catch((err) => {
+                Known_Lang.TEXT_CONTAINER.innerText = "Failed to load";
+                console.error(err);
             });
         }
         createDOMElements() {
@@ -378,12 +386,7 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
                     calculated[lang] = count;
                 }
             }
-            const sum = Object.values(calculated).reduce((x, y) => x + y);
-            const pert = {};
-            Object.entries(calculated).forEach(([lang, count]) => {
-                pert[lang] = (count / sum) * 100;
-            });
-            this.COUNTED_LANGS = pert;
+            this.COUNTED_LANGS = calculated;
             console.log("Calculated");
         }
         display_loading_screen() {
@@ -412,31 +415,18 @@ define("known-languages/Known_Lang", ["require", "exports", "modules/label", "mo
     Known_Lang.CONTAINER = (0, createElement_4.default)("div");
     Known_Lang.TEXT_CONTAINER = (0, createElement_4.default)("span");
 });
-define("main", ["require", "exports", "globals", "known-languages/Known_Lang", "modules/get-lang-colors"], function (require, exports, globals_2, Known_Lang_1, get_lang_colors_3) {
+define("main", ["require", "exports", "globals", "known-languages/Known_Lang", "modules/get-lang-colors"], function (require, exports, globals_3, Known_Lang_1, get_lang_colors_3) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    globals_2 = __importDefault(globals_2);
+    globals_3 = __importDefault(globals_3);
     Known_Lang_1 = __importDefault(Known_Lang_1);
     get_lang_colors_3 = __importDefault(get_lang_colors_3);
-    (0, globals_2.default)();
+    (0, globals_3.default)();
     new get_lang_colors_3.default().then(() => {
         console.log("Color loaded");
         new Known_Lang_1.default();
     }).catch((err) => {
         console.error("Failed to load");
     }).load();
-});
-define("known-languages/bullet", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class Bullet {
-        constructor(lang) {
-        }
-    }
-    exports.default = Bullet;
-});
-define("known-languages/language", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
 });
 //# sourceMappingURL=main.js.map

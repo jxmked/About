@@ -77,10 +77,38 @@ export default class Known_Lang {
         console.log("Starting to fetch github repositories...");
         
         new getRepos().then((repos:RepoProperties[]) => {
-            
             console.log("Repositories has been fetched");
             console.log("Parsing Repositories...");
             this.__calculate(repos);
+            
+            console.log("Sorting languages");
+            
+            // Sort COUNTED_LANGS by value
+            // Min -> Max
+            const entries:[string, number][] = Object.entries(this.COUNTED_LANGS);
+            const rebuild:{[key:string]:number} = {};
+            const skips:string[] = (envRes.get("known-lang-skip") || []).map((x:string) => x.toLowerCase());
+            
+            entries.sort((a, b) => a[1] - b[1]);
+            
+            console.log(skips)
+            
+            // Rebuild object
+            entries.forEach((item:[string, number]) => {
+                if(skips.indexOf(item[0].toLowerCase()) == -1)
+                    rebuild[item[0]] = item[1];
+            });
+            
+            /**
+             * Convert to percentages
+             * */
+            const sum:number = Object.values(rebuild).reduce((x, y) => x + y);
+            const pert:{[key:string]:number} = {};
+            Object.entries(rebuild).forEach(([lang, count]) => {
+                pert[lang] = (count / sum) * 100;
+            });
+            
+            this.COUNTED_LANGS = pert;
             
             // Remove all child element from container
             // except the label tag
@@ -99,26 +127,13 @@ export default class Known_Lang {
             
             console.log("Loading element has been removed");
             
-            console.log("Sorting languages");
-            
-            // Sort COUNTED_LANGS by value
-            // Min -> Max
-            const sortedPert:[string, number][] = [];
-            const entries:[string, number][] = Object.entries(this.COUNTED_LANGS);
-            const rebuild:{[key:string]:number} = {};
-            
-            entries.sort((a, b) => {
-                return a[1] - b[1];
-            });
-            
-            // Rebuild object
-            entries.forEach((item:[string, number]) => {
-                rebuild[item[0]] = item[1];
-            });
-            
-            this.COUNTED_LANGS = rebuild;
             this.createDOMElements();
-        })
+            
+        }).catch((err:any) => {
+            Known_Lang.TEXT_CONTAINER.innerText = "Failed to load";
+            
+            console.error(err);
+        });
     }
     
     createDOMElements():void {
@@ -182,18 +197,7 @@ export default class Known_Lang {
             }
         }
         
-        /**
-         * Convert to percentages
-         * */
-        const sum:number = Object.values(calculated).reduce((x, y) => x + y);
-        
-        const pert:{[key:string]:number} = {};
-        
-        Object.entries(calculated).forEach(([lang, count]) => {
-            pert[lang] = (count / sum) * 100;
-        });
-        
-        this.COUNTED_LANGS = pert;
+        this.COUNTED_LANGS = calculated;
         
         console.log("Calculated");
     }
@@ -222,3 +226,4 @@ export default class Known_Lang {
         console.error(err)
     }
 }
+

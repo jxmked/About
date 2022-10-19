@@ -107,9 +107,3 @@ declare module "known-languages/Known_Lang" {
     }
 }
 declare module "main" { }
-declare module "known-languages/bullet" {
-    export default class Bullet {
-        constructor(lang: string);
-    }
-}
-declare module "known-languages/language" { }
