@@ -17,7 +17,7 @@ export default class getRepo {
     constructor(){
         this.thenCallback = (args:any) => {};
         this.catchCallback = (args:any) => {
-            console.log(args)
+            console.error(args);
         };
         
         fetch(getRepo.url, {

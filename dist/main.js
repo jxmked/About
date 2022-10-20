@@ -125,7 +125,7 @@ define("modules/get_repos", ["require", "exports"], function (require, exports) 
         constructor() {
             this.thenCallback = (args) => { };
             this.catchCallback = (args) => {
-                console.log(args);
+                console.error(args);
             };
             fetch(getRepo.url, {
                 "method": "GET"
