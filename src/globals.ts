@@ -67,8 +67,7 @@ envRes.set("configs", {
 });
 
 
-//envRes.set("known-lang-skip", []);
-
+envRes.set("known-lang-skip", []);
 
 
 export default () => {};
