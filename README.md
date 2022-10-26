@@ -1,7 +1,6 @@
 
 > Hope you'll like some of my projects and scripts 
-> that I created and/or develop to boost my productivity
-> and useful as you wish. 🤦‍♂️🙃
+> that I created for random things... 🤦‍♂️🙃
 
 - [Repo_Clone Repo](https://github.com/jxmked/Repo_Clone) 
   - [Repo Clone Page](https://jxmked.github.io/Repo_Clone)
