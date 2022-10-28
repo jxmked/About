@@ -1,0 +1,40 @@
+name: 'Update modernizr.js'
+
+on:
+  push:
+    branches: [xio]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      
+      - name: 'Init npm'
+        run: npm ci
+      
+      - name: 'Build App'
+        run: npm run build
+      
+      - name: 'Minify Main Script'
+        run: npm run minify
+
+      - name: 'Push to gh-pages'
+        run: |
+            git config --global user.email "${{ secrets.EMAIL }}"
+            git config --global user.name "${{ secrets.NAME }}"
+            git rm --cached -r .
+            git add -f ./index.html
+            git add -f ./assets
+            git add -f ./dist
+            git add -f ./favicon.ico
+            git add -f ./404.html
+            git commit -m "Update"
+            git branch -M gh-pages
+            git push -f 'https://${{ secrets.GH_AUTH_TOKEN }}@github.com/${{ secrets.NAME }}/jxmked.git'
+            
+

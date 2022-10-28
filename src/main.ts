@@ -16,6 +16,5 @@ new getColors().then(() => {
     
 }).catch((err:any) => {
     console.error("Failed to load")
-}).load()
-
+}).load();
 
