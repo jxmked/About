@@ -52,6 +52,7 @@ export default class Known_Lang {
     private static BASE:HTMLElement = createElement("div", {id:"main-languages"}); // #main-languages
     private static CONTAINER:HTMLElement = createElement("div"); // Base container
     private static TEXT_CONTAINER:HTMLElement = createElement("span"); // Text interact
+    private thenCallback:Function;
     
     /**
      * Calculated Languages in Percentage
@@ -63,6 +64,7 @@ export default class Known_Lang {
         console.log("Known_Lang has been initiated");
         
         this.COUNTED_LANGS = {};
+        this.thenCallback = () => {};
         
         // Add label
         Known_Lang.CONTAINER.appendChild(new Label({
@@ -128,7 +130,7 @@ export default class Known_Lang {
             console.log("Loading element has been removed");
             
             this.createDOMElements();
-            
+            this.thenCallback(); // Done 
         }).catch((err:any) => {
             Known_Lang.TEXT_CONTAINER.innerText = "Failed to load";
             
@@ -223,7 +225,11 @@ export default class Known_Lang {
     }
     
     catch(err:any):void {
-        console.error(err)
+        console.error(err);
+    }
+    
+    then(callback:Function):void {
+        this.thenCallback = callback;
     }
 }
 

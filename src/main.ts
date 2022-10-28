@@ -1,5 +1,6 @@
 import __init__ from "./globals";
-import Known_Lang from "known-languages/Known_Lang";
+import Known_Lang from "./known-languages/Known_Lang";
+import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
 
 /**
@@ -12,7 +13,7 @@ __init__();
 new getColors().then(() => {
     console.log("Color loaded")
     
-    new Known_Lang();
+    const known_Lang = new Known_Lang();
     
 }).catch((err:any) => {
     console.error("Failed to load")

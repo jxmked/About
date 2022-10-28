@@ -1,9 +1,15 @@
-name: 'Update modernizr.js'
+name: 'Build for deployment'
 
 on:
   push:
     branches: [xio]
     
+  workflow_dispatch:
+
+concurrency:
+  group: "build"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,6 +39,7 @@ jobs:
             git add -f ./dist
             git add -f ./favicon.ico
             git add -f ./404.html
+            git add -f ./site.webmanifest
             git commit -m "Update"
             git branch -M gh-pages
             git push -f 'https://${{ secrets.GH_AUTH_TOKEN }}@github.com/${{ secrets.NAME }}/jxmked.git'
