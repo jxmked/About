@@ -59,12 +59,13 @@ class Label {
         
         const tooltip:string = this.__normalize(this.tooltip!)!;
         
-        if(tooltip != void 0 || tooltip != "") {
+        if(this.tooltip != void 0 && this.tooltip != "") {
             label.appendChild(this.__get_tooltip());
         }
         
         return label;
     }
+    
 }
 
 export default Label;

@@ -15,6 +15,10 @@ new getColors().then(() => {
     
     const known_Lang = new Known_Lang();
     
+    known_Lang.then(() => {
+        new Feature_Repo();
+    });
+    
 }).catch((err:any) => {
     console.error("Failed to load")
 }).load();

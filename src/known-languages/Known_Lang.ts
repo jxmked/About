@@ -93,8 +93,6 @@ export default class Known_Lang {
             
             entries.sort((a, b) => a[1] - b[1]);
             
-            console.log(skips)
-            
             // Rebuild object
             entries.forEach((item:[string, number]) => {
                 if(skips.indexOf(item[0].toLowerCase()) == -1)
@@ -169,7 +167,7 @@ export default class Known_Lang {
             } catch(TypeError) {
                 clearInterval(ival);
             }
-        }, 100);
+        }, 0);
         
         Known_Lang.CONTAINER.appendChild(barGraph.html);
         Known_Lang.CONTAINER.appendChild(listItem.html);

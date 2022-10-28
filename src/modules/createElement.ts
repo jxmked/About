@@ -7,7 +7,8 @@
 import {env_mode} from "globals";
 
 type CreateElementName = string;
-type CreateElementAttributes = {[id:string]:any}
+type CreateElementAttributes = {[key:string]:any}
+
 
 class CreateElement {
     private element:HTMLElement;
@@ -25,13 +26,28 @@ class CreateElement {
             return;
         
         for (const [key, value] of Object.entries(this.attr)) {
-            if(key == "text") {
-                this.element.appendChild(document.createTextNode(value));
-                continue;
+            switch(key.toLowerCase()) {
+                case "text":
+                    this.element.appendChild(document.createTextNode(value));
+                    break;
+                
+                case "appendchild":
+                    if(value instanceof Array) {
+                        value.forEach((node:any) => this.appendChild(node))
+                    } else {
+                        this.appendChild(value);
+                    }
+                    
+                    break;
+                
+                default:
+                    this.element.setAttribute(key, value);
             }
-            
-            this.element.setAttribute(key, value);
         }
+    }
+    
+    private appendChild(element:HTMLElement) {
+        this.element.appendChild(element);
     }
     
     get html():HTMLElement {

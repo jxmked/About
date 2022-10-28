@@ -19,7 +19,11 @@ interface RepoProperties {
     topics:string[];
     stars:number;
     forks:number;
-    download_link:string
+    default_branch:string;
+    download_link:string;
+    
+    /** Inherit from Object.protoype **/
+    take:(key:string, fallback?:any) => any;
 };
 
 type hexCode = `#${string}`;

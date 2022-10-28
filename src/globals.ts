@@ -66,8 +66,29 @@ envRes.set("configs", {
     } 
 });
 
+envRes.set("username", "jxmked");
 
 envRes.set("known-lang-skip", []);
+envRes.set("featured-repositories", ["portfolio-include"]);
 
 
-export default () => {};
+if(! Object.prototype.hasOwnProperty.call(Object, "take")) {
+    // Using `get` as method name Throws an error 
+    Object.defineProperty(Object.prototype, "take", {
+        configurable:false,
+        enumerable: false,
+        writable:false,
+        value: function(key:string|number, fallback:any) {
+            const props = this!;
+            return (props.hasOwnProperty(key)) ? props[key] : fallback;
+        }
+    });
+    
+    console.log("Object.prototype.get has been defined");
+}
+
+// Initialize
+
+export default (() => {
+    return ()=> {}
+})();
