@@ -25,33 +25,53 @@
 import {envRes} from "globals";
 import createElement from "modules/createElement";
 import UsedLang from "used-languages";
+import { fallback_empty, isEmpty } from "Helpers";
 
 export default class Item {
     private properties:RepoProperties;
     private container:HTMLElement;
     private target_keys:string[];
     
+    html_url:string;
+    node_id:string;
+    name:string;
+    homepage:string;
+    id:number|string;
+    description:string;
+    
     constructor(properties:RepoProperties) {
         this.properties = properties;
+        
+        const { node_id, name, html_url, homepage, id, description} = this.properties;
+        
+        this.html_url = fallback_empty(html_url, "{url}");
+        this.node_id = fallback_empty(node_id, "{node_id}");
+        this.name = fallback_empty(name, "{name}");
+        this.homepage = fallback_empty(homepage, "{homepage}");
+        this.id = (id == null || id == void 0) ? "{id}" : id;
+        this.description = fallback_empty(description, "{description}");
+        
         this.target_keys = envRes.get("featured-repositories")!;
         
         this.container = createElement("div", {
-            "data-has-homepage": (this.properties.take("homepage") ? true : false),
-            "node-id": this.properties.take("node_id"),
-            "property-id": this.properties.take("id", "null"),
-            "data-item-name": this.properties.take("name"),
-            "data-item-id": this.properties.take("id", "null"),
+            "data-has-homepage": (isEmpty(homepage) ? false : true),
+            "node-id": this.node_id,
+            "property-id": this.id,
+            "data-item-name": this.name,
+            "data-item-id": this.id,
             "class": "pp-items"
         });
         
         this.label();
-        this.description();
+        this.create_description();
         this.tags();
-       // this.usedLang();
+        this.inused_lang();
     }
     
-    usedLang() {
-        this.container.appendChild(new UsedLang(this.properties.take("languages")).html);
+    inused_lang() {
+        const lang_info = new UsedLang(this.properties.languages);
+        
+        this.container.appendChild(lang_info.html);
     }
     
     label() {
@@ -60,43 +80,46 @@ export default class Item {
             "class":"listen-on-click",
             "target":"_blank",
             "rel":"noopener noreferrer",
-            "href": this.properties.take("html_url", "{html_url}"),
-            "text": this.properties.take("name", "{name}"),
-            "alt": this.properties.take("html_url", "{alt}"),
-            "aria-label": this.properties.take("name", "{name}")
+            "href": this.html_url,
+            "text": this.name,
+            "alt": this.html_url,
+            "aria-label": this.html_url
         });
         
         label.appendChild(a);
         this.container.appendChild(label);
     }
     
-    description() {
+    create_description() {
         const desc:HTMLElement = createElement("p", {
-            "data-for": this.properties.take("name"),
-            text: this.properties.take("description", "{description}")
+            "data-for": this.name,
+            text: this.description
         });
         
         this.container.appendChild(createElement("div", {
             "appendChild": desc,
-            "aria-for": this.properties.take("name", "{name}"),
-            "aria-repository-link": this.properties.take("html_url", "{html_url}")
+            "aria-for": this.name,
+            "aria-repository-link": this.html_url
         }));
     }
     
     tags() {
-        const topics:string[] = this.properties.take("topics").filter((value:string) => {
+        let { topics } = this.properties;
+        
+        const topics_object:HTMLElement[] = topics.filter((value:string) => {
             // Remove target keys from topic list
-            return !(this.target_keys.some((key) => key == value));
+            return !( !isEmpty(value) && this.target_keys.some((key) => key == value));
         }).map((topic:string) => {
+            
             // Create Element For All Topics
             return createElement("li", {
                 "text": topic,
-                "data-property-of": this.properties.take("name")
+                "data-property-of": this.name
             });
         });
         
         const list_con:HTMLElement = createElement("ul", {
-            "appendChild": topics
+            "appendChild": topics_object
         });
         
         this.container.appendChild(createElement("div", {

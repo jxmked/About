@@ -13,8 +13,9 @@ export { envRes };
 /**
  * localforage
  * */
+ /*
 export const localforage:LocalForage = window.localforage || {};
-
+*/
 
 /**
  * Environment mode

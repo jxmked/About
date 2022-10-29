@@ -4,6 +4,7 @@
  * - div (Used Languages)
  *   - div (Language Bar Graph)
  *     - span[]
+ * 
  *   - ul (Language Names)
  *     - li[].item
  *       - span (Bullet)
@@ -17,7 +18,7 @@ import Color from "modules/get-lang-colors";
 import {isEmpty} from "Helpers";
 
 export default class Used_Lang {
-    private static BASE:HTMLElement = createElement("div");
+    private BASE:HTMLElement;
     
     private languages:{[key:string]:number};
     private structure:{
@@ -29,9 +30,24 @@ export default class Used_Lang {
     constructor(languages:{[key:string]:number}) {
         this.languages = languages;
         this.structure = [];
+        this.BASE = createElement("div", {
+            "data-languages-count": Object.values(this.languages).length.toString()
+        });
         
         if(! isEmpty(this.languages)) {
-           /* sum = Object.values(this.languages).reduce((x, y) => x + y)
+            // Sort COUNTED_LANGS by value
+            // Max -> Min
+            const entries:[string, number][] = Object.entries(this.languages);
+            const rebuild:{[key:string]:number} = {};
+            
+            entries.sort((a, b) => a[1] + b[1]);
+            
+            // Rebuild object
+            entries.forEach((item:[string, number]) => {
+                rebuild[item[0]] = item[1];
+            });
+            
+            const sum:number = Object.values(this.languages).reduce((x, y) => x + y);
             
             this.structure = Object.entries(this.languages).map(([lang, map]) => {
                 return {
@@ -39,47 +55,65 @@ export default class Used_Lang {
                     color: Color.lang(lang),
                     percent: (map / sum) * 100
                 }
-            }); */
-            
-            // Sort COUNTED_LANGS by value
-            // Min -> Max
-            const entries:[string, number][] = Object.entries(this.languages);
-            const rebuild:{[key:string]:number} = {};
-            
-            entries.sort((a, b) => a[1] - b[1]);
-            
-            // Rebuild object
-            entries.forEach((item:[string, number]) => {
-                rebuild[item[0]] = item[1];
             });
             
-            /**
-             * Convert to percentages
-             * */
-            const sum:number = Object.values(rebuild).reduce((x, y) => x + y);
-            //const pert:{[key:string]:number} = {};
-            this.languages = Object.fromEntries(Object.entries(rebuild).map(([lang, count]) => {
-                return [lang, (count / sum) * 100];
-            }))
-            
-///this.languages = pert;
-            
-            console.table(this.languages)
+            this.languages = Object.assign({}, rebuild);
         }
         
-        
+        this.create_bar_graph();
+        this.create_language_list();
     }
     
     create_bar_graph() {
         
-      //  const elements:HTMLElement[] = Object.entries
-        const con:HTMLElement = createElement("div");
+        const container:HTMLElement = createElement("div");
         
+        this.structure.forEach((args) => {
+            const {name, color, percent} = args;
+            
+            container.appendChild(createElement("span", {
+                "style": `background-color: ${color};width: ${percent}%;`,
+                "data-languages": name,
+                "data-color": color,
+                "data-value": percent
+            }));
+        });
+        
+        this.BASE.appendChild(container);
     }
     
+    create_language_list() {
+        const container:HTMLElement = createElement("ul");
+        
+        this.structure.forEach(({color, name, percent}) => {
+            const bullet:HTMLElement = createElement("span", {
+                "style":`background-color: ${color};`,
+                "data-language": name
+            });
+            
+            const lang_name:HTMLElement = createElement("p", {
+                "class":"language",
+                "text": name
+            });
+            
+            const percentage:HTMLElement = createElement("p", {
+                "text": `${percent.toFixed(2)}%`
+            })
+            
+            container.appendChild(createElement("li", {
+                "data-color": color,
+                "data-name": name,
+                "data-value": percent,
+                "class": "item",
+                "appendChild": [bullet, lang_name, percentage]
+            }));
+        });
+        
+        this.BASE.appendChild(container);
+    }
     
-    get html(){
-        return Used_Lang.BASE;
+    get html():HTMLElement {
+        return this.BASE;
     }
 }
 

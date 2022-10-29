@@ -4,9 +4,8 @@
   "description": "Personal Portfolio",
   "main": "./dist/main.js",
   "scripts": {
-    "build": "tsc -p tsconfig-build.json && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\"",
-    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch -s compressed --embed-sources \"./src/styles/main.scss:dist/main.css\"\"",
-    "minify": "npx babel ./dist/main.js -o ./dist/main.js --minified"
+    "build": "ncc build src/index.ts -m -C -o dist && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\"",
+    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch -s compressed --embed-sources \"./src/styles/main.scss:dist/main.css\"\""
   },
   "repository": {
     "type": "git",
@@ -23,9 +22,10 @@
   },
   "homepage": "https://jxmked.github.io/jxmked/",
   "devDependencies": {
-    "@types/localforage": "0.0.33",
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.6",
+    "@types/localforage": "0.0.33",
+    "@vercel/ncc": "^0.34.0",
     "concurrently": "^7.4.0",
     "modernizr": "^3.12.0",
     "sass": "^1.54.9",

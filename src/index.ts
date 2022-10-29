@@ -1,9 +1,11 @@
-import __nothing__ from "customs";
+import __nothing__ from "legacy";
 import __init__ from "./globals";
 import Known_Lang from "./known-languages/Known_Lang";
 import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
 import getRepos from "modules/get_repos";
+//import {for_of} from "supports";
+
 
 /**
  * My wifi went out

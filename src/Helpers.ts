@@ -15,10 +15,20 @@ export const isEmpty:Function = (param:any): boolean => {
         return param.length == 0;
     }
     
-    if(param instanceof String) {
+    if(param instanceof String || typeof param === "string") {
         return (param === "" || param === void 0 || param === null)
+    }
+    
+    if(param === void 0 || param === null) {
+        return true;
     }
     
     throw new TypeError("Undefined Object");
     
 }
+
+export function fallback_empty<T>(str:string, fallback:T):T|string {
+    return (isEmpty(str)) ? fallback : str;
+}
+
+

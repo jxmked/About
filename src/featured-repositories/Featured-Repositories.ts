@@ -40,12 +40,15 @@ class FeaturedRepositories {
     private static BASE:HTMLElement = createElement("div", {"id": "main-personal-projects"});
     private static PARENT:HTMLElement = createElement("div");
     private item_container:HTMLElement;
+    private target_keys:string[];
     
     constructor() {
         const self = FeaturedRepositories;
         this.item_container = createElement("div", {
             id: "pp-list"
         });
+        
+        this.target_keys = envRes.get("featured-repositories")!;
         
         // Add Label
         const label = new Label({title:"Featured Repositories"});
@@ -62,9 +65,13 @@ class FeaturedRepositories {
         
         new getRepos().then((repos) => {
             repos.forEach((repository:RepoProperties) => {
-                const item = new Item(repository);
+                if(repository.topics.length == 0)
+                    return;
                 
-                this.item_container.appendChild(item.html);
+                const topics:string = repository.topics.join("|");
+                if(this.target_keys.some((key:string) => topics.indexOf(key) !== -1)) {
+                    this.item_container.appendChild(new Item(repository).html);
+                }
             })
            
         });
