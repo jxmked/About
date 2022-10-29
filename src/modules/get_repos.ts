@@ -10,7 +10,7 @@ type getRepoProperties = (arg:RepoProperties[]) => void;
 
 export default class getRepo {
     
-    private static url:string = "https://cdn.jsdelivr.net/gh/jxmked/resources@master/repositories.json";
+    static url:string = "https://cdn.jsdelivr.net/gh/jxmked/resources@master/repositories.json";
     private thenCallback:getRepoProperties;
     private catchCallback:Function;
     

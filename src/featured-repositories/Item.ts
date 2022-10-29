@@ -24,6 +24,7 @@
 
 import {envRes} from "globals";
 import createElement from "modules/createElement";
+import UsedLang from "used-languages";
 
 export default class Item {
     private properties:RepoProperties;
@@ -46,6 +47,11 @@ export default class Item {
         this.label();
         this.description();
         this.tags();
+       // this.usedLang();
+    }
+    
+    usedLang() {
+        this.container.appendChild(new UsedLang(this.properties.take("languages")).html);
     }
     
     label() {

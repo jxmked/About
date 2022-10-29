@@ -1,8 +1,17 @@
+import __nothing__ from "customs";
 import __init__ from "./globals";
 import Known_Lang from "./known-languages/Known_Lang";
 import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
+import getRepos from "modules/get_repos";
 
+/**
+ * My wifi went out
+ * Override
+ */
+getRepos.url = "./excludes/repositories.json";
+
+__nothing__();
 /**
  * Just to initialize 
  * 
