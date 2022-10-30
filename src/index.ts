@@ -34,3 +34,7 @@ new getColors().then(() => {
     console.error("Failed to load")
 }).load();
 
+
+
+export default () => {};
+
