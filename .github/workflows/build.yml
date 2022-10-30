@@ -2,6 +2,9 @@ name: 'Build for deployment'
 
 on:
   push:
+    paths-ignore:
+      - 'README.md'
+    
     branches: [xio]
     
   workflow_dispatch:
@@ -26,9 +29,6 @@ jobs:
       - name: 'Build App'
         run: npm run build
       
-      - name: 'Minify Main Script'
-        run: npm run minify
-
       - name: 'Push to gh-pages'
         run: |
             git config --global user.email "${{ secrets.EMAIL }}"
