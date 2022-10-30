@@ -4,8 +4,9 @@
   "description": "Personal Portfolio",
   "main": "./dist/main.js",
   "scripts": {
-    "build": "tsc -p ts && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\"",
-    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch -s compressed --embed-sources \"./src/styles/main.scss:dist/main.css\"\""
+    "minify": "uglifyjs dist/index.js --mangle toplevel=true -O quote_keys=true -o dist/index.js",
+    "build": "tsc -p tsconfig-build.json && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\" && npm run minify",
+    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch --embed-sources \"./src/styles/main.scss:dist/main.css\"\""
   },
   "repository": {
     "type": "git",

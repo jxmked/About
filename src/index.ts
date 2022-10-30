@@ -3,17 +3,19 @@ import __init__ from "./globals";
 import Known_Lang from "./known-languages/Known_Lang";
 import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
-import getRepos from "modules/get_repos";
-//import {for_of} from "supports";
-
 
 /**
  * My wifi went out
  * Override
  */
+ /*
+import getRepos from "modules/get_repos";
 getRepos.url = "./excludes/repositories.json";
+/**/
 
+// Check and create Legacies
 __nothing__();
+
 /**
  * Just to initialize 
  * 

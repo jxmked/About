@@ -6,12 +6,14 @@ const propertyExist:Function = (name:string):boolean => {
     return Object.prototype.hasOwnProperty.call(Object, name);
 };
 
+/*
 const propertyExistB:Function = (name:string):boolean => {
     return Object.prototype.hasOwnProperty.call(Array, name);
 };
-
-const proto_o = Object.prototype;
 const proto_a = Array.prototype;
+
+ */
+const proto_o = Object.prototype;
 
 const attr = {
     configurable: false,

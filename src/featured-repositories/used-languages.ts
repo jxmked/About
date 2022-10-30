@@ -12,7 +12,6 @@
  *       - p (percentages)
  * */
 
-import {envRes} from "globals";
 import createElement from "modules/createElement";
 import Color from "modules/get-lang-colors";
 import {isEmpty} from "Helpers";

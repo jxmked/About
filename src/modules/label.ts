@@ -11,6 +11,7 @@
  * 
  * */
 import createElement from "modules/createElement";
+import {isEmpty} from "Helpers";
 
 interface LabelProperties {
     title:string,
@@ -32,10 +33,10 @@ class Label {
         this.tooltip = properties.tooltip;
     }
     
-    private __normalize(str?:string):string|undefined {
-        if(! str) return void 0;
+    private __normalize(str?:string):string|null {
+        if(isEmpty(str)) return null;
         
-        str = str.normalize("NFD");
+        str = str!.normalize("NFD");
         str = str.trim();
         
         return str;
@@ -57,9 +58,7 @@ class Label {
             "text":this.__normalize(this.title)!
         });
         
-        const tooltip:string = this.__normalize(this.tooltip!)!;
-        
-        if(this.tooltip != void 0 && this.tooltip != "") {
+        if(isEmpty(this.tooltip)) {
             label.appendChild(this.__get_tooltip());
         }
         

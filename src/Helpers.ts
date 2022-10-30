@@ -1,4 +1,5 @@
-import {envRes} from "globals";
+
+
 
 export const isEmpty:Function = (param:any): boolean => {
     if(param instanceof Object) {
