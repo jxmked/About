@@ -1,0 +1,11 @@
+{
+    "minifyJS": true,
+    "minifyCSS": true,
+    "quoteCharacter": "\"",
+    "removeComments": true,
+    "removeEmptyAttributes": true,
+    "collapseWhitespace": true,
+    "conservativeCollapse": true,
+    "collapseInlineTagWhitespace": false,
+    "removeTagWhitespace": false
+}

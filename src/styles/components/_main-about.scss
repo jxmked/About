@@ -1,0 +1,42 @@
+#main-about {
+    
+    display: none;
+    
+    > div {
+        width: 95%;
+        height: 98%;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 5px;
+        white-space: initial;
+        
+        
+        > p {
+            font-family: 'Montserrat', 'Sans-Serif';
+            font-size: 1rem;
+            color: $primary-text-color;
+            font-weight: 400;
+            text-indent: 1rem;
+            line-height: 1.4rem;
+            @media (prefers-color-scheme: dark) {
+                color: $primary-text-color-dark;
+            }
+            
+            > span.text-bold {
+                font-weight: 500;
+            }
+            
+            
+        }
+        > p:first-child {
+            
+        }
+        
+        > p:last-child {
+            text-align: left;
+        }
+    }
+    
+    //display: none
+}
+
