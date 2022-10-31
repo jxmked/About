@@ -22,7 +22,7 @@ const attr = {
 };
 
 const legacies:Function[] = [];
-
+/*
 legacies.push(() => {
     let success:boolean = false;
     if(! propertyExist("take") && propertyExist("assign")) {
@@ -42,7 +42,7 @@ legacies.push(() => {
     }
     return success;
 });
-
+*/
 legacies.push(() => {
     let success:boolean = false;
     if(! propertyExist("fromEntries") && propertyExist("assign")) {

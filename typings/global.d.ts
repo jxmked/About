@@ -27,3 +27,8 @@ interface RepoProperties {
 };
 
 type hexCode = `#${string}`;
+
+interface NavigationBarAddItem {
+    href: string;
+    name:string|number;
+}
