@@ -3,7 +3,7 @@ import __init__ from "./globals";
 import Known_Lang from "./known-languages/Known_Lang";
 import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
-import navbar from "NavigationBar/index";
+import navbar from "NavigationBar/NavigationBar";
 
 /**
  * My wifi went out
@@ -24,18 +24,39 @@ __nothing__();
  * */
 __init__();
 
+/**
+ * Click Nav Panel to Close
+ * */
 new navbar();
+
+/**
+ * initialize Known Languages.
+ * Add Loading Screen during Initialize
+ * */
 const known_Lang = new Known_Lang();
 
+/**
+ * Fetch Languages Color 
+ * Ready...
+ * */
 new getColors().then(() => {
-    console.log("Color loaded");
+    console.log("Colors loaded");
     
+    // Start Fetching and building DOM object
     known_Lang.start();
     
     known_Lang.then(() => {
+        /**
+         * To make sure we append Featured Repositories after
+         * Known Languages.
+         * Wait for completion of Known Languages
+         * */
         new Feature_Repo();
     });
     
+    /**
+     * Add Item to Navigation List
+     * */
     const navList:NavigationBarAddItem[] = [
         {
             name:"Introduction",

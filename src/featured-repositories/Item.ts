@@ -25,7 +25,7 @@
 import {envRes} from "globals";
 import createElement from "modules/createElement";
 import UsedLang from "used-languages";
-import { fallback_empty, isEmpty } from "Helpers";
+import { fallbackEmpty, isEmpty } from "Helpers";
 
 export default class Item {
     private properties:RepoProperties;
@@ -44,12 +44,12 @@ export default class Item {
         
         const { node_id, name, html_url, homepage, id, description} = this.properties;
         
-        this.html_url = fallback_empty(html_url, "{url}");
-        this.node_id = fallback_empty(node_id, "{node_id}");
-        this.name = fallback_empty(name, "{name}");
-        this.homepage = fallback_empty(homepage, "{homepage}");
-        this.id = (id == null || id == void 0) ? "{id}" : id;
-        this.description = fallback_empty(description, "{description}");
+        this.html_url = fallbackEmpty(html_url, "{url}");
+        this.node_id = fallbackEmpty(node_id, "{node_id}");
+        this.name = fallbackEmpty(name, "{name}");
+        this.homepage = fallbackEmpty(homepage, "{homepage}");
+        this.id = (id === null || id === void 0) ? "{id}" : id;
+        this.description = fallbackEmpty(description, "{description}");
         
         this.target_keys = envRes.get("featured-repositories")!;
         
@@ -68,13 +68,13 @@ export default class Item {
         this.inused_lang();
     }
     
-    inused_lang() {
+    inused_lang():void {
         const lang_info = new UsedLang(this.properties.languages);
         
         this.container.appendChild(lang_info.html);
     }
     
-    label() {
+    label():void {
         const label:HTMLElement = createElement("label");
         const a:HTMLElement = createElement("a", {
             "class":"listen-on-click",
@@ -90,7 +90,7 @@ export default class Item {
         this.container.appendChild(label);
     }
     
-    create_description() {
+    create_description():void {
         const desc:HTMLElement = createElement("p", {
             "data-for": this.name,
             text: this.description
@@ -103,7 +103,7 @@ export default class Item {
         }));
     }
     
-    tags() {
+    tags():void {
         let { topics } = this.properties;
         
         const topics_object:HTMLElement[] = topics.filter((value:string) => {

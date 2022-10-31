@@ -17,8 +17,8 @@ import Color from "modules/get-lang-colors";
 import {isEmpty} from "Helpers";
 
 export default class Used_Lang {
-    private BASE:HTMLElement;
     
+    private BASE:HTMLElement;
     private languages:{[key:string]:number};
     private structure:{
         color:hexCode,
@@ -63,7 +63,7 @@ export default class Used_Lang {
         this.create_language_list();
     }
     
-    create_bar_graph() {
+    private create_bar_graph():void {
         
         const container:HTMLElement = createElement("div");
         
@@ -81,7 +81,7 @@ export default class Used_Lang {
         this.BASE.appendChild(container);
     }
     
-    create_language_list() {
+    private create_language_list():void {
         const container:HTMLElement = createElement("ul");
         
         this.structure.forEach(({color, name, percent}) => {
