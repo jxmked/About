@@ -11,6 +11,7 @@
 
 import createElement from "modules/createElement";
 import getColors from "modules/get-lang-colors";
+import {fallbackEmpty} from "Helpers";
 
 interface CreateItemProperties {
     name:string;
@@ -29,6 +30,7 @@ export default class CreateListItem {
     }
     
     item({name, value}:CreateItemProperties):void {
+        
         const color:hexCode = getColors.lang(name);
         const li:HTMLElement = createElement("li", {
             "data-value": value,
@@ -36,8 +38,11 @@ export default class CreateListItem {
             "data-color":color
         });
         
-        li.appendChild(this.bullet(name, value, color));
-        li.appendChild(this.itemName(name, value, color));
+        name = fallbackEmpty(name, "{lang_name}");
+        const num:string = fallbackEmpty(String(value), "{lang_count}");
+        
+        li.appendChild(this.bullet(name, num, color));
+        li.appendChild(this.itemName(name, num, color));
         li.appendChild(this.itemValue(name, value, color));
         
         this.LIST.appendChild(li);
@@ -47,7 +52,7 @@ export default class CreateListItem {
         return this.BASE;
     }
     
-    itemValue(name:string, value:number, color:string):HTMLElement {
+    private itemValue(name:string, value:number, color:string):HTMLElement {
         return createElement("span", {
             "data-value": value,
             "data-language":name,
@@ -56,7 +61,7 @@ export default class CreateListItem {
         });
     }
     
-    itemName(name:string, value:number, color:hexCode):HTMLElement {
+    private itemName(name:string, value:string, color:hexCode):HTMLElement {
         return createElement("p", {
             "data-value": value,
             "data-language":name,
@@ -65,7 +70,7 @@ export default class CreateListItem {
         });
     }
     
-    bullet(name:string, value:number, color:string):HTMLElement {
+    private bullet(name:string, value:string, color:string):HTMLElement {
         return createElement("span", {
             "data-value": value,
             "data-language":name,

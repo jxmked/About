@@ -9,6 +9,7 @@
 
 import getColors from "modules/get-lang-colors";
 import createElement from "modules/createElement";
+import {fallbackEmpty} from "Helpers";
 
 interface BarGraphItemProperties {
     name:any
@@ -28,12 +29,16 @@ export default class CreateBarGraph {
     
     // Throwing an error
     /*set */ item({name, value}:BarGraphItemProperties) {
+        
+        name = fallbackEmpty(name, "{lang_name}");
+        let width:string = fallbackEmpty(String(value), "{lang_count}");
+        
         const color:hexCode = getColors.lang(name);
         
         const bar:HTMLElement = createElement("span", {
             "data-value": value,
             "data-language": name,
-            "style": `background-color:${color};width:${value}%;`
+            "style": `background-color:${color};width:${width}%;`
         });
         
         this.PARENT.appendChild(bar);

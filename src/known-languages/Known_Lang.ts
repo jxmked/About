@@ -45,6 +45,7 @@ import createElement from "modules/createElement";
 import getRepos from "modules/get_repos";
 import createBarGraph from "create-bar-graph";
 import createListItem from "create-list-item";
+import {fallbackEmpty} from "Helpers";
 
 export default class Known_Lang {
     
@@ -68,19 +69,21 @@ export default class Known_Lang {
         
         // Add label
         Known_Lang.CONTAINER.appendChild(new Label({
-            title: "Known Languages: ", 
-            tooltip: "from Github"}).html);
+            title: "Known Languages"}).html);
         
         this.display_loading_screen();
         
         Known_Lang.BASE.appendChild(Known_Lang.CONTAINER);
         Known_Lang.PLACEMENT.parentNode!.insertBefore(Known_Lang.BASE, Known_Lang.PLACEMENT.nextSibling);
-        
+    }
+    
+    start():void {
         console.log("Starting to fetch github repositories...");
         
         new getRepos().then((repos:RepoProperties[]) => {
             console.log("Repositories has been fetched");
             console.log("Parsing Repositories...");
+            
             this.__calculate(repos);
             
             console.log("Sorting languages");
@@ -141,6 +144,7 @@ export default class Known_Lang {
         
         const barGraph:createBarGraph = new createBarGraph();
         const listItem:createListItem = new createListItem();
+        
         const pert:{[key:string]:number} = this.COUNTED_LANGS;
         const keys:string[] = Object.keys(pert);
         
@@ -148,18 +152,18 @@ export default class Known_Lang {
         let ival = window.setInterval(() => {
             try {
                 
-                const lang:string = keys[--index];
+                const lang:string = fallbackEmpty(keys[--index], "{lang_name}");
                 
                 // Add Item into Bar Graph
                 barGraph.item({
                     name:lang,
-                    value:pert[lang]
+                    value:pert[lang as keyof typeof pert]
                 });
                 
                 // Add Item to Item List
                 listItem.item({
                     name:lang,
-                    value:pert[lang]
+                    value:pert[lang as keyof typeof pert]
                 });
                 
                 console.log(`'${lang}' language has been added to bar graph.`);
@@ -182,20 +186,19 @@ export default class Known_Lang {
         
         const calculated:{[key:string]:number} = {};
         
-        // Get language dictionary 
-        for(const {languages, name} of Object.values(repos)) {
-            
+        // Get language dictionary
+        Object.values(repos).forEach(({languages, name}) => {
             console.log("Counting... " + name);
             
-            for(const [lang, count] of Object.entries(languages)) {
+            Object.entries(languages).forEach(([lang, count]) => {
                 if(calculated.hasOwnProperty(lang)){
                     calculated[lang] += count
-                    continue;
+                    return;
                 }
                 
                 calculated[lang] = count;
-            }
-        }
+            });
+        });
         
         this.COUNTED_LANGS = calculated;
         
@@ -212,6 +215,7 @@ export default class Known_Lang {
         
         const waveContainer:HTMLElement = createElement("div");
         const waveMotion:HTMLElement = createElement("div");
+        
         Known_Lang.TEXT_CONTAINER.innerText = "Loading...";
         
         waveContainer.appendChild(waveMotion);

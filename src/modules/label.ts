@@ -34,7 +34,7 @@ class Label {
     }
     
     private __normalize(str?:string):string|null {
-        if(isEmpty(str)) return null;
+        if(isEmpty(str)) return "";
         
         str = str!.normalize("NFD");
         str = str.trim();
@@ -58,7 +58,7 @@ class Label {
             "text":this.__normalize(this.title)!
         });
         
-        if(isEmpty(this.tooltip)) {
+        if(! isEmpty(this.tooltip)) {
             label.appendChild(this.__get_tooltip());
         }
         

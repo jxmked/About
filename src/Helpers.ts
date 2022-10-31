@@ -28,8 +28,17 @@ export const isEmpty:Function = (param:any): boolean => {
     
 }
 
-export function fallback_empty<T>(str:string, fallback:T):T|string {
+function fallbackEmpty<T>(str:string, fallback:T):T|string {
     return (isEmpty(str)) ? fallback : str;
 }
 
+export {fallbackEmpty, fallbackEmpty as fallback_empty};
 
+export function normalizeString(param:string|number, method:string = "NFD"):string {
+    // @ts-ignore
+    if((! param instanceof Number)  && isEmpty(param)) {
+        return "";
+    }
+    
+    return String(param).normalize(method).trim();
+}
