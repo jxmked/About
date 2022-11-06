@@ -64,7 +64,7 @@ class FeaturedRepositories {
             target.parentNode!.insertBefore(self.BASE, target.nextSibling);
         }
         
-        new getRepos().then((repos) => {
+        getRepos().then((repos) => {
             repos.forEach((repository:RepoProperties) => {
                 if(repository.topics.length == 0)
                     return;
