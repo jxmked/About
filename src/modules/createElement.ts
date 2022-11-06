@@ -25,7 +25,7 @@ class CreateElement {
         if(this.attr == void 0)
             return;
         
-        for (const [key, value] of Object.entries(this.attr)) {
+        Object.entries(this.attr).forEach(([key, value]) => {
             switch(key.toLowerCase()) {
                 case "text":
                     this.element.appendChild(document.createTextNode(value));
@@ -43,7 +43,7 @@ class CreateElement {
                 default:
                     this.element.setAttribute(key, value);
             }
-        }
+        });
     }
     
     private appendChild(element:HTMLElement) {

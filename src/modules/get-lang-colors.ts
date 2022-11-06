@@ -35,12 +35,10 @@ export default class Get_Colors {
         const _then = this.thenCallback.bind(this.thenCallback);
         
         fetch(Get_Colors.url, {
-            method:"get"
+            method:"GET"
         }).then((res:any) => { 
-            const status = res.status;
-            
-            if(status != 200) { // Not ok
-                throw new Error(`Failed to fetch colors with status code: ${status}`);
+            if(! res.ok) { // Not ok
+                throw new Error(`Failed to fetch colors with status code: ${res.status}`);
             }
             
             Get_Colors.__is_success = true;
@@ -52,10 +50,10 @@ export default class Get_Colors {
             // Translate key to lower case
             const colors:colorProperties = {};
             const keys:string[] = Object.keys(res);
-            let index:number = keys.length;
+            let index:number = keys.length, key:string;
             
             while(index--) {
-                let key:string = keys[index];
+                key = keys[index];
                 colors[key.toLowerCase() as keyof colorProperties] = res[key];
             }
             
