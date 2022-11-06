@@ -37,6 +37,7 @@ import Item from "Item";
 
 
 class FeaturedRepositories {
+    
     private static BASE:HTMLElement = createElement("div", {"id": "main-personal-projects"});
     private static PARENT:HTMLElement = createElement("div");
     private item_container:HTMLElement;
@@ -63,12 +64,13 @@ class FeaturedRepositories {
             target.parentNode!.insertBefore(self.BASE, target.nextSibling);
         }
         
-        new getRepos().then((repos) => {
+        getRepos().then((repos) => {
             repos.forEach((repository:RepoProperties) => {
                 if(repository.topics.length == 0)
                     return;
                 
                 const topics:string = repository.topics.join("|");
+                
                 if(this.target_keys.some((key:string) => topics.indexOf(key) !== -1)) {
                     this.item_container.appendChild(new Item(repository).html);
                 }

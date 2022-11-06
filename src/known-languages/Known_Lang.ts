@@ -62,8 +62,6 @@ export default class Known_Lang {
     
     constructor() {
         
-        console.log("Known_Lang has been initiated");
-        
         this.COUNTED_LANGS = {};
         this.thenCallback = () => {};
         
@@ -78,15 +76,9 @@ export default class Known_Lang {
     }
     
     start():void {
-        console.log("Starting to fetch github repositories...");
-        
-        new getRepos().then((repos:RepoProperties[]) => {
-            console.log("Repositories has been fetched");
-            console.log("Parsing Repositories...");
+        getRepos().then((repos:RepoProperties[]) => {
             
             this.__calculate(repos);
-            
-            console.log("Sorting languages");
             
             // Sort COUNTED_LANGS by value
             // Min -> Max
@@ -106,12 +98,10 @@ export default class Known_Lang {
              * Convert to percentages
              * */
             const sum:number = Object.values(rebuild).reduce((x, y) => x + y);
-            const pert:{[key:string]:number} = {};
-            Object.entries(rebuild).forEach(([lang, count]) => {
-                pert[lang] = (count / sum) * 100;
-            });
             
-            this.COUNTED_LANGS = pert;
+            this.COUNTED_LANGS = Object.fromEntries(Object.entries(rebuild).map(([lang, count]) => {
+                return [lang, (count / sum) * 100]
+            }))
             
             // Remove all child element from container
             // except the label tag
@@ -128,8 +118,6 @@ export default class Known_Lang {
             
             Known_Lang.BASE.classList.remove("loading");
             
-            console.log("Loading element has been removed");
-            
             this.createDOMElements();
             this.thenCallback(); // Done 
         }).catch((err:any) => {
@@ -140,8 +128,6 @@ export default class Known_Lang {
     }
     
     createDOMElements():void {
-        console.log("Creating DOM Elements...");
-        
         const barGraph:createBarGraph = new createBarGraph();
         const listItem:createListItem = new createListItem();
         
@@ -165,9 +151,6 @@ export default class Known_Lang {
                     name:lang,
                     value:pert[lang as keyof typeof pert]
                 });
-                
-                console.log(`'${lang}' language has been added to bar graph.`);
-                
             } catch(TypeError) {
                 clearInterval(ival);
             }
@@ -181,15 +164,10 @@ export default class Known_Lang {
         /**
          * Sum each unique languages has been used each repository
          * */
-         
-        console.log("Calculating languages from each repository...");
-        
         const calculated:{[key:string]:number} = {};
         
         // Get language dictionary
         Object.values(repos).forEach(({languages, name}) => {
-            console.log("Counting... " + name);
-            
             Object.entries(languages).forEach(([lang, count]) => {
                 if(calculated.hasOwnProperty(lang)){
                     calculated[lang] += count
@@ -201,8 +179,6 @@ export default class Known_Lang {
         });
         
         this.COUNTED_LANGS = calculated;
-        
-        console.log("Calculated");
     }
     
     
@@ -222,8 +198,6 @@ export default class Known_Lang {
         container.appendChild(waveContainer);
         container.appendChild(Known_Lang.TEXT_CONTAINER);
         Known_Lang.CONTAINER.appendChild(container);
-        
-        console.log("Loading screen has been added");
     }
     
     catch(err:any):void {

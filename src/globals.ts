@@ -45,6 +45,25 @@ export const env_mode:"prod"|"dev" = window.XIO.ENVIRONMENT_MODE;
         console[i as keyof Console] = () => {};
 })();
 
+export const NavigationListItem:NavigationBarAddItem[] = [
+    {
+        name:"Introduction",
+        href: "#main-cover"
+    }, {
+        name: "About me",
+        href: "#main-about"
+    }, {
+        name: "Known Languages",
+        href: "#main-languages"
+    }, {
+        name: "Featured Repositories",
+        href: "#main-personal-projects"
+    }, {
+        name: "Connect",
+        href: "#main-socials"
+    }
+];
+
 
 /**
  * Setup and config 
@@ -72,8 +91,14 @@ envRes.set("username", "jxmked");
 envRes.set("known-lang-skip", []);
 envRes.set("featured-repositories", ["portfolio-include"]);
 
-// Initialize
 
+
+
+
+
+
+
+// Initialize
 export default (() => {
     return ()=> {}
 })();

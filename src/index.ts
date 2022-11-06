@@ -1,21 +1,8 @@
-import __nothing__ from "legacy";
-import __init__ from "./globals";
+import __init__, { NavigationListItem } from "./globals";
 import Known_Lang from "./known-languages/Known_Lang";
 import Feature_Repo from "./featured-repositories/Featured-Repositories"
 import getColors from "modules/get-lang-colors";
-import navbar from "NavigationBar/index";
-
-/**
- * My wifi went out
- * Override
- */
- /*
-import getRepos from "modules/get_repos";
-getRepos.url = "./excludes/repositories.json";
-/**/
-
-// Check and create Legacies
-__nothing__();
+import navbar from "NavigationBar/NavigationBar";
 
 /**
  * Just to initialize 
@@ -24,48 +11,43 @@ __nothing__();
  * */
 __init__();
 
+/**
+ * Click Event In Nav Panel
+ * */
 new navbar();
+
+/**
+ * initialize Known Languages.
+ * Add Loading display during Initialize
+ * */
 const known_Lang = new Known_Lang();
 
+/**
+ * Fetch Languages Color 
+ * Ready...
+ * */
 new getColors().then(() => {
-    console.log("Color loaded");
-    
+    // Start Fetching and building DOM object
     known_Lang.start();
-    
     known_Lang.then(() => {
+        /**
+         * To make sure we append Featured Repositories after
+         * Known Languages.
+         * Wait for completion of Known Languages
+         * */
         new Feature_Repo();
     });
     
-    const navList:NavigationBarAddItem[] = [
-        {
-            name:"Introduction",
-            href: "#main-cover"
-        }, {
-            name: "About me",
-            href: "#main-about"
-        }, {
-            name: "Known Languages",
-            href: "#main-languages"
-        }, {
-            name: "Featured Repositories",
-            href: "#main-personal-projects"
-        }, {
-            name: "Connect",
-            href: "#main-socials"
-        }
-    ];
     
-    let ival = window.setInterval(() => {
-        try {
-            navbar.addItem(navList.shift() as NavigationBarAddItem);
-        } catch(err) {
-            clearInterval(ival);
-        }
-    }, 140);
+    /**
+     * Add Item to Navigation List
+     * */
+    NavigationListItem.forEach((navItem) => {
+        navbar.addItem(navItem);
+    });
     
 }).catch((err:any) => {
     console.error("Failed to load");
 }).load();
 
 export default () => {};
-

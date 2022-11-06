@@ -26,15 +26,11 @@ export default class Get_Colors {
     private static __is_success:boolean = false;
     
     constructor() {
-        console.log("Get colors has been initiated");
-        
         this.thenCallback = (args:any) => {};
         this.catchCallback = (args:any) => {};
     }
     
     load() {
-        console.log("Fetching colors has been started");
-        
         const _catch = this.catchCallback.bind(this.catchCallback);
         const _then = this.thenCallback.bind(this.thenCallback);
         
@@ -49,12 +45,9 @@ export default class Get_Colors {
             
             Get_Colors.__is_success = true;
             
-            console.log("Colors has been fetched!");
-            
             return res.json() as colorProperties;
+        
         }).then((res:colorProperties) => {
-            
-            console.log("Translating Color keys into lowercase...");
             
             // Translate key to lower case
             const colors:colorProperties = {};
@@ -66,11 +59,7 @@ export default class Get_Colors {
                 colors[key.toLowerCase() as keyof colorProperties] = res[key];
             }
             
-            console.log("Translated");
-            
             Get_Colors.__loaded_colors = colors;
-            
-            console.log("Languages color is good to go");
             
             _then();
         }).catch(_catch);
