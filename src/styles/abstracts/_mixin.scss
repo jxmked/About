@@ -1,10 +1,22 @@
+
+@use "defined" as var;
+
 @mixin reset {
     display: block;
-    max-width: $max-width;
-    min-width: $min-width;
+    max-width: var.$max-width;
+    min-width: var.$min-width;
     white-space: nowrap;
     font-family: "Helvetica", "Arial", "Sans-Serif";
     font-family: 12px;
-    background-color: $primary-bg-color;
     margin: 0 auto;
+}
+
+@mixin color {
+    background-color: var.$primary-bg-color;
+    color: var.$primary-text-color;
+    
+    @media (prefers-color-scheme: dark){
+        background-color: var.$primary-bg-color-dark;
+        color: var.$primary-text-color-dark;
+    }
 }

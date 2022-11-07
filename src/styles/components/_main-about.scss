@@ -12,13 +12,12 @@
         > p {
             font-family: 'Montserrat', 'Sans-Serif';
             font-size: 1rem;
-            color: $primary-text-color;
+            
             font-weight: 400;
             text-indent: 1rem;
             line-height: 1.4rem;
-            @media (prefers-color-scheme: dark) {
-                color: $primary-text-color-dark;
-            }
+            
+            @extend .dark-light-mode;
             
             > span.text-bold {
                 font-weight: 500;

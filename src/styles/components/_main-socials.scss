@@ -36,10 +36,9 @@
                     display: inline-block;
                     margin: 0 5px !important;
                     padding-bottom: 5px;
-                    color: $primary-text-color;
-                    @media (prefers-color-scheme: dark) {
-                        color: $primary-text-color-dark;
-                    }
+                    
+                    @extend .dark-light-mode;
+                    
                     &:first-child { // Image/SVG
                         width: 1.5rem;
                         height: 1.5rem;

@@ -22,11 +22,7 @@
                 box-sizing: border-box;
                 white-space: nowrap;
                 margin: 0;
-                background-color: inherit;
-                @media (prefers-color-scheme: dark) {
-                    background-color: rgb(52, 52, 54);
-                }
-                
+                @extend .dark-light-mode;
                 span {
                     position: relative;
                     display: inline-block;
@@ -36,9 +32,11 @@
                     box-sizing: border-box;
                     border-style: solid;
                     border-color: $primary-bg-color;
+                    
                     @media (prefers-color-scheme: dark) {
                         border-color: rgb(52, 52, 54);
                     }
+                    
                     border: 0 0.5px 0 0.5px;
                     border-top: 0;
                     border-collapse: collapse;
@@ -47,6 +45,7 @@
                     @media only screen and (min-width: 650px) {
                         border: 0 0.2px 0 0.2px;
                     }
+                    
                     &:last-child {
                         border-right: none;
                     }
@@ -91,13 +90,10 @@
                     }
                     
                     p, span:last-child {
-                        color: $primary-text-color;
                         font-size: .9rem;
                         font-weight: 400;
                         font-style: italic;
-                        @media (prefers-color-scheme: dark) {
-                            color: $primary-text-color-dark;
-                        }
+                        @extend .dark-light-mode
                     }
                     
                     p {

@@ -24,19 +24,17 @@
         
         &.copyright {
             text-align: right;
-            color: $primary-text-color;
-            @media (prefers-color-scheme: dark) {
-                color: $primary-text-color-dark;
-            }
+            
+            @extend .dark-light-mode;
+            
             p {
                 font-family: "Helvetica", "Sans-Serif";
                 font-style: italic;
                 letter-spacing: 2px;
                 font-weight: 400;
-                color: $primary-text-color;
-                @media (prefers-color-scheme: dark) {
-                    color: $primary-text-color-dark;
-                }
+                
+                @extend .dark-light-mode;
+                
             }
         }
     }

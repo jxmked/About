@@ -14,13 +14,10 @@
             letter-spacing: 2px;
             font-weight: 500;
             font-style: italic;
-            color: $primary-text-color;
             text-align: justify;
             line-height: 1.6rem;
-            @media (prefers-color-scheme: dark) {
-                color: $primary-text-color-dark;
-            }
             
+            @extend .dark-light-mode;
         }
     }
     
