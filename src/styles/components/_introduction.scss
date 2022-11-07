@@ -1,25 +1,38 @@
-#main-introduction {
+#main-cover {
     
-    margin: 0;
+    $box-shadow: 0px 4px 8px rgba(52, 52, 54, 0.4);
     
-    > div {
-        padding: 1.2rem 1.6rem;
-        margin: 0;
-        
-        > p {
-            font-family: 'Montserrat', 'Sans-Serif';
-            white-space: initial;
-            text-indent: 1.5rem;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            font-weight: 500;
-            font-style: italic;
-            text-align: justify;
-            line-height: 1.6rem;
-            
-            @extend .dark-light-mode;
+    width: 98%;
+    margin: 70px auto 30px auto;
+    padding: 0;
+    box-shadow: none;
+    min-height: 212px;
+    height: auto;
+    
+    > .cover-place-holder {
+        margin: 0 auto;
+        width: 98%;
+        min-height: 120px;
+        img {
+            box-shadow: $box-shadow;
+            border-radius: 14px;
+            width: 100%;
+            height: auto;
         }
     }
     
-    //display: none;
+    > .profile-place-holder {
+        margin: 0;
+        padding: 0;
+        > img {
+            display: block;
+            margin: auto;
+            margin-top: -100px;
+            width: 130px;
+            border-radius: 50%;
+            box-shadow: $box-shadow;
+        }
+    }
+    
+   // display: none;
 }

@@ -1,0 +1,25 @@
+#main-introduction {
+    
+    margin: 0;
+    
+    > div {
+        padding: 1.2rem 1.6rem;
+        margin: 0;
+        
+        > p {
+            font-family: 'Montserrat', 'Sans-Serif';
+            white-space: initial;
+            text-indent: 1.5rem;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            font-style: italic;
+            text-align: justify;
+            line-height: 1.6rem;
+            
+            @extend .dark-light-mode;
+        }
+    }
+    
+    //display: none;
+}
