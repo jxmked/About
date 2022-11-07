@@ -4,9 +4,11 @@
   "description": "Personal Portfolio",
   "main": "./dist/main.js",
   "scripts": {
+    "dev:sass": "sass --watch --style expanded --embed-sources \"./src/styles/index.scss:dist/index.css\"",
+    "dev:tsc": "tsc --watch -p tsconfig.json",
     "minify": "uglifyjs dist/index.js --mangle toplevel=true -O quote_keys=true -o dist/index.js && html-minifier index.html -c html-minifier.json -o index.html",
-    "build": "tsc -p tsconfig-build.json && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\" && npm run minify",
-    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch --embed-sources \"./src/styles/main.scss:dist/main.css\"\""
+    "build": "tsc -p tsconfig-build.json && sass -s compressed --no-source-map \"./src/styles/index.scss:dist/index.css\" && npm run minify",
+    "dev": "concurrently --raw \"npm run dev:tsc\" \"npm run dev:sass\""
   },
   "repository": {
     "type": "git",

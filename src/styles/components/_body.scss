@@ -1,20 +1,15 @@
-@use '../abstracts/mixin' as mx;
-
-html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-}
-
-::selection {
-    background-color: rgb(255, 204, 0);
-    color: rgb(36, 36, 38);
-}
+@use '../defined' as def;
+@use '../mixin' as mx;
 
 body {
-    @include reset;
+    display: block;
+    max-width: def.$max-width;
+    min-width: def.$min-width;
+    white-space: nowrap;
+    font-family: def.$font-sans;
+    font-size: 1.3rem;
+    line-height: 1.4rem;
+    margin: 0 auto;
+    background-color: var(--bg-color);
 }
 
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}

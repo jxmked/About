@@ -1,0 +1,18 @@
+@use "defined" as var;
+
+@mixin Font-Style ($font-family, $font-weight) {
+    font-family: $font-family;
+    font-weight: $font-weight;
+}
+
+
+@mixin prefers-color-scheme-handler {
+    background-color: def.$primary-bg-color;
+    color: def.$primary-text-color;
+    
+    @media (prefers-color-scheme: dark){
+        background-color: def.$primary-bg-color-dark;
+        color: var.$primary-text-color-dark;
+    }
+}
+
