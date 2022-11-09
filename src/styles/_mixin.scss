@@ -1,4 +1,5 @@
 @use "defined" as def;
+@use "variables" as var;
 
 @mixin Font-Style ($font-family, $font-weight) {
     font-family: $font-family;
@@ -43,5 +44,9 @@
     max-height: def.$max-height;
     min-width: def.$min-width;
     min-height: def.$min-height;
+}
+
+@mixin component-box-shadow {
+    box-shadow: var.$box-shadow-1;
 }
 

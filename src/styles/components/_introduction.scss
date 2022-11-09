@@ -1,16 +1,15 @@
 
+@use "../variables" as var;
+
+
 %bg-inherit {
     background-color: inherit;
 }
 
 #main-cover {
     
-    display: none;
-    
-    $box-shadow: 0px 4px 8px rgba(52, 52, 54, 0.4);
-    
     width: 98%;
-    margin: 70px auto 30px auto;
+    margin: 30px auto 30px auto;
     padding: 0;
     box-shadow: none;
     min-height: 212px;
@@ -31,7 +30,7 @@
     
         // Main cover photo
         img {
-            box-shadow: $box-shadow;
+            box-shadow: var.$box-shadow-2;
             border-radius: 14px;
             width: 100%;
             @extend %bg-inherit;
@@ -59,7 +58,7 @@
             
             width: 110px;
             border-radius: 50%;
-            box-shadow: $box-shadow;
+            box-shadow: var.$box-shadow-2;
         }
     }
 }
