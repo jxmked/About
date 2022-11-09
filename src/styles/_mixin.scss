@@ -26,3 +26,22 @@
     letter-spacing: 3px;
 }
 
+@mixin cursor-default {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+   supported by Chrome, Edge, Opera and Firefox */
+  cursor: pointer;
+}
+
+
+@mixin restrict-sizing {
+    max-width: def.$max-width;
+    max-height: def.$max-height;
+    min-width: def.$min-width;
+    min-height: def.$min-height;
+}
+

@@ -5,13 +5,16 @@
 
 %default-prop {
     width: 100%;
-    max-width: def.$max-width;
-    min-width: def.$min-width;
+    @include mx.restrict-sizing;
     height: 45px;
 }
 
 %head-line-title {
     @include mx.head-line-title;
+}
+
+%cursor-default {
+    @include mx.cursor-default;
 }
 
 #primary-nav {
@@ -32,7 +35,7 @@
     }
 }
 
-#primary-nav, #primary-nav > div {
+#primary-nav > div {
     
     @extend %default-prop;
     
@@ -47,18 +50,17 @@
     background-color: rgba(242, 242, 247, 0.7);
     z-index: 90;
     
-  /*  @supports (backdrop-filter: blur(8px)) {
+    @supports (backdrop-filter: blur(8px)) {
         backdrop-filter: saturate(180%) blur(20px);
         background-color: transparent;
-    } */
-}
-
-#primary-nav > div {
+    }
+    
     > #burger {
         height: 45px;
         width: 45px;
         margin: 5px 5px 5px 12px;
-        cursor: none;
+        
+        @extend %cursor-default;
         
         > input[type="checkbox"] {
             margin: 0;
@@ -71,7 +73,7 @@
         }
         
         > .--menu-bars {
-            cursor: pointer;
+            @extend %cursor-default;
         }
         
         > .--menu-bars > span {
@@ -133,6 +135,12 @@
             height: calc(100vh - 50px);
         }
         
+        /**
+         * We rely on Input checkbox to open and close the  
+         * navigation panel and transition bars from regular to `x` and vice versa.
+         * */
+        // Nav Panel
+        // Event transition In and Out once clicked
         > input[type="checkbox"]:checked ~ #nav-panel {
             transform: translateX(0%);
         }
@@ -206,11 +214,19 @@
                 font-family: var.$default-font-family;
                 line-height: 1.2rem;
                 font-style: normal;
+                letter-spacing: 1px;
+                transition:
+                    letter-spacing var.$text-hover-transition-speed var.$text-hover-transitioning,
+                    font-weight var.$text-hover-transition-speed var.$text-hover-transitioning,
+                    color var.$text-hover-transition-speed var.$text-hover-transitioning;
+                
+                @extend %cursor-default;
                 
                 &:hover, &:active {
                     background-color: transparent;
                     color: var.$text-color-hard;
                     font-weight: 600;
+                    letter-spacing: 2px;
                 }
             }
         }

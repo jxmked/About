@@ -1,5 +1,6 @@
 @use "variables" as var;
 @use "defined" as def;
+@use "./mixin" as mx;
 
 html {
     scroll-behavior: smooth;
@@ -16,15 +17,14 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+@import 'global-variables';
 @import 'reset';
 @import 'components/body';
 
 body > div, #main-footer {
-    width: auto;
-    
-    max-width: def.$max-width;
-    min-width: def.$min-width;
-    
+    @include mx.restrict-sizing;
+      
+    width: auto;.
     margin-left: 0;
     margin-right: 0;
     margin-top: 2rem;
@@ -33,7 +33,7 @@ body > div, #main-footer {
     
     white-space: nowrap;
     
-    box-shadow: 0px 2px 8px rgba(52, 52, 54, 0.2);
+    box-shadow: 0px 2px 8px var.$box-shadow-1; 
     
     box-sizing: border-box;
     
@@ -54,4 +54,4 @@ body > div, #main-footer {
 
 
 @import 'components/navbar';
-@import 'components/introduction'
+@import 'components/introduction';
