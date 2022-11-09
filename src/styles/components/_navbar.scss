@@ -1,5 +1,6 @@
 
 @use '../defined' as def;
+@use '../variables' as var;
 @use '../mixin' as mx;
 
 %default-prop {
@@ -36,7 +37,7 @@
     @extend %default-prop;
     
     border: none;
-    box-shadow: var(--box-shadow-1);
+    box-shadow: var.$box-shadow-1;
     margin: 0;
     padding: 0;
     top: 0;
@@ -95,7 +96,7 @@
                 top: 30px;
             }
             
-            background-color: var(--text-color);
+            background-color: var.$text-color;
         }
         
         > #nav-panel {
@@ -107,7 +108,7 @@
             z-index: 92;
             transform: translateX(-105%);
             transition: transform ease-in-out 0.5s;
-            box-shadow: var(--box-shadow-2);
+            box-shadow: var.$box-shadow-2;
         }
         
         > #nav-panel:after,
@@ -122,7 +123,7 @@
             transform: translateX(-105%);
             transition: transform ease-in-out 0.5s;
             z-index: 1;
-            box-shadow: var(--box-shadow-1);
+            box-shadow: var.$box-shadow-1;
         }
         
         > #nav-panel,
@@ -142,7 +143,7 @@
             transform: translateX(-29%); 
         }
         > input[type="checkbox"]:checked ~ .--menu-bars > span {
-            background-color: var(--burger-menu-open-color);
+            background-color: var.$burger-menu-open-color;
         }
         
         // Event
@@ -193,22 +194,22 @@
             padding: 8px 0 10px 0;
             
             &:not(:last-child){
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid var.$border-color;
             }
             
             > a {
                 
                 text-decoration: none;
-                color: var(--text-color);
+                color: var.$text-color;
                 font-size: 1rem;
                 font-weight: 500;
-                font-family: 'Montserrat', "Caviar Dreams", "Sans-Serif";
+                font-family: var.$default-font-family;
                 line-height: 1.2rem;
                 font-style: normal;
                 
                 &:hover, &:active {
                     background-color: transparent;
-                    color: var(--text-color-hard);
+                    color: var.$text-color-hard;
                     font-weight: 600;
                 }
             }
