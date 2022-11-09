@@ -1,12 +1,16 @@
 
 @use '../defined' as def;
-
+@use '../mixin' as mx;
 
 %default-prop {
     width: 100%;
     max-width: def.$max-width;
     min-width: def.$min-width;
     height: 45px;
+}
+
+%head-line-title {
+    @include mx.head-line-title;
 }
 
 #primary-nav {
@@ -95,7 +99,7 @@
         }
         
         > #nav-panel {
-            width: 150px;
+            width: 230px;
             height: calc(100vh - 55px);
             position: absolute;
             top: 0;
@@ -111,7 +115,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            transform: translate(-50%, -50%);
             margin: 0;
             width: 100vw;
             content: '';
@@ -136,13 +139,14 @@
             transform: translateX(0%);
         }
         > input[type="checkbox"]:checked ~ #nav-panel:before {
-            transform: translateX(-47%); 
+            transform: translateX(-29%); 
         }
         > input[type="checkbox"]:checked ~ .--menu-bars > span {
             background-color: var(--burger-menu-open-color);
         }
         
         // Event
+        // Menu Bars Animation Between Clicked and To be Click
         > input[type="checkbox"]:checked ~ .--menu-bars > span:nth-child(1) {
             top: 24px;
             transform: rotate(45deg);
@@ -164,12 +168,13 @@
         
         background-color: transparent;
         position: relative;
-        margin: 80px 7px 0 0;
+        margin: 80px 0px 0 0;
         text-align: right;
-        padding: 5px;
+        padding: 5px 9px 5px 5px;
         z-index: 256;
         list-style-type: none;
-        width: calc(100% - 12px);
+        
+       // width: calc(100% - 12px);
         
         > li {
             &:first-child {
@@ -178,9 +183,7 @@
                 
                 > span {
                     width: 100%;
-                    font-weight: 600;
-                    font-size: 1.2rem;
-                    color: var(--text-color);
+                    @extend %head-line-title;
                 }
             }
             
@@ -194,14 +197,19 @@
             }
             
             > a {
-                font-size: 14px;
+                
                 text-decoration: none;
                 color: var(--text-color);
+                font-size: 1rem;
                 font-weight: 500;
+                font-family: 'Montserrat', "Caviar Dreams", "Sans-Serif";
+                line-height: 1.2rem;
+                font-style: normal;
                 
                 &:hover, &:active {
                     background-color: transparent;
-                    color: var(--text-color);
+                    color: var(--text-color-hard);
+                    font-weight: 600;
                 }
             }
         }
