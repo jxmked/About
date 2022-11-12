@@ -36,7 +36,7 @@ new getColors().then(() => {
          * Wait for completion of Known Languages
          * */
         new Feature_Repo();
-    });
+    }); 
     
     
     /**

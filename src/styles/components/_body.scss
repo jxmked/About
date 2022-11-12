@@ -1,5 +1,6 @@
 @use '../defined' as def;
 @use '../mixin' as mx;
+@use '../variables' as var;
 
 body {
     display: block;
@@ -10,6 +11,7 @@ body {
     font-size: 1.3rem;
     line-height: 1.4rem;
     margin: 0 auto;
+    color: var.$text-color;
     background-color: var(--bg-color);
 }
 
