@@ -28,8 +28,8 @@ body > div, #main-footer {
     @include mx.restrict-sizing;
       
     width: auto;.
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 2rem;
     
     padding: 10px 5px;
@@ -44,10 +44,10 @@ body > div, #main-footer {
         white-space: normal;
         
         > label {
-            font-weight: 700;
+            font-weight: 500;
             padding: 9px 5px 0px 0px;
             font-size: 1.2rem;
-            text-decoration: underline;
+            font-family: var.$default-font-family;
             margin: 0 0 0 1rem;
             width: auto;
             display: block;
@@ -56,8 +56,9 @@ body > div, #main-footer {
 }
 
 body > div {
-    margin: auto;
-   width: 100%!important;
+    margin: 1rem auto;
+    width: 100% !important;
+    height: auto;
 }
 
 @import 'components/navbar';

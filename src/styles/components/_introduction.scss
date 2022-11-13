@@ -1,23 +1,18 @@
 
 @use "../variables" as var;
 
-%temp-hide {
-   // display: none;
-}
-
 %bg-inherit {
     background-color: inherit;
 }
 
 #main-cover {
-    @extend %temp-hide;
-    
     width: 98%;
     margin: 30px auto 30px auto;
     padding: 0;
     box-shadow: none;
     min-height: 212px;
     height: auto;
+    
     @extend %bg-inherit;
     
     /**

@@ -22,11 +22,12 @@
 }
 
 #main-personal-projects {
+    
     position: static;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
     position: static;
     white-space: normal;
-    height: auto;
+    max-height: none;
     
     &:before, &:after {
         content: '';
@@ -90,12 +91,11 @@
                     border-top: 1px solid var.$border-color;
                     
                     // Main Margin between top and bottom elements
-                    padding-top: 14px;
-                    padding-bottom: 12px;
-                    
+                    padding: 0.6rem 1rem 0.5rem 1rem;
                     > ul:first-child {
                         
                         @extend %offspace;
+                        
                         list-style-type: none;
                         padding: 0 1rem;
                         border: 0;
@@ -193,3 +193,5 @@
         }
     }
 }
+
+
