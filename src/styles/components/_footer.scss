@@ -1,0 +1,31 @@
+
+
+@use "../variables" as var;
+@use "../defined" as def;
+@use "../mixin" as mx;
+
+/**
+ *
+ *    <footer id="main-footer">
+        <div class="copyright">
+            <span>&copy;2022&nbsp;</span>
+        </div>
+    </footer>
+ * */
+
+footer#main-footer {
+    
+    > div {
+        text-align: right;
+
+        > span {
+            font-family: var.$default-font-family;
+            color: var.$text-color;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-right: 1rem;
+        }
+    }
+    
+}
