@@ -4,10 +4,6 @@
 @use "../variables" as var;
 @use "../mixin" as mx;
 
-%temp-hide {
-    //display: none;
-}
-
 %border-box {
     height: 100%;
     margin: 0;
@@ -23,10 +19,9 @@
 }
 
 #main-languages {
-    @extend %temp-hide;
     
     box-shadow: var.$box-shadow-1;
-    
+    max-height: none;
     
     div {
         @extend %wh-max;

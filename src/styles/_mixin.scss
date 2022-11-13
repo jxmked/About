@@ -1,12 +1,6 @@
 @use "defined" as def;
 @use "variables" as var;
 
-@mixin Font-Style ($font-family, $font-weight) {
-    font-family: $font-family;
-    font-weight: $font-weight;
-}
-
-
 @mixin prefers-color-scheme-handler {
     background-color: def.$primary-bg-color;
     color: def.$primary-text-color;
