@@ -1,10 +1,17 @@
-@use "variables" as var;
-@use "defined" as def;
+@use "./variables" as var;
+@use "./defined" as def;
 @use "./mixin" as mx;
+
+
+@import 'global-variables';
+@import 'reset';
+@import 'components/body';
+
 
 html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    background-color: var.$bg-color;
 }
 
 ::selection {
@@ -16,10 +23,6 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-@import 'global-variables';
-@import 'reset';
-@import 'components/body';
 
 body > div, #main-footer {
     @include mx.restrict-sizing;
@@ -52,9 +55,18 @@ body > div, #main-footer {
     }
 }
 
+body > div {
+    margin: auto;
+   width: 100%!important;
+}
 
 @import 'components/navbar';
 @import 'components/introduction';
 @import 'components/short-message';
 @import 'components/known-languages';
 @import 'components/featured-projects';
+@import 'components/socials';
+@import 'components/footer';
+
+
+

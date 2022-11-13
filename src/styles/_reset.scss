@@ -356,15 +356,12 @@ template {
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    content: '';
-    content: none;
 }
 *::-webkit-scrollbar{
 	display: none; /*I dont like this one mostly on mobile and tablet devices*/
 }
 html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-    background: #ffffff;
 }
 
 body {
