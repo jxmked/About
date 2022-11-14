@@ -38,10 +38,10 @@
                 @extend %border-box;
                 @extend %wh-max;
                 
-                height: inherit;
                 border-radius: 15px;
                 overflow: hidden;
                 font-size: 0;
+                height: inherit !important;
                 
                 span {
                     @extend %border-box;
@@ -50,7 +50,8 @@
                     display: inline-block;
                     
                     border-left: 1px solid var.$bg-color;
-                    
+                                    background-color: #000;
+                
                     &:last-child, {
                         border-right: none;
                     }
