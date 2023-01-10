@@ -34,6 +34,12 @@
 
 - [Single_Sheet-Android_App](https://github.com/jxmked/Single_Sheet-Android_App/)
 
+- [MariadB-Sample](https://github.com/jxmked/mariadb-sample)
+  - [MariadB-Sample Live Page](jxmked.github.io/mariadb-sample/)
+
+- [Canvas - Random Shape Animation](https://github.com/jxmked/canvas-shaped-background)
+  - [Live Page](https://jxmked.github.io/canvas-shaped-background/)
+
 ----
 
 <!--
