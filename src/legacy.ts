@@ -1,8 +1,8 @@
 export default () => {};
 
-console.log("Handling possible legacy method");
+console.log('Handling possible legacy method');
 
-const propertyExist:Function = (name:string):boolean => {
+const propertyExist: Function = (name: string): boolean => {
     return Object.prototype.hasOwnProperty.call(Object, name);
 };
 
@@ -21,7 +21,7 @@ const attr = {
     writable: false
 };
 
-const legacies:Function[] = [];
+const legacies: Function[] = [];
 /*
 legacies.push(() => {
     let success:boolean = false;
@@ -44,100 +44,107 @@ legacies.push(() => {
 });
 */
 legacies.push(() => {
-    let success:boolean = false;
-    if(! propertyExist("fromEntries") && propertyExist("assign")) {
-        Object.defineProperty(proto_o, "fromEntries", Object.assign(attr, {
-            value: function(arr:any) {
-                const build = {};
-                
-                for (let index = 0; index < arr.length; index++) {
-                    const pair = arr[index];
-                    
-                    if (Object(pair) !== pair) {
-                      throw new TypeError('iterable for fromEntries should yield objects');
+    let success = false;
+    if (!propertyExist('fromEntries') && propertyExist('assign')) {
+        Object.defineProperty(
+            proto_o,
+            'fromEntries',
+            Object.assign(attr, {
+                value: function (arr: any) {
+                    const build = {};
+
+                    for (let index = 0; index < arr.length; index++) {
+                        const pair = arr[index];
+
+                        if (Object(pair) !== pair) {
+                            throw new TypeError('iterable for fromEntries should yield objects');
+                        }
+
+                        // Consistency with Map: contract is that entry has "0" and "1" keys, not
+                        // that it is an array or iterable.
+
+                        const { '0': key, '1': val } = pair;
+
+                        Object.defineProperty(build, key, {
+                            configurable: true,
+                            enumerable: true,
+                            writable: true,
+                            value: val
+                        });
                     }
-                
-                    // Consistency with Map: contract is that entry has "0" and "1" keys, not
-                    // that it is an array or iterable.
-                
-                    const { '0': key, '1': val } = pair;
-                
-                    Object.defineProperty(build, key, {
-                      configurable: true,
-                      enumerable: true,
-                      writable: true,
-                      value: val,
-                    });
+
+                    return build;
                 }
-                
-                return build;
-            }
-        }));
+            })
+        );
         success = true;
-        console.log("Using legacy Object.prototype.fromEntries");
+        console.log('Using legacy Object.prototype.fromEntries');
     } else {
         return true;
     }
-    
+
     return success;
 });
 
 legacies.push(() => {
-    let success:boolean = false;
-    
-    if(! propertyExist("entries") && propertyExist("keys") && propertyExist("assign")) {
-        Object.defineProperty(proto_o, "entries", Object.assign(attr, {
-            value: function(obj:object):Array<any> {
-                const ownProps = Object.keys(obj);
-                let index = ownProps.length;
-                const arr = new Array(index);
-                
-                while(index--)
-                    arr[index] = [ownProps[index], obj[ownProps[index as keyof typeof ownProps] as keyof typeof obj]];
-                
-                return arr;
-            }
-        }));
+    let success = false;
+
+    if (!propertyExist('entries') && propertyExist('keys') && propertyExist('assign')) {
+        Object.defineProperty(
+            proto_o,
+            'entries',
+            Object.assign(attr, {
+                value: function (obj: object): any[] {
+                    const ownProps = Object.keys(obj);
+                    let index = ownProps.length;
+                    const arr = new Array(index);
+
+                    while (index--) arr[index] = [ownProps[index], obj[ownProps[index as keyof typeof ownProps] as keyof typeof obj]];
+
+                    return arr;
+                }
+            })
+        );
         success = true;
-        console.log("Using legacy Object.prototype.entries");
+        console.log('Using legacy Object.prototype.entries');
     } else {
         return true;
     }
-    
+
     return success;
 });
 
 legacies.push(() => {
-    let success:boolean = false;
-    
-    if(! propertyExist("keys") && propertyExist("assign")) {
-        Object.defineProperty(proto_o, "keys", Object.assign(attr, {
-            value: function(obj:object):Array<any> {
-                const arr = [];
-                for (let key in obj)
-                    arr.push(key);
-                
-                return arr;
-            }
-        }));
+    let success = false;
+
+    if (!propertyExist('keys') && propertyExist('assign')) {
+        Object.defineProperty(
+            proto_o,
+            'keys',
+            Object.assign(attr, {
+                value: function (obj: object): any[] {
+                    const arr = [];
+                    for (const key in obj) arr.push(key);
+
+                    return arr;
+                }
+            })
+        );
         success = true;
-        
-        console.log("Using legacy Object.prototype.keys");
+
+        console.log('Using legacy Object.prototype.keys');
     } else {
         return true;
     }
-    
+
     return success;
 });
-
-
 
 /**
  * Try to fill up the missing
  * */
 let i = legacies.length + 7;
 
-while (legacies.length > 0 && (i--) > 0) {
-    if(legacies[0]())
-        legacies.shift();
+while (legacies.length > 0 && i-- > 0) {
+    if (legacies[0]()) legacies.shift();
 }
