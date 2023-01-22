@@ -54,7 +54,7 @@ __[xCreatIOn](https://xio.netlify.app/)__
 > My portfolio - v1. Written in TypeScript and SCSS.
 __[Jovan De Guia](https://jxmked.github.io/jxmked/)__
 
-<!---> My portfolio - v2 (Under development) - Written in React App (Typescript and Tailwindcss)
+<!-- My portfolio - v2 (Under development) - Written in React App (Typescript and Tailwindcss)
 __[Jovan De Guia](https://jovandeguia.netlify.app/)__
 --->
 ## Socials
