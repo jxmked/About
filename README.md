@@ -40,6 +40,12 @@
 - [Canvas - Random Shape Animation](https://github.com/jxmked/canvas-shaped-background)
   - [Live Page](https://jxmked.github.io/canvas-shaped-background/)
 
+- [ts-neuroevolution](https://github.com/jxmked/ts-neuroevolution)
+  - [NPM package](https://www.npmjs.com/package/ts-neuroevolution)
+
+- [FlappyLearning](https://github.com/jxmked/FlappyLearning)
+  - [FlappyLearning Live Page](https://jxmked.github.io/FlappyLearning/)
+
 ----
 
 <!--
