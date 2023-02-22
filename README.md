@@ -46,6 +46,9 @@
 - [FlappyLearning](https://github.com/jxmked/FlappyLearning)
   - [FlappyLearning Live Page](https://jxmked.github.io/FlappyLearning/)
 
+- [FlappyBird](https://github.com/jxmked/Flappybird)
+  - [Play the game](https://jxmked.github.io/Flappybird/)
+
 ----
 
 <!--
