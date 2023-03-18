@@ -1,3 +1,4 @@
+[![Jovan's GitHub stats](https://gh-stats-card.cyclic.app/api/jxmked)](https://github.com/jxmked)
 
 > Hope you'll like some of my projects and scripts 
 > that I created for random things... 🤦‍♂️🙃
@@ -48,6 +49,8 @@
 
 - [FlappyBird](https://github.com/jxmked/Flappybird)
   - [Play the game](https://jxmked.github.io/Flappybird/)
+
+- [github-stats-card](https://github.com/jxmked/github-stats-card)
 
 ----
 
