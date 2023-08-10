@@ -52,6 +52,7 @@
 
 - [github-stats-card](https://github.com/jxmked/github-stats-card)
 
+- [URL Redirectinator](https://jxmked.github.io/url-redirecnator/)
 ----
 
 <!--
