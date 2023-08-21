@@ -52,7 +52,9 @@
 
 - [github-stats-card](https://github.com/jxmked/github-stats-card)
 
-- [URL Redirectinator](https://jxmked.github.io/url-redirecnator/)
+- [URL Redirectinator](https://github.com/jxmked/url-redirecnator)
+  - [Live Page](https://jxmked.github.io/url-redirecnator/)
+
 ----
 
 <!--
