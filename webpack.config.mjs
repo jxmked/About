@@ -10,6 +10,8 @@ import packageJson from './package.json' assert { type: 'json' };
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import UglifyJs from 'uglify-js';
+import HTMLMinifier from 'html-minifier';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,8 +38,8 @@ const CONFIG = {
   // Manifesting and information
 
   // For site.webmanifest
-  appName: 'Jovan\'s Portfolio',
-  shortAppName: 'Jovan'',
+  appName: "Jovan's Portfolio",
+  shortAppName: 'Jovan',
   description: packageJson.description,
   colors: {
     background: '#3a3a3c',
@@ -48,7 +50,7 @@ const CONFIG = {
     src: path.resolve('src/assets/icon.png'),
     sizes: [96, 128, 256, 512]
   },
-  appType: "app"
+  appType: 'app'
 };
 
 /**
@@ -83,20 +85,12 @@ const prodPlugins = [
     publicPath: 'jxmked/',
     fileName: 'asset-manifest.json'
   })
-
-  /*
-  new CopyPlugin({
-      patterns: [
-        { from: 'src/sw.js', to: 'sw.js' },
-      ],
-    }), */
 ];
 
 /**
  * Handle App Repository Url
  * */
-const APP_REPOSITORY = packageJson.repository.url.replace(/^git\+/i, "");
-
+const APP_REPOSITORY = packageJson.repository.url.replace(/^git\+/i, '');
 
 export default function (env, config) {
   if (process.env['NODE' + '_ENV'] === void 0) {
@@ -116,11 +110,11 @@ export default function (env, config) {
   }
   const DateToday = new Date().toISOString().substring(0, 10);
   const current_year = new Date().getFullYear();
-  
+
   CONFIG.env.appName = CONFIG.appName;
   CONFIG.env.shortName = CONFIG.shortAppName;
   CONFIG.env.description = CONFIG.description;
-  
+
   return {
     entry: CONFIG.input.entry,
     module: {
@@ -342,6 +336,30 @@ export default function (env, config) {
         APP_REPOSITORY: APP_REPOSITORY,
         APP_TITLE_LENGTH: CONFIG.appName.length
       }),
+
+      new CopyPlugin({
+        patterns: [{
+          from: "public/*.html",
+          transform: {
+            transformer(content, absoluteFrom) {
+              content = new Buffer(content).toString("utf8");
+            
+              const minified = HTMLMinifier.minify(content, {
+                html5: true,
+                keepClosingSlash: true,
+                minifyCSS: true,
+                quoteCharacter: "\"",
+                removeComments: true,
+                minifyJS: true,
+                removeTagWhitespace: true,
+                caseSensitive: true
+              })
+              
+              return Buffer.from(minified)
+            }
+          }
+        }]
+      })
     ].concat(prodPlugins)
   };
-};
+}
