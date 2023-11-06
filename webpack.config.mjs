@@ -10,7 +10,6 @@ import packageJson from './package.json' assert { type: 'json' };
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import UglifyJs from 'uglify-js';
 import HTMLMinifier from 'html-minifier';
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -338,27 +337,31 @@ export default function (env, config) {
       }),
 
       new CopyPlugin({
-        patterns: [{
-          from: "public/*.html",
-          transform: {
-            transformer(content, absoluteFrom) {
-              content = new Buffer(content).toString("utf8");
-            
-              const minified = HTMLMinifier.minify(content, {
-                html5: true,
-                keepClosingSlash: true,
-                minifyCSS: true,
-                quoteCharacter: "\"",
-                removeComments: true,
-                minifyJS: true,
-                removeTagWhitespace: true,
-                caseSensitive: true
-              })
-              
-              return Buffer.from(minified)
+        patterns: [
+          {
+            from: 'public/',
+            transform: {
+              transformer(content, absoluteFrom) {
+                if (!absoluteFrom.endsWith('.html')) return content;
+             
+                content = new Buffer(content).toString('utf8');
+
+                const minified = HTMLMinifier.minify(content, {
+                  html5: true,
+                  keepClosingSlash: true,
+                  minifyCSS: true,
+                  quoteCharacter: '"',
+                  removeComments: true,
+                  minifyJS: true,
+                  removeTagWhitespace: true,
+                  caseSensitive: true
+                });
+
+                return Buffer.from(minified);
+              }
             }
           }
-        }]
+        ]
       })
     ].concat(prodPlugins)
   };
