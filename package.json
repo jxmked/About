@@ -1,36 +1,43 @@
 {
-  "name": "jxmked",
-  "version": "1.2.2",
-  "description": "Personal Portfolio",
-  "main": "./dist/main.js",
+  "name": "profile",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.68",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
-    "dev:sass": "sass --watch --style=expanded --embed-sources \"./src/styles/index.scss:dist/index.css\"",
-    "dev:tsc": "tsc --watch -p tsconfig.json",
-    "minify": "uglifyjs dist/index.js --mangle toplevel=true -O quote_keys=true -o dist/index.js && html-minifier index.html -c html-minifier.json -o index.html",
-    "build": "tsc -p tsconfig-build.json && sass --style=compressed --no-source-map \"./src/styles/index.scss:dist/index.css\" && npm run minify",
-    "dev": "concurrently --raw \"npm run dev:tsc\" \"npm run dev:sass\""
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jxmked/jxmked.git"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "keywords": [
-    "portfolio",
-    "personal-porfolio"
-  ],
-  "author": "jxmked <jamc015lol@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jxmked/jxmked/issues"
-  },
-  "homepage": "https://jxmked.github.io/jxmked/",
-  "devDependencies": {
-    "@types/localforage": "0.0.33",
-    "concurrently": "^7.4.0",
-    "html-minifier": "^4.0.0",
-    "modernizr": "^3.12.0",
-    "sass": "^1.54.9",
-    "typescript": "^4.8.2",
-    "uglify-js": "^3.17.4"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
