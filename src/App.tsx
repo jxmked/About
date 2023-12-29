@@ -1,8 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-// import './App.css';
+import PageView from "./hooks/ga"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 function App() {
+  PageView();
+  
   return (
     <div>Hello, world</div>
   );
