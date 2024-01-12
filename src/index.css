@@ -53,6 +53,8 @@ button,
 
 body {
     @apply grid items-center align-middle;
+    @apply m-0 p-0;
+
     background-image: linear-gradient(to right top, #0f1721, #0c1421, #091021, #090a20, #0a031f);
 }
 
