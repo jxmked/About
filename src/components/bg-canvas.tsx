@@ -1,26 +1,48 @@
 import React, { useRef, useEffect, ReactPropTypes } from 'react'
 import { windowHeight, windowWidth } from '../constants'
-const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    ctx.fillStyle = '#000000'
-    ctx.beginPath()
-    ctx.arc(50, 100, 20*Math.sin(frameCount*0.05)**2, 0, 2*Math.PI)
-    ctx.fill()
-  }
+import { Vec2 } from '../interfaces';
 
-const Canvas = (props:React.HTMLAttributes<HTMLCanvasElement>) => {
+export type ICanvasElement = React.HTMLAttributes<HTMLCanvasElement>;
+
+export enum B_COLLISION {
+  TOP = 0b0001,
+  BOTTOM = 0b0010,
   
+}
+
+const arcSize = (windowWidth / windowHeight) * .5;
+const maxRes = Math.min(windowHeight, windowWidth);
+
+const position = new Vec2(0, 0);
+
+
+const onBorderHit = (ctx: CanvasRenderingContext2D, pos: Vec2) => {
+  const { width, height }= ctx.canvas;
+
+  
+}
+
+const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+  const borderHitResult = onBorderHit(ctx,  position);
+  ctx.fillStyle = '#000000'
+  ctx.beginPath()
+  ctx.arc(position.x, position.y, maxRes * arcSize, 0, 2 * Math.PI)
+  ctx.fill()
+}
+
+const Canvas = (props: React.HTMLAttributes<HTMLCanvasElement>) => {
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  
-  
-  
+
   useEffect(() => {
-    
+
     const canvas = canvasRef.current
     const context = canvas!.getContext('2d')!
     let frameCount = 0
     let animationFrameId: ReturnType<Window["requestAnimationFrame"]>;
-    
+
     //Our draw came here
     const render = () => {
       frameCount++
@@ -28,7 +50,7 @@ const Canvas = (props:React.HTMLAttributes<HTMLCanvasElement>) => {
       animationFrameId = window.requestAnimationFrame(render)
     }
     render()
-    
+
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
@@ -40,8 +62,8 @@ const Canvas = (props:React.HTMLAttributes<HTMLCanvasElement>) => {
     height: windowHeight,
     ref: canvasRef
   }, props);
-  
-  return <canvas {...props}/>
+
+  return <canvas {...props} />
 }
 
 export default Canvas
