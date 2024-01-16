@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import { windowHeight, windowWidth } from "../constants";
-import { Vec2 } from "../interfaces";
-import { inRange } from "../utils";
+import React, { useRef, useEffect } from 'react';
+import { windowHeight, windowWidth } from '../constants';
+import { Vec2 } from '../interfaces';
+import { inRange } from '../utils';
 
 export type ICanvasElement = React.HTMLAttributes<HTMLCanvasElement>;
 
@@ -9,7 +9,7 @@ export enum B_COLLISION {
   TOP = 0b1000,
   LEFT = 0b0100,
   BOTTOM = 0b0010,
-  RIGHT = 0b0001,
+  RIGHT = 0b0001
 }
 
 const minScreenize = Math.min(windowHeight, windowWidth);
@@ -22,7 +22,7 @@ const velocity = new Vec2(inRange(0.1, 0.9), inRange(0.1, 0.9));
 const onBorderHit = function (
   ctx: CanvasRenderingContext2D,
   pos: Vec2,
-  size: number,
+  size: number
 ): number {
   const { width, height } = ctx.canvas;
 
@@ -90,13 +90,13 @@ const draw = function (ctx: CanvasRenderingContext2D): void {
     170,
     position.x,
     position.y,
-    arcSize,
+    arcSize
   );
 
   // Add three color stops
-  gradient.addColorStop(0, "red");
-  gradient.addColorStop(0.5, "green");
-  gradient.addColorStop(1, "blue");
+  gradient.addColorStop(0, 'red');
+  gradient.addColorStop(0.5, 'green');
+  gradient.addColorStop(1, 'blue');
 
   ctx.fillStyle = gradient;
   ctx.beginPath();
@@ -109,8 +109,8 @@ const Canvas = (props: React.HTMLAttributes<HTMLCanvasElement>) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas!.getContext("2d")!;
-    let animationFrameId: ReturnType<Window["requestAnimationFrame"]>;
+    const context = canvas!.getContext('2d')!;
+    let animationFrameId: ReturnType<Window['requestAnimationFrame']>;
 
     //Our draw came here
     const render = () => {
@@ -127,12 +127,12 @@ const Canvas = (props: React.HTMLAttributes<HTMLCanvasElement>) => {
   props = Object.assign(
     {
       className:
-        "fixed block w-full h-full p-0 m-0 top-0 left-0 translate-x-0.5 translate-y-0.5",
+        'fixed block w-full h-full p-0 m-0 top-0 left-0 translate-x-0.5 translate-y-0.5',
       width: windowWidth,
       height: windowHeight,
-      ref: canvasRef,
+      ref: canvasRef
     },
-    props,
+    props
   );
 
   return <canvas {...props} />;

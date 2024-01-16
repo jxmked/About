@@ -1,7 +1,7 @@
-import React from "react";
-import PageView from "./hooks/ga";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BgCanvas from "./components/bg-canvas";
+import React from 'react';
+import PageView from './hooks/ga';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import BgCanvas from './components/bg-canvas';
 
 function App() {
   PageView();

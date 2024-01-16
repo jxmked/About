@@ -1,4 +1,4 @@
-import ReactGA from "react-ga4";
+import ReactGA from 'react-ga4';
 
 export interface sendEventProperties {
   label: string;
@@ -6,25 +6,25 @@ export interface sendEventProperties {
   action: string;
 }
 
-ReactGA.initialize("G-JPJZGW7PW6");
+ReactGA.initialize('G-JPJZGW7PW6');
 
 function PageView(): void {
-  ReactGA.send("pageview");
+  ReactGA.send('pageview');
 }
 
 function sendEvent({ label, category, action }: sendEventProperties): void {
   ReactGA.send({
     label,
     category,
-    action,
+    action
   });
 }
 
 function externalLinkHook(social: string): void {
   sendEvent({
     label: `Social: ${social}`,
-    category: "Social Link Clicked",
-    action: "clicked",
+    category: 'Social Link Clicked',
+    action: 'clicked'
   });
 }
 

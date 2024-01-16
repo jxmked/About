@@ -1,3 +1,3 @@
-export * from "./lerp";
-export * from "./clamp";
-export * from "./randomizer";
+export * from './lerp';
+export * from './clamp';
+export * from './randomizer';

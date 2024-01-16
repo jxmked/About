@@ -1,5 +1,5 @@
-import { clamp } from "./clamp";
-import { lerp } from "./lerp";
+import { clamp } from './clamp';
+import { lerp } from './lerp';
 
 /**
  * The `inRange` function generates a random number within a given range and optionally rounds it to
@@ -12,11 +12,7 @@ import { lerp } from "./lerp";
  * will be rounded using the `Math.round()` function. If `round` is set to `false` or not
  * @returns a number.
  */
-export function inRange(
-  min: number,
-  max: number,
-  round: boolean = false,
-): number {
+export function inRange(min: number, max: number, round: boolean = false): number {
   let res = lerp(min, max, Math.random());
   // to be sure
   res = clamp(min, max, res);
