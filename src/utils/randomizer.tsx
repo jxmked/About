@@ -1,5 +1,3 @@
-import React from "react";
-
 import { clamp } from "./clamp";
 import { lerp } from "./lerp";
 
