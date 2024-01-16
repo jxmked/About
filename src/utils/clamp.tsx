@@ -1,5 +1,3 @@
-
-
 /**
  * The `clamp` function takes in a minimum value, a maximum value, and a value to be clamped, and
  * returns the clamped value within the specified range.
@@ -13,5 +11,5 @@
  */
 
 export function clamp(min: number, max: number, value: number): number {
-    return Math.max(Math.min(value, max), min)
+  return Math.max(Math.min(value, max), min);
 }

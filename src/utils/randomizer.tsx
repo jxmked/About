@@ -12,13 +12,16 @@ import { lerp } from "./lerp";
  * will be rounded using the `Math.round()` function. If `round` is set to `false` or not
  * @returns a number.
  */
-export function inRange(min: number, max: number, round: boolean=false): number {
-    
-    let res = lerp(min, max, Math.random())
-    // to be sure
-    res = clamp(min, max, res);
+export function inRange(
+  min: number,
+  max: number,
+  round: boolean = false,
+): number {
+  let res = lerp(min, max, Math.random());
+  // to be sure
+  res = clamp(min, max, res);
 
-    return round ? Math.round(res) : res
+  return round ? Math.round(res) : res;
 }
 
 /**
@@ -27,5 +30,5 @@ export function inRange(min: number, max: number, round: boolean=false): number 
  * @returns The function `NeOPo` returns a number.
  */
 export function NeOPo(value: number): number {
-    return (Math.random() > .5) ? Math.abs(value) : -Math.abs(value);
+  return Math.random() > 0.5 ? Math.abs(value) : -Math.abs(value);
 }

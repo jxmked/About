@@ -1,4 +1,3 @@
-
 /**
  * The lerp function calculates a linear interpolation between two numbers based on a given point.
  * @param {number} start - The start parameter is the initial value or starting point of the range you
@@ -10,5 +9,5 @@
  * @returns a number.
  */
 export function lerp(start: number, end: number, point: number): number {
-    return (end - start) * point + start; 
+  return (end - start) * point + start;
 }
