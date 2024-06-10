@@ -1,4 +1,4 @@
-[![Jovan's GitHub stats](https://gh-stats-card.cyclic.app/api/jxmked)](https://github.com/jxmked)
+[![Jovan's GitHub stats](https://gh-stats-card.vercel.app/api/jxmked)](https://github.com/jxmked)
 
 > Hope you'll like some of my projects and scripts 
 > that I created for random things... 🤦‍♂️🙃
